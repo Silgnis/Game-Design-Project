@@ -66,3 +66,4 @@ tile_map_data = PackedByteArray("AAD///7/AAAAAAAAAAD/////AAAAAAEAAAD//wAAAAAAAAI
 tile_set = SubResource("TileSet_qaa4w")
 
 [node name="CharacterBody2D" parent="." unique_id=1400733540 instance=ExtResource("1_r150o")]
+MOVE_SPEED = 100.0

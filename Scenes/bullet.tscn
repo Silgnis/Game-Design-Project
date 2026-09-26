@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dtclgpudk4ih3"]
+
+[ext_resource type="Script" uid="uid://dt02s3u23mjmr" path="res://Scripts/bullet.gd" id="1_oduel"]
+[ext_resource type="Texture2D" uid="uid://ca2t7jngsbwiu" path="res://Resources/New_All_Fire_Bullet_Pixel_16x16/All_Fire_Bullet_Pixel_16x16_00.png" id="1_xjght"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xjght"]
+radius = 3.0
+
+[node name="Bullet" type="Area2D" unique_id=913723620]
+script = ExtResource("1_oduel")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=699702102]
+texture = ExtResource("1_xjght")
+region_enabled = true
+region_rect = Rect2(225, 278, 15, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=522000665]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_xjght")
