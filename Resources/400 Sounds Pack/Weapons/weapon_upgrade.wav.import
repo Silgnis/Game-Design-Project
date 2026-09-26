@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dnv1gaqxlrfsn"
+path="res://.godot/imported/weapon_upgrade.wav-76edfc72d2b81bc1824d2908e4e99cb1.sample"
+
+[deps]
+
+source_file="res://Resources/400 Sounds Pack/Weapons/weapon_upgrade.wav"
+dest_files=["res://.godot/imported/weapon_upgrade.wav-76edfc72d2b81bc1824d2908e4e99cb1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://btet24a6h026r"
+path="res://.godot/imported/punch_2.wav-5f9df6763fb9d6f25409e4e3808ad337.sample"
+
+[deps]
+
+source_file="res://Resources/400 Sounds Pack/Combat and Gore/punch_2.wav"
+dest_files=["res://.godot/imported/punch_2.wav-5f9df6763fb9d6f25409e4e3808ad337.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

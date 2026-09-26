@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c0m7mhax4mq0v"
+path="res://.godot/imported/tennis_ball_bounce_1.wav-53d5844d2781812aa9fa5195f825ddfb.sample"
+
+[deps]
+
+source_file="res://Resources/400 Sounds Pack/Items/tennis_ball_bounce_1.wav"
+dest_files=["res://.godot/imported/tennis_ball_bounce_1.wav-53d5844d2781812aa9fa5195f825ddfb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

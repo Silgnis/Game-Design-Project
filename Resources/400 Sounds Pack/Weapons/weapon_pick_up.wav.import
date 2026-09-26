@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://8xli44w2ng3n"
+path="res://.godot/imported/weapon_pick_up.wav-4bd9801e6dcd5959077d2aade1fb3720.sample"
+
+[deps]
+
+source_file="res://Resources/400 Sounds Pack/Weapons/weapon_pick_up.wav"
+dest_files=["res://.godot/imported/weapon_pick_up.wav-4bd9801e6dcd5959077d2aade1fb3720.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

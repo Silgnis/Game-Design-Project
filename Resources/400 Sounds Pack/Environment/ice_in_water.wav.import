@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dkf7mdxnix4jm"
+path="res://.godot/imported/ice_in_water.wav-b099d39b358d5eb2e0b0bd477cc322dd.sample"
+
+[deps]
+
+source_file="res://Resources/400 Sounds Pack/Environment/ice_in_water.wav"
+dest_files=["res://.godot/imported/ice_in_water.wav-b099d39b358d5eb2e0b0bd477cc322dd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

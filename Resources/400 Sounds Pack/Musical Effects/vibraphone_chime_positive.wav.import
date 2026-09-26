@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c7f6hmx08jmua"
+path="res://.godot/imported/vibraphone_chime_positive.wav-d3d65e5b2429f272bd1348e79c9affae.sample"
+
+[deps]
+
+source_file="res://Resources/400 Sounds Pack/Musical Effects/vibraphone_chime_positive.wav"
+dest_files=["res://.godot/imported/vibraphone_chime_positive.wav-d3d65e5b2429f272bd1348e79c9affae.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

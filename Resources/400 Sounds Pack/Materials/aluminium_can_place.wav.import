@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dagwx182qldmr"
+path="res://.godot/imported/aluminium_can_place.wav-f2605148659405bc247686ca07d1d782.sample"
+
+[deps]
+
+source_file="res://Resources/400 Sounds Pack/Materials/aluminium_can_place.wav"
+dest_files=["res://.godot/imported/aluminium_can_place.wav-f2605148659405bc247686ca07d1d782.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
