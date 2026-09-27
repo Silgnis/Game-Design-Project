@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://4pqund3nukl7"]
+
+[ext_resource type="Script" uid="uid://di4q7kbouysr5" path="res://Scripts/coin.gd" id="1_wjfxq"]
+[ext_resource type="Texture2D" uid="uid://6ept8bm3uika" path="res://Resources/kenney_pixel-platformer/Tiles/tile_0151.png" id="2_pjf33"]
+[ext_resource type="Texture2D" uid="uid://ddbg1n2psbwrc" path="res://Resources/kenney_pixel-platformer/Tiles/tile_0152.png" id="3_phb8h"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a8ku5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pjf33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_phb8h")
+}],
+"loop": 1,
+"name": &"spin",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eu64u"]
+
+[node name="Coin" type="Area2D" unique_id=2008278633]
+script = ExtResource("1_wjfxq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=370498718]
+sprite_frames = SubResource("SpriteFrames_a8ku5")
+animation = &"spin"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1771537256]
+shape = SubResource("CapsuleShape2D_eu64u")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=914695288]
+zoom = Vector2(4, 4)
