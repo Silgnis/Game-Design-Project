@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://be8qbmt0fe144" path="res://Scenes/player.tscn" id="1_r150o"]
 [ext_resource type="Texture2D" uid="uid://brcuex7rk0tsp" path="res://Resources/kenney_pixel-platformer/Tilemap/tilemap-backgrounds_packed.png" id="2_idj7w"]
 [ext_resource type="PackedScene" uid="uid://d1uwu4o13cud" path="res://Scenes/turret.tscn" id="3_kln2b"]
+[ext_resource type="PackedScene" uid="uid://r0wha1du3xq5" path="res://Scenes/myling_ghost.tscn" id="4_rgh2o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kln2b"]
 texture = ExtResource("2_idj7w")
@@ -71,4 +72,7 @@ tile_set = SubResource("TileSet_qaa4w")
 [node name="Turret" parent="." unique_id=620192780 node_paths=PackedStringArray("target") instance=ExtResource("3_kln2b")]
 position = Vector2(158, -32)
 scale = Vector2(0.1207916, 0.1207916)
+target = NodePath("../Player")
+
+[node name="Ghost" parent="." unique_id=961786400 node_paths=PackedStringArray("target") instance=ExtResource("4_rgh2o")]
 target = NodePath("../Player")

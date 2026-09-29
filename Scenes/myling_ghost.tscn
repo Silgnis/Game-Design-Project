@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://r0wha1du3xq5"]
+
+[ext_resource type="Script" uid="uid://bbp8nur43vdsb" path="res://Scripts/myling_ghost.gd" id="1_lkns2"]
+[ext_resource type="Texture2D" uid="uid://bdn1vul7q8hcu" path="res://Resources/kenney_pixel-platformer/Tiles/tile_0016.png" id="2_bbdpy"]
+
+[node name="Ghost" type="Node2D" unique_id=961786400]
+script = ExtResource("1_lkns2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1400834475]
+texture_filter = 1
+texture = ExtResource("2_bbdpy")
