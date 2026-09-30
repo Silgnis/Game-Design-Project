@@ -17,7 +17,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func movement() -> void:
-	var direction = Input.get_vector("left","right","up","down")
+	var direction = Input.get_vector("left","right","up","down").normalized()
 	
 	if direction != Vector2.ZERO:
 		velocity = direction * MOVE_SPEED

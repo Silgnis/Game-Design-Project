@@ -32,6 +32,3 @@ shape = SubResource("RectangleShape2D_t3rt0")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_qaa4w")
 frame_progress = 0.6595093
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=117143787]
-zoom = Vector2(4, 4)
