@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dnv5x0gdqrxj" path="res://Resources/kenney_pixel-platformer/Tilemap/tilemap_packed.png" id="2_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://d1uwu4o13cud" path="res://Scenes/turret.tscn" id="3_kln2b"]
 [ext_resource type="PackedScene" uid="uid://r0wha1du3xq5" path="res://Scenes/myling_ghost.tscn" id="4_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://dnodgevy3ctaj" path="res://Scenes/gun.tscn" id="4_v1gob"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kln2b"]
 texture = ExtResource("2_idj7w")
@@ -265,6 +266,9 @@ offset = Vector2(100, 0)
 zoom = Vector2(2, 2)
 
 [node name="Player" parent="." unique_id=1400733540 instance=ExtResource("1_r150o")]
+
+[node name="Gun" parent="Player" unique_id=2031640145 instance=ExtResource("4_v1gob")]
+position = Vector2(5, 2)
 
 [node name="Turret" parent="." unique_id=620192780 node_paths=PackedStringArray("target") instance=ExtResource("3_kln2b")]
 position = Vector2(158, -32)

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dnodgevy3ctaj"]
+
+[ext_resource type="Texture2D" uid="uid://dak7nngajqojt" path="res://Resources/guns_v1.png" id="1_nxj5y"]
+[ext_resource type="Script" uid="uid://is1eft3wfpy6" path="res://Scripts/gun.gd" id="1_oqrbh"]
+
+[node name="Gun" type="Node2D" unique_id=2031640145]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1636635855]
+texture_filter = 1
+texture = ExtResource("1_nxj5y")
+region_enabled = true
+region_rect = Rect2(0, 22, 32, 11)
+script = ExtResource("1_oqrbh")
