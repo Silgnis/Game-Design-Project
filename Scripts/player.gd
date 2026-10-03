@@ -8,6 +8,12 @@ class_name player
 
 var currency: int = 0
 
+func _ready() -> void:
+	NavigationManager.on_trigger_player_spawn.connect(_on_spawn)
+
+func _on_spawn(position: Vector2):
+	global_position = position
+	
 func _physics_process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Shoot"):
