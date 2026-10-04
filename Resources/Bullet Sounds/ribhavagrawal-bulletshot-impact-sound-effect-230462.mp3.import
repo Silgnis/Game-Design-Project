@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bffc17tfr082f"
+path="res://.godot/imported/ribhavagrawal-bulletshot-impact-sound-effect-230462.mp3-0c7aee06457e9a6976183e43b05be543.mp3str"
+
+[deps]
+
+source_file="res://Resources/Bullet Sounds/ribhavagrawal-bulletshot-impact-sound-effect-230462.mp3"
+dest_files=["res://.godot/imported/ribhavagrawal-bulletshot-impact-sound-effect-230462.mp3-0c7aee06457e9a6976183e43b05be543.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

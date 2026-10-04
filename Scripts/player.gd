@@ -4,8 +4,10 @@ class_name player
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @export var bullet_scene = load("res://Scenes/bullet.tscn")
 
+@export var max_health: int = 100
 @export var MOVE_SPEED = 100.0
 
+var current_health: int = max_health
 var currency: int = 0
 
 func _ready() -> void:
@@ -41,3 +43,17 @@ func shoot():
 	b.global_position = global_position
 	b.direction = shooting_dir
 	b.rotation = shooting_dir.angle()
+	
+func take_damage(amount: int) -> void:
+	current_health -= amount
+	flash_red()
+	
+	if current_health <= 0:
+		current_health = max_health # temp, call die func here later
+
+func flash_red() -> void:
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color.RED, 0.05)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
+
+# TODO> die function

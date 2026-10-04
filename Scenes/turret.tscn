@@ -3,11 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://brbmarl6uenv7" path="res://Resources/turret_sprite.png" id="1_fcprl"]
 [ext_resource type="Script" uid="uid://xcplyh53q7an" path="res://Scripts/turret.gd" id="1_hskch"]
 
-[node name="Turret" type="Node2D" unique_id=620192780]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hskch"]
+size = Vector2(177, 168)
+
+[node name="Turret" type="StaticBody2D" unique_id=1010533878]
+collision_layer = 4
+collision_mask = 11
 script = ExtResource("1_hskch")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=679956360]
-scale = Vector2(-0.39402205, -0.434022)
+rotation = -3.1415927
+scale = Vector2(0.39402205, 0.434022)
 texture = ExtResource("1_fcprl")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=2138155325]
@@ -17,3 +23,7 @@ scale = Vector2(0.40597796, 0.40597796)
 [node name="ShootTimer" type="Timer" parent="." unique_id=1943463517]
 wait_time = 1.5
 autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2049946406]
+position = Vector2(6.5, -2)
+shape = SubResource("RectangleShape2D_hskch")

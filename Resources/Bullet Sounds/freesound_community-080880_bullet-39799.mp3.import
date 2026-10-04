@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://qkt3mo2gpj0q"
+path="res://.godot/imported/freesound_community-080880_bullet-39799.mp3-1208c119a5f11df558a15ae603a218bb.mp3str"
+
+[deps]
+
+source_file="res://Resources/Bullet Sounds/freesound_community-080880_bullet-39799.mp3"
+dest_files=["res://.godot/imported/freesound_community-080880_bullet-39799.mp3-1208c119a5f11df558a15ae603a218bb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

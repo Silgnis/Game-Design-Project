@@ -1,10 +1,13 @@
 extends Node2D
 
-@export var bullet_scene: PackedScene = preload("res://Scenes/bullet.tscn")
+@export var bullet_scene: PackedScene = preload("res://Scenes/EnemyBullet.tscn")
 @export var target: Node2D # Drag your Player node here in the editor, or acquire via group
 
 @onready var muzzle: Marker2D = $Muzzle
 @onready var shoot_timer: Timer = $ShootTimer
+
+@export var max_health: int = 100
+var current_health: int = max_health
 
 func _ready() -> void:
 	# Connect the timer's timeout signal to the shoot function
@@ -32,3 +35,18 @@ func shoot() -> void:
 	b.global_position = muzzle.global_position
 	b.direction = shooting_dir
 	b.rotation = shooting_dir.angle()
+	
+func take_damage(amount: int) -> void:
+	current_health -= amount
+	flash_red()
+	
+	if current_health <= 0:
+		die()
+
+func flash_red() -> void:
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color.RED, 0.05)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
+
+func die() -> void:
+	queue_free()
