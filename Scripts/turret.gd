@@ -3,6 +3,7 @@ extends Node2D
 @export var bullet_scene: PackedScene = preload("res://Scenes/EnemyBullet.tscn")
 @export var target: Node2D # Drag your Player node here in the editor, or acquire via group
 
+@onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
 @onready var muzzle: Marker2D = $Muzzle
 @onready var shoot_timer: Timer = $ShootTimer
 
@@ -39,6 +40,11 @@ func shoot() -> void:
 func take_damage(amount: int) -> void:
 	current_health -= amount
 	flash_red()
+	
+	if hurt_sfx:
+		# Randomize pitch slightly (0.9 to 1.1) so repeated hits don't sound repetitive
+		hurt_sfx.pitch_scale = randf_range(0.9, 1.1)
+		hurt_sfx.play()
 	
 	if current_health <= 0:
 		die()

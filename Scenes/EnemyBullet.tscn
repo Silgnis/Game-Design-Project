@@ -20,5 +20,3 @@ region_rect = Rect2(195.60815, 131.76288, 8.730347, 8.566208)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=522000665]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_xjght")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1321460023]

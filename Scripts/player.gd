@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name player
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
 @export var bullet_scene = load("res://Scenes/bullet.tscn")
 
 @export var max_health: int = 100
@@ -47,6 +48,11 @@ func shoot():
 func take_damage(amount: int) -> void:
 	current_health -= amount
 	flash_red()
+	
+	if hurt_sfx:
+		# Randomize pitch slightly (0.9 to 1.1) so repeated hits don't sound repetitive
+		hurt_sfx.pitch_scale = randf_range(0.9, 1.1)
+		hurt_sfx.play()
 	
 	if current_health <= 0:
 		current_health = max_health # temp, call die func here later
