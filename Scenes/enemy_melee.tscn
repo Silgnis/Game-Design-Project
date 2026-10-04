@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bf8hkj8p6pfa6"]
+
+[ext_resource type="Script" uid="uid://bvodc4yhq33rf" path="res://Scripts/enemy_melee.gd" id="1_3dfpd"]
+[ext_resource type="Texture2D" uid="uid://vc6m2k4w5bx2" path="res://Resources/kenney_pixel-platformer/Tiles/Characters/tile_0008.png" id="2_s1fu1"]
+[ext_resource type="AudioStream" uid="uid://qkt3mo2gpj0q" path="res://Resources/Bullet Sounds/dmg_sfx.mp3" id="3_s1fu1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eu64u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v1gob"]
+radius = 13.0
+
+[node name="EnemyMelee" type="CharacterBody2D" unique_id=778502133]
+collision_layer = 4
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_3dfpd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=149151036]
+texture_filter = 1
+texture = ExtResource("2_s1fu1")
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=583183493]
+stream = ExtResource("3_s1fu1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=518826974]
+shape = SubResource("RectangleShape2D_eu64u")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=333268419]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=658461672]
+shape = SubResource("CircleShape2D_v1gob")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1921615030]
