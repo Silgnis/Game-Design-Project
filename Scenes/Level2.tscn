@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d08w70s0wbjcm" path="res://Resources/Custom Assets/Tileset and tree.png" id="1_0plju"]
 [ext_resource type="Script" uid="uid://bhgm6sfwrsrgk" path="res://Scripts/level.gd" id="1_5awjf"]
-[ext_resource type="Texture2D" uid="uid://cyahrsdnyb8ql" path="res://Resources/Custom Assets/Pine_Tree_-_NIGHT_lighter.png" id="2_ms0wi"]
+[ext_resource type="TileSet" uid="uid://cdr018fxgilse" path="res://Resources/tree_tileset.tres" id="3_5awjf"]
 [ext_resource type="PackedScene" uid="uid://bsl7npd3rj82l" path="res://door.tscn" id="3_ms0wi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q12u6"]
@@ -64,14 +64,6 @@ texture = ExtResource("1_0plju")
 [sub_resource type="TileSet" id="TileSet_riosl"]
 sources/4 = SubResource("TileSetAtlasSource_q12u6")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_joc8x"]
-texture = ExtResource("2_ms0wi")
-texture_region_size = Vector2i(53, 96)
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_1wtbc"]
-sources/5 = SubResource("TileSetAtlasSource_joc8x")
-
 [node name="Level2" type="Node2D" unique_id=1783777693]
 script = ExtResource("1_5awjf")
 
@@ -81,7 +73,7 @@ tile_set = SubResource("TileSet_riosl")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=283679165]
 tile_map_data = PackedByteArray("AADx/wkABQAAAAAAAADy/wUABQAAAAAAAADx/wMABQAAAAAAAADx//n/BQAAAAAAAADy//f/BQAAAAAAAADx//T/BQAAAAAAAADy//H/BQAAAAAAAAD0//L/BQAAAAAAAAD1//H/BQAAAAAAAAD2//L/BQAAAAAAAAD4//H/BQAAAAAAAAD5//L/BQAAAAAAAAD9//L/BQAAAAAAAAD///H/BQAAAAAAAAABAPL/BQAAAAAAAAACAPH/BQAAAAAAAAAEAPL/BQAAAAAAAAAGAPH/BQAAAAAAAAAIAPL/BQAAAAAAAAAKAPH/BQAAAAAAAAAMAPL/BQAAAAAAAAANAPb/BQAAAAAAAAAMAPj/BQAAAAAAAAANAPr/BQAAAAAAAAAMAP3/BQAAAAAAAAANAP//BQAAAAAAAAAMAAIABQAAAAAAAAANAAQABQAAAAAAAAAMAAgABQAAAAAAAAANAAoABQAAAAAAAAALAA4ABQAAAAAAAAAJAA0ABQAAAAAAAAAHAA4ABQAAAAAAAAAFAA4ABQAAAAAAAAAEAA0ABQAAAAAAAAADAA4ABQAAAAAAAAABAA0ABQAAAAAAAAD//w4ABQAAAAAAAAD9/w0ABQAAAAAAAAD7/w4ABQAAAAAAAAD5/w0ABQAAAAAAAAD3/w0ABQAAAAAAAAD2/w4ABQAAAAAAAAD0/w4ABQAAAAAAAADz/w0ABQAAAAAAAADy/w0ABQAAAAAAAAANAA0ABQAAAAAAAAANAPP/BQAAAAAAAADz//T/BQAAAAAAAAD7//L/BQAAAAAAAADy/woABQAAAAAAAAD4//n/BQAAAAAAAAAHAPr/BQAAAAAAAAADAAYABQAAAAAAAADw//n/BQAAAAAAAADu//r/BQAAAAAAAADs//n/BQAAAAAAAADq//n/BQAAAAAAAADo//r/BQAAAAAAAADm//r/BQAAAAAAAADv/wMABQAAAAAAAADt/wMABQAAAAAAAADu/wMABQAAAAAAAADr/wMABQAAAAAAAADq/wMABQAAAAAAAADq/wIABQAAAAAAAADp/wIABQAAAAAAAADo/wIABQAAAAAAAADn/wIABQAAAAAAAADm/wIABQAAAAAAAAA=")
-tile_set = SubResource("TileSet_1wtbc")
+tile_set = ExtResource("3_5awjf")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=44119269]
 zoom = Vector2(1.4, 1.4)

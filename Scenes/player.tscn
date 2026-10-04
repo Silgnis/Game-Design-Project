@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b6oapclcyyw88" path="res://Resources/kenney_pixel-platformer/Tiles/Characters/tile_0007.png" id="2_6t5aa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t3rt0"]
-size = Vector2(20, 23)
+size = Vector2(20, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qaa4w"]
 animations = [{
@@ -25,7 +25,6 @@ animations = [{
 script = ExtResource("1_6t5aa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=775327215]
-position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_t3rt0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=591878261]
