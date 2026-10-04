@@ -12,7 +12,11 @@ var current_health: int = max_health
 var currency: int = 0
 
 func _ready() -> void:
+	# Connect door spawn signal as usual
 	NavigationManager.on_trigger_player_spawn.connect(_on_spawn)
+	# If returning from a checkpoint, place player at saved coordinates instead
+	if NavigationManager.has_checkpoint:
+		global_position = NavigationManager.current_checkpoint_pos
 
 func _on_spawn(position: Vector2):
 	global_position = position
@@ -55,11 +59,13 @@ func take_damage(amount: int) -> void:
 		hurt_sfx.play()
 	
 	if current_health <= 0:
-		current_health = max_health # temp, call die func here later
+		die()
 
 func flash_red() -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color.RED, 0.05)
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
 
-# TODO> die function
+func die() -> void:
+	current_health = max_health
+	NavigationManager.respawn_player()
