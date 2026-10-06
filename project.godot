@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GD Project"
-run/main_scene="uid://155xx7s6y6ta"
+run/main_scene="uid://03s48bb5kjr5"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
