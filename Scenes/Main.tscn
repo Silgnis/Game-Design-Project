@@ -1,35 +1,7 @@
 [gd_scene format=3 uid="uid://155xx7s6y6ta"]
 
 [ext_resource type="PackedScene" uid="uid://caig3ma6csg50" path="res://Scenes/Level1.tscn" id="1_pbw6q"]
-[ext_resource type="PackedScene" uid="uid://be8qbmt0fe144" path="res://Scenes/player.tscn" id="1_r150o"]
-[ext_resource type="PackedScene" uid="uid://d1uwu4o13cud" path="res://Scenes/turret.tscn" id="3_kln2b"]
-[ext_resource type="PackedScene" uid="uid://r0wha1du3xq5" path="res://Scenes/myling_ghost.tscn" id="4_rgh2o"]
-[ext_resource type="PackedScene" uid="uid://dnodgevy3ctaj" path="res://Scenes/gun.tscn" id="4_v1gob"]
-[ext_resource type="PackedScene" uid="uid://bf8hkj8p6pfa6" path="res://Scenes/enemy_melee.tscn" id="6_v1gob"]
 
 [node name="Main" type="Node2D" unique_id=580632960]
 
 [node name="Level1" parent="." unique_id=1783777693 instance=ExtResource("1_pbw6q")]
-
-[node name="Player" parent="." unique_id=1400733540 instance=ExtResource("1_r150o")]
-motion_mode = 1
-
-[node name="Gun" parent="Player" unique_id=2031640145 instance=ExtResource("4_v1gob")]
-position = Vector2(5, 2)
-
-[node name="Turret" parent="." unique_id=620192780 node_paths=PackedStringArray("target") instance=ExtResource("3_kln2b")]
-position = Vector2(158, -32)
-scale = Vector2(0.1207916, 0.1207916)
-target = NodePath("../Player")
-
-[node name="Ghost" parent="." unique_id=961786400 node_paths=PackedStringArray("target") instance=ExtResource("4_rgh2o")]
-target = NodePath("../Player")
-
-[node name="Turret2" parent="." unique_id=916837178 node_paths=PackedStringArray("target") instance=ExtResource("3_kln2b")]
-position = Vector2(-123.99997, -113.99999)
-scale = Vector2(0.1207916, 0.1207916)
-target = NodePath("../Player")
-
-[node name="EnemyMelee" parent="." unique_id=1830089330 node_paths=PackedStringArray("target") instance=ExtResource("6_v1gob")]
-position = Vector2(-116, 40)
-target = NodePath("../Player")

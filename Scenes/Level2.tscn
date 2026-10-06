@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://bhgm6sfwrsrgk" path="res://Scripts/level.gd" id="1_5awjf"]
 [ext_resource type="TileSet" uid="uid://cdr018fxgilse" path="res://Resources/tree_tileset.tres" id="3_5awjf"]
 [ext_resource type="PackedScene" uid="uid://bsl7npd3rj82l" path="res://Scenes/door.tscn" id="3_ms0wi"]
+[ext_resource type="PackedScene" uid="uid://be8qbmt0fe144" path="res://Scenes/player.tscn" id="5_ehjmi"]
+[ext_resource type="PackedScene" uid="uid://dnodgevy3ctaj" path="res://Scenes/gun.tscn" id="6_p4u3k"]
+[ext_resource type="PackedScene" uid="uid://r0wha1du3xq5" path="res://Scenes/myling_ghost.tscn" id="7_70df5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q12u6"]
 texture = ExtResource("1_0plju")
@@ -81,14 +84,25 @@ zoom = Vector2(1.4, 1.4)
 [node name="Doors" type="Node2D" parent="." unique_id=1782850330]
 
 [node name="Door_W" parent="Doors" unique_id=1005104512 instance=ExtResource("3_ms0wi")]
-position = Vector2(-400, -12)
+position = Vector2(-554, -29)
+scale = Vector2(2.4799976, 3.3599997)
+collision_mask = 2
 destination_level_tag = "level_1"
 destination_door_tag = "E"
 
 [node name="CollisionShape2D" parent="Doors/Door_W" index="0" unique_id=365260228]
-position = Vector2(75, 2)
+position = Vector2(67.742004, 2.0833335)
 
 [node name="Spawn" parent="Doors/Door_W" index="1" unique_id=645219470]
-position = Vector2(109, 2)
+position = Vector2(85.483955, 2.0833335)
+
+[node name="Player" parent="." unique_id=1400733540 instance=ExtResource("5_ehjmi")]
+motion_mode = 1
+
+[node name="Gun" parent="Player" unique_id=2031640145 instance=ExtResource("6_p4u3k")]
+position = Vector2(5, 2)
+
+[node name="Ghost" parent="." unique_id=961786400 node_paths=PackedStringArray("target") instance=ExtResource("7_70df5")]
+target = NodePath("../Player")
 
 [editable path="Doors/Door_W"]

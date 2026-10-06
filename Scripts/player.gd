@@ -24,6 +24,7 @@ func _ready() -> void:
 		global_position = NavigationManager.current_checkpoint_pos
 
 func _on_spawn(position: Vector2):
+	print_debug("Player teleporting to: ", position)
 	global_position = position
 	
 func _physics_process(delta: float) -> void:

@@ -23,7 +23,8 @@ func go_to_level(level_tag: String, destination_tag: String) -> void:
 		
 	if scene_to_load != null:
 		spawn_door_tag = destination_tag
-		get_tree().change_scene_to_packed(scene_to_load)
+		# Defer the scene change until the physics step is done
+		get_tree().call_deferred("change_scene_to_packed", scene_to_load)
 
 func trigger_player_spawn(position: Vector2) -> void:
 	on_trigger_player_spawn.emit(position)

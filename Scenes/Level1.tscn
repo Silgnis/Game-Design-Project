@@ -3,7 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://d08w70s0wbjcm" path="res://Resources/Custom Assets/Tileset and tree.png" id="1_2llne"]
 [ext_resource type="Script" uid="uid://bhgm6sfwrsrgk" path="res://Scripts/level.gd" id="1_jghel"]
 [ext_resource type="TileSet" uid="uid://cdr018fxgilse" path="res://Resources/tree_tileset.tres" id="3_jghel"]
-[ext_resource type="PackedScene" uid="uid://bsl7npd3rj82l" path="res://door.tscn" id="3_joc8x"]
+[ext_resource type="PackedScene" uid="uid://bsl7npd3rj82l" path="res://Scenes/door.tscn" id="3_joc8x"]
+[ext_resource type="PackedScene" uid="uid://be8qbmt0fe144" path="res://Scenes/player.tscn" id="5_ysn8j"]
+[ext_resource type="PackedScene" uid="uid://dnodgevy3ctaj" path="res://Scenes/gun.tscn" id="6_6ll4n"]
+[ext_resource type="PackedScene" uid="uid://r0wha1du3xq5" path="res://Scenes/myling_ghost.tscn" id="7_kylad"]
+[ext_resource type="PackedScene" uid="uid://d1uwu4o13cud" path="res://Scenes/turret.tscn" id="8_kylad"]
+[ext_resource type="PackedScene" uid="uid://bf8hkj8p6pfa6" path="res://Scenes/enemy_melee.tscn" id="9_bdlbp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q12u6"]
 texture = ExtResource("1_2llne")
@@ -72,7 +77,7 @@ tile_map_data = PackedByteArray("AAD6//r/BAACAAIAAAD6//v/BAACAAIAAAD6//z/BAACAAI
 tile_set = SubResource("TileSet_riosl")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=283679165]
-tile_map_data = PackedByteArray("AADx/wkABQAAAAAAAADy/wUABQAAAAAAAADx/wMABQAAAAAAAADy/wEABQAAAAAAAADx//7/BQAAAAAAAADy//z/BQAAAAAAAADx//n/BQAAAAAAAADy//f/BQAAAAAAAADx//T/BQAAAAAAAADy//H/BQAAAAAAAAD0//L/BQAAAAAAAAD1//H/BQAAAAAAAAD2//L/BQAAAAAAAAD4//H/BQAAAAAAAAD5//L/BQAAAAAAAAD9//L/BQAAAAAAAAD///H/BQAAAAAAAAABAPL/BQAAAAAAAAACAPH/BQAAAAAAAAAEAPL/BQAAAAAAAAAGAPH/BQAAAAAAAAAIAPL/BQAAAAAAAAAKAPH/BQAAAAAAAAAMAPL/BQAAAAAAAAANAPb/BQAAAAAAAAAMAPj/BQAAAAAAAAANAPr/BQAAAAAAAAANAAQABQAAAAAAAAAMAAgABQAAAAAAAAANAAoABQAAAAAAAAALAA4ABQAAAAAAAAAJAA0ABQAAAAAAAAAHAA4ABQAAAAAAAAAFAA4ABQAAAAAAAAAEAA0ABQAAAAAAAAADAA4ABQAAAAAAAAABAA0ABQAAAAAAAAD//w4ABQAAAAAAAAD9/w0ABQAAAAAAAAD7/w4ABQAAAAAAAAD5/w0ABQAAAAAAAAD3/w0ABQAAAAAAAAD2/w4ABQAAAAAAAAD0/w4ABQAAAAAAAADz/w0ABQAAAAAAAADy/w0ABQAAAAAAAAANAA0ABQAAAAAAAAANAPP/BQAAAAAAAADz//T/BQAAAAAAAAD7//L/BQAAAAAAAADy/woABQAAAAAAAAAOAPz/BQAAAAAAAAAQAPz/BQAAAAAAAAASAPz/BQAAAAAAAAATAPz/BQAAAAAAAAAVAPz/BQAAAAAAAAAXAPz/BQAAAAAAAAAYAPz/BQAAAAAAAAAZAPz/BQAAAAAAAAAPAPv/BQAAAAAAAAAOAPr/BQAAAAAAAAAOAAMABQAAAAAAAAAQAAMABQAAAAAAAAAPAAMABQAAAAAAAAARAAQABQAAAAAAAAATAAQABQAAAAAAAAASAAMABQAAAAAAAAATAAMABQAAAAAAAAAVAAMABQAAAAAAAAAWAAMABQAAAAAAAAAUAAMABQAAAAAAAAAZAAMABQAAAAAAAAAYAAMABQAAAAAAAAAaAAMABQAAAAAAAAAaAAIABQAAAAAAAAAaAAEABQAAAAAAAAAXAAIABQAAAAAAAAA=")
+tile_map_data = PackedByteArray("AADx/wkABQAAAAAAAADy/wUABQAAAAAAAADx/wMABQAAAAAAAADy/wEABQAAAAAAAADx//7/BQAAAAAAAADy//z/BQAAAAAAAADx//n/BQAAAAAAAADy//f/BQAAAAAAAADx//T/BQAAAAAAAADy//H/BQAAAAAAAAD0//L/BQAAAAAAAAD1//H/BQAAAAAAAAD2//L/BQAAAAAAAAD4//H/BQAAAAAAAAD5//L/BQAAAAAAAAD9//L/BQAAAAAAAAD///H/BQAAAAAAAAABAPL/BQAAAAAAAAACAPH/BQAAAAAAAAAEAPL/BQAAAAAAAAAGAPH/BQAAAAAAAAAIAPL/BQAAAAAAAAAKAPH/BQAAAAAAAAAMAPL/BQAAAAAAAAANAPb/BQAAAAAAAAAMAPj/BQAAAAAAAAANAPr/BQAAAAAAAAANAAQABQAAAAAAAAAMAAgABQAAAAAAAAANAAoABQAAAAAAAAALAA4ABQAAAAAAAAAJAA0ABQAAAAAAAAAHAA4ABQAAAAAAAAAFAA4ABQAAAAAAAAAEAA0ABQAAAAAAAAADAA4ABQAAAAAAAAABAA0ABQAAAAAAAAD//w4ABQAAAAAAAAD9/w0ABQAAAAAAAAD7/w4ABQAAAAAAAAD5/w0ABQAAAAAAAAD3/w0ABQAAAAAAAAD2/w4ABQAAAAAAAAD0/w4ABQAAAAAAAADz/w0ABQAAAAAAAADy/w0ABQAAAAAAAAANAA0ABQAAAAAAAAANAPP/BQAAAAAAAADz//T/BQAAAAAAAAD7//L/BQAAAAAAAADy/woABQAAAAAAAAAOAPz/BQAAAAAAAAAQAPz/BQAAAAAAAAASAPz/BQAAAAAAAAATAPz/BQAAAAAAAAAVAPz/BQAAAAAAAAAXAPz/BQAAAAAAAAAYAPz/BQAAAAAAAAAZAPz/BQAAAAAAAAAPAPv/BQAAAAAAAAAOAPr/BQAAAAAAAAAOAAMABQAAAAAAAAAQAAMABQAAAAAAAAAPAAMABQAAAAAAAAARAAQABQAAAAAAAAATAAQABQAAAAAAAAASAAMABQAAAAAAAAATAAMABQAAAAAAAAAVAAMABQAAAAAAAAAWAAMABQAAAAAAAAAUAAMABQAAAAAAAAAZAAMABQAAAAAAAAAYAAMABQAAAAAAAAAaAAMABQAAAAAAAAAaAAIABQAAAAAAAAAaAAEABQAAAAAAAAAXAAMABQAAAAAAAAA=")
 tile_set = ExtResource("3_jghel")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=44119269]
@@ -82,10 +87,37 @@ zoom = Vector2(1.4, 1.4)
 
 [node name="Door_E" parent="Doors" unique_id=1005104512 instance=ExtResource("3_joc8x")]
 position = Vector2(393, 5)
+collision_mask = 2
 destination_level_tag = "level_2"
 destination_door_tag = "W"
 
+[node name="CollisionShape2D" parent="Doors/Door_E" index="0" unique_id=365260228]
+scale = Vector2(1.8400024, 2.8000007)
+
 [node name="Spawn" parent="Doors/Door_E" index="1" unique_id=645219470]
-position = Vector2(-35, -1)
+position = Vector2(-36, -3)
+
+[node name="Player" parent="." unique_id=1400733540 instance=ExtResource("5_ysn8j")]
+motion_mode = 1
+
+[node name="Gun" parent="Player" unique_id=2031640145 instance=ExtResource("6_6ll4n")]
+position = Vector2(5, 2)
+
+[node name="Ghost" parent="." unique_id=961786400 node_paths=PackedStringArray("target") instance=ExtResource("7_kylad")]
+target = NodePath("../Player")
+
+[node name="Turret" parent="." unique_id=1010533878 node_paths=PackedStringArray("target") instance=ExtResource("8_kylad")]
+position = Vector2(158, -32)
+scale = Vector2(0.1207916, 0.1207916)
+target = NodePath("../Player")
+
+[node name="Turret2" parent="." unique_id=1192049205 node_paths=PackedStringArray("target") instance=ExtResource("8_kylad")]
+position = Vector2(-123.99997, -113.99999)
+scale = Vector2(0.1207916, 0.1207916)
+target = NodePath("../Player")
+
+[node name="EnemyMelee" parent="." unique_id=778502133 node_paths=PackedStringArray("target") instance=ExtResource("9_bdlbp")]
+position = Vector2(-99, 39)
+target = NodePath("../Player")
 
 [editable path="Doors/Door_E"]
