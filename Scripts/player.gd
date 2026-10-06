@@ -19,7 +19,13 @@ var currency: int = 0:
 			player_ui.update_coins(currency)
 
 func _ready() -> void:
-	current_health = max_health
+	# Load saved stats if they exist, otherwise use defaults
+	if NavigationManager.saved_health != -1:
+		current_health = NavigationManager.saved_health
+		currency = NavigationManager.saved_currency
+	else:
+		current_health = max_health
+		
 	player_ui.update_hearts(current_health)
 	player_ui.update_coins(currency)
 	# Connect door spawn signal as usual

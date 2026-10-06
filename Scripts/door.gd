@@ -8,7 +8,6 @@ class_name Door
 
 
 func _on_body_entered(body: Node2D) -> void:
-	print_debug("something entered: ", body.name)
 	if body is player:
-		print_debug("player entered")
+		NavigationManager.save_player_state(body.current_health, body.currency)
 		NavigationManager.go_to_level(destination_level_tag,destination_door_tag)

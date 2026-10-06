@@ -12,6 +12,10 @@ var current_checkpoint_pos: Vector2 = Vector2.ZERO
 var current_checkpoint_level: String = ""
 var has_checkpoint: bool = false
 
+# Player stats
+var saved_health: int = -1 # -1 means "no health saved yet"
+var saved_currency: int = 0
+
 func go_to_level(level_tag: String, destination_tag: String) -> void:
 	var scene_to_load: PackedScene
 	
@@ -33,6 +37,10 @@ func save_checkpoint(pos: Vector2, level_tag: String) -> void:
 	current_checkpoint_pos = pos
 	current_checkpoint_level = level_tag
 	has_checkpoint = true
+	
+func save_player_state(health: int, currency: int) -> void:
+	saved_health = health
+	saved_currency = currency
 
 func respawn_player() -> void:
 	if has_checkpoint:
