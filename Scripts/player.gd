@@ -6,9 +6,10 @@ class_name player
 @onready var player_ui: PlayerUI = $PlayerUI
 @export var bullet_scene = load("res://Scenes/bullet.tscn")
 
-# Each hit costs 1 HP (half a heart), so 6 HP = 3 hearts
 @export var max_health: int = 6
 @export var MOVE_SPEED = 100.0
+@export var ACCELERATION = 2000.0
+@export var DECELERATION = 1600.0
 
 var current_health: int
 var currency: int = 0
@@ -25,22 +26,22 @@ func _ready() -> void:
 func _on_spawn(position: Vector2):
 	global_position = position
 	
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Shoot"):
 		shoot()
 	
-	movement()
+	movement(delta)
 	move_and_slide()
 
-func movement() -> void:
+func movement(delta: float) -> void:
 	var direction = Input.get_vector("left","right","up","down").normalized()
 	
 	if direction != Vector2.ZERO:
-		velocity = direction * MOVE_SPEED
+		velocity = velocity.move_toward(direction * MOVE_SPEED, ACCELERATION * delta)
 		animated_sprite_2d.play("default")
 	else:
-		velocity = Vector2.ZERO
+		velocity = velocity.move_toward(Vector2.ZERO, DECELERATION * delta)
 		animated_sprite_2d.stop()
 
 func shoot():
@@ -54,7 +55,6 @@ func shoot():
 	b.rotation = shooting_dir.angle()
 	
 func take_damage(_amount: int) -> void:
-	# Damage amount is ignored: every hit removes exactly half a heart
 	current_health -= 1
 	player_ui.update_hearts(current_health)
 	flash_red()
