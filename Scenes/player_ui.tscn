@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/player_ui.gd" id="1_pui"]
+[ext_resource type="Texture2D" uid="uid://kf71u3aj5lmk" path="res://Resources/Custom Assets/heart.png" id="2_heart"]
+
+[node name="PlayerUI" type="CanvasLayer"]
+script = ExtResource("1_pui")
+
+[node name="Hearts" type="HBoxContainer" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 128.0
+offset_bottom = 48.0
+theme_override_constants/separation = 4
+
+[node name="Heart1" type="TextureRect" parent="Hearts"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_heart")
+stretch_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="Hearts"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_heart")
+stretch_mode = 2
+
+[node name="Heart3" type="TextureRect" parent="Hearts"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_heart")
+stretch_mode = 2

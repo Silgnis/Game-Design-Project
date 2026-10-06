@@ -3,15 +3,19 @@ class_name player
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
+@onready var player_ui: PlayerUI = $PlayerUI
 @export var bullet_scene = load("res://Scenes/bullet.tscn")
 
-@export var max_health: int = 100
+# Each hit costs 1 HP (half a heart), so 6 HP = 3 hearts
+@export var max_health: int = 6
 @export var MOVE_SPEED = 100.0
 
-var current_health: int = max_health
+var current_health: int
 var currency: int = 0
 
 func _ready() -> void:
+	current_health = max_health
+	player_ui.update_hearts(current_health)
 	# Connect door spawn signal as usual
 	NavigationManager.on_trigger_player_spawn.connect(_on_spawn)
 	# If returning from a checkpoint, place player at saved coordinates instead
@@ -49,8 +53,10 @@ func shoot():
 	b.direction = shooting_dir
 	b.rotation = shooting_dir.angle()
 	
-func take_damage(amount: int) -> void:
-	current_health -= amount
+func take_damage(_amount: int) -> void:
+	# Damage amount is ignored: every hit removes exactly half a heart
+	current_health -= 1
+	player_ui.update_hearts(current_health)
 	flash_red()
 	
 	if hurt_sfx:
