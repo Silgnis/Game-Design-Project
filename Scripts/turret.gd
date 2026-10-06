@@ -1,6 +1,9 @@
 extends Node2D
 
 @export var bullet_scene: PackedScene = preload("res://Scenes/EnemyBullet.tscn")
+@export var coin_scene: PackedScene = preload("res://Scenes/Coin.tscn")
+@export var coin_drop_count: int = 3
+@export var coin_drop_radius: float = 12.0
 @export var target: Node2D # Drag your Player node here in the editor, or acquire via group
 
 @onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
@@ -8,6 +11,7 @@ extends Node2D
 @onready var shoot_timer: Timer = $ShootTimer
 
 @export var max_health: int = 100
+var is_dead: bool = false
 var current_health: int = max_health
 
 func _ready() -> void:
@@ -55,4 +59,18 @@ func flash_red() -> void:
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
 
 func die() -> void:
+	if is_dead:
+		return
+	is_dead = true
+	drop_coins()
 	queue_free()
+
+func drop_coins() -> void:
+	if coin_scene == null:
+		return
+	for i in coin_drop_count:
+		var coin = coin_scene.instantiate()
+		var offset = Vector2.RIGHT.rotated(randf() * TAU) * randf_range(4.0, coin_drop_radius)
+		coin.global_position = global_position + offset
+		# Deferred because die() usually runs inside a physics callback (bullet hit)
+		get_tree().current_scene.add_child.call_deferred(coin)

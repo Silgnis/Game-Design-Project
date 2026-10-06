@@ -12,11 +12,16 @@ class_name player
 @export var DECELERATION = 1600.0
 
 var current_health: int
-var currency: int = 0
+var currency: int = 0:
+	set(value):
+		currency = value
+		if is_node_ready():
+			player_ui.update_coins(currency)
 
 func _ready() -> void:
 	current_health = max_health
 	player_ui.update_hearts(current_health)
+	player_ui.update_coins(currency)
 	# Connect door spawn signal as usual
 	NavigationManager.on_trigger_player_spawn.connect(_on_spawn)
 	# If returning from a checkpoint, place player at saved coordinates instead

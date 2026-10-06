@@ -7,6 +7,7 @@ const EMPTY_HEART = preload("res://Resources/Custom Assets/empty heart.png")
 const HEALTH_PER_HEART = 2
 
 @onready var hearts: Array[Node] = $Hearts.get_children()
+@onready var coin_label: Label = $Coins/CoinLabel
 
 func update_hearts(current_health: int) -> void:
 	for i in hearts.size():
@@ -19,3 +20,6 @@ func update_hearts(current_health: int) -> void:
 			heart.texture = HALF_HEART
 		else:
 			heart.texture = EMPTY_HEART
+
+func update_coins(amount: int) -> void:
+	coin_label.text = str(amount)

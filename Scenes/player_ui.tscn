@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/player_ui.gd" id="1_pui"]
 [ext_resource type="Texture2D" uid="uid://kf71u3aj5lmk" path="res://Resources/Custom Assets/heart.png" id="2_heart"]
+[ext_resource type="Texture2D" uid="uid://6ept8bm3uika" path="res://Resources/kenney_pixel-platformer/Tiles/tile_0151.png" id="3_coin"]
 
 [node name="PlayerUI" type="CanvasLayer"]
 script = ExtResource("1_pui")
@@ -30,3 +31,27 @@ texture_filter = 1
 layout_mode = 2
 texture = ExtResource("2_heart")
 stretch_mode = 2
+
+[node name="Coins" type="HBoxContainer" parent="."]
+offset_left = 16.0
+offset_top = 52.0
+offset_right = 128.0
+offset_bottom = 84.0
+theme_override_constants/separation = 6
+
+[node name="CoinIcon" type="TextureRect" parent="Coins"]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("3_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinLabel" type="Label" parent="Coins"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.3, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 22
+text = "0"
+vertical_alignment = 1

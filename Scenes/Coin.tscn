@@ -21,6 +21,8 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eu64u"]
 
 [node name="Coin" type="Area2D" unique_id=2008278633]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_wjfxq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=370498718]
@@ -30,5 +32,3 @@ animation = &"spin"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1771537256]
 shape = SubResource("CapsuleShape2D_eu64u")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=914695288]
-zoom = Vector2(4, 4)
