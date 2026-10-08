@@ -1,0 +1,47 @@
+extends Area2D
+
+# A thrown rock: flies for split_time seconds, then bursts into a star of pebbles.
+# Hitting the player or a wall before that stops it without splitting.
+@export var SPEED = 55.0
+@export var damage: int = 10
+@export var split_time: float = 1.2
+@export var pebble_scene: PackedScene = preload("res://Scenes/pebble_bullet_new.tscn")
+@export var pebble_count: int = 8
+@export var spin_speed: float = 6.0
+
+var direction = Vector2.RIGHT
+var _age := 0.0
+var _done := false
+
+func _ready() -> void:
+	body_entered.connect(_on_body_entered)
+
+func _physics_process(delta: float) -> void:
+	position += direction * SPEED * delta
+	rotation += spin_speed * delta
+	_age += delta
+	if _age >= split_time:
+		split()
+
+func split() -> void:
+	if _done:
+		return
+	_done = true
+	# Star pattern: evenly spaced directions, one of them pointing along the rock's travel
+	var base_angle = direction.angle()
+	for i in pebble_count:
+		var dir = Vector2.RIGHT.rotated(base_angle + TAU * i / pebble_count)
+		var p = pebble_scene.instantiate()
+		p.global_position = global_position
+		p.direction = dir
+		p.rotation = dir.angle()
+		get_tree().current_scene.add_child.call_deferred(p)
+	queue_free()
+
+func _on_body_entered(body: Node2D) -> void:
+	if _done:
+		return
+	if body.has_method("take_damage"):
+		body.take_damage(damage)
+	_done = true
+	queue_free()

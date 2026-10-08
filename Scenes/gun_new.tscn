@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" uid="uid://bwr5xfohb1nf5" path="res://Resources/Custom Assets/Player/Gun.png" id="1_gun"]
+[ext_resource type="Script" uid="uid://is1eft3wfpy6" path="res://Scripts/gun.gd" id="1_oqrbh"]
+[ext_resource type="Texture2D" uid="uid://cyteg4n1w8nsu" path="res://Resources/crosshair.png" id="3_t6ynv"]
+
+[node name="Gun" type="Node2D" unique_id=2031640145]
+
+[node name="rifle" type="Sprite2D" parent="." unique_id=1636635855]
+texture_filter = 1
+position = Vector2(0, 1)
+texture = ExtResource("1_gun")
+script = ExtResource("1_oqrbh")
+
+[node name="Cursor" type="Sprite2D" parent="rifle" unique_id=2033691141]
+texture_filter = 1
+position = Vector2(57, -1)
+texture = ExtResource("3_t6ynv")
+region_enabled = true
+region_rect = Rect2(20, 30, 13, 13)
