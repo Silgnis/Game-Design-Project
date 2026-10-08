@@ -11,6 +11,10 @@ class_name player
 @export var ACCELERATION = 2000.0
 @export var DECELERATION = 1600.0
 
+# Fire Rate Controls
+@export var fire_rate: float = 0.25  # Time in seconds between shots
+var shoot_cooldown_timer: float = 0.0
+
 var current_health: int
 var currency: int = 0:
 	set(value):
@@ -38,9 +42,18 @@ func _on_spawn(position: Vector2):
 	global_position = position
 	
 func _physics_process(delta: float) -> void:
-	
-	if Input.is_action_just_pressed("Shoot"):
+	# Reduce timer toward zero
+	if shoot_cooldown_timer > 0.0:
+		shoot_cooldown_timer -= delta
+		
+	# Instant reset when button is released so rapid clicking fires immediately
+	if Input.is_action_just_released("Shoot"):
+		shoot_cooldown_timer = 0.0
+
+	# Check if action is held down (is_action_pressed) and timer has elapsed
+	if Input.is_action_pressed("Shoot") and shoot_cooldown_timer <= 0.0:
 		shoot()
+		shoot_cooldown_timer = fire_rate  # Reset cooldown
 	
 	movement(delta)
 	move_and_slide()
@@ -71,7 +84,6 @@ func take_damage(_amount: int) -> void:
 	flash_red()
 	
 	if hurt_sfx:
-		# Randomize pitch slightly (0.9 to 1.1) so repeated hits don't sound repetitive
 		hurt_sfx.pitch_scale = randf_range(0.9, 1.1)
 		hurt_sfx.play()
 	
