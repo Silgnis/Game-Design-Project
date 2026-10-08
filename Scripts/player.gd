@@ -85,5 +85,5 @@ func flash_red() -> void:
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
 
 func die() -> void:
-	current_health = max_health
+	NavigationManager.save_player_state(max_health, currency)
 	NavigationManager.respawn_player()
