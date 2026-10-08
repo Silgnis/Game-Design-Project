@@ -28,4 +28,4 @@ func respawn_player() -> void:
 		spawn_door_tag = ""
 		go_to_level(GameManager.current_checkpoint_level, "")
 	else:
-		get_tree().reload_current_scene()
+		get_tree().call_deferred("reload_current_scene")
