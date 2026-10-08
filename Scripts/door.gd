@@ -9,5 +9,5 @@ class_name Door
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is player:
-		NavigationManager.save_player_state(body.current_health, body.currency)
+		GameManager.save_player_state(body.current_health, body.currency)
 		NavigationManager.go_to_level(destination_level_tag,destination_door_tag)
