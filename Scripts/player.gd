@@ -20,9 +20,9 @@ var currency: int = 0:
 
 func _ready() -> void:
 	# Load saved stats if they exist, otherwise use defaults
-	if NavigationManager.saved_health != -1:
-		current_health = NavigationManager.saved_health
-		currency = NavigationManager.saved_currency
+	if GameManager.saved_health != -1:
+		current_health = GameManager.saved_health
+		currency = GameManager.saved_currency
 	else:
 		current_health = max_health
 		
@@ -31,8 +31,8 @@ func _ready() -> void:
 	# Connect door spawn signal as usual
 	NavigationManager.on_trigger_player_spawn.connect(_on_spawn)
 	# If returning from a checkpoint, place player at saved coordinates instead
-	if NavigationManager.has_checkpoint:
-		global_position = NavigationManager.current_checkpoint_pos
+	if GameManager.has_checkpoint:
+		global_position = GameManager.current_checkpoint_pos
 
 func _on_spawn(position: Vector2):
 	print_debug("Player teleporting to: ", position)
@@ -85,5 +85,5 @@ func flash_red() -> void:
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
 
 func die() -> void:
-	current_health = max_health
+	GameManager.save_player_state(max_health, currency)
 	NavigationManager.respawn_player()
