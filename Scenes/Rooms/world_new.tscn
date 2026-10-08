@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cxr10ec6jbtqe"]
 
 [ext_resource type="Script" uid="uid://0i8mrt5eda80" path="res://Scripts/world_new.gd" id="1_world"]
-[ext_resource type="PackedScene" path="res://Scenes/room1_new.tscn" id="2_room1"]
-[ext_resource type="PackedScene" path="res://Scenes/room2_new.tscn" id="3_room2"]
+[ext_resource type="PackedScene" path="res://Scenes/Rooms/room1_new.tscn" id="2_room1"]
+[ext_resource type="PackedScene" path="res://Scenes/Rooms/room2_new.tscn" id="3_room2"]
 [ext_resource type="PackedScene" path="res://Scenes/player_new.tscn" id="4_player"]
 [ext_resource type="PackedScene" path="res://Scenes/gun_new.tscn" id="5_gun"]
 [ext_resource type="PackedScene" uid="uid://r0wha1du3xq5" path="res://Scenes/myling_ghost.tscn" id="6_ghost"]
