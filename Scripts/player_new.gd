@@ -82,7 +82,7 @@ func movement(delta: float) -> void:
 		animated_sprite_2d.play("default")
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, DECELERATION * delta)
-		animated_sprite_2d.stop()
+		animated_sprite_2d.play("idle")
 
 func shoot():
 	var b = bullet_scene.instantiate()

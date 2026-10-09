@@ -119,6 +119,7 @@ shape = SubResource("RectangleShape2D_t3rt0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=591878261]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_new")
+animation = &"idle"
 
 [node name="HandMarker" type="Marker2D" parent="." unique_id=1838279170]
 position = Vector2(-7, -6)
