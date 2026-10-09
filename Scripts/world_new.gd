@@ -6,13 +6,18 @@ extends Node2D
 
 @onready var player: CharacterBody2D = $Player
 @onready var camera: Camera2D = $Camera2D
+@onready var minimap: Minimap = get_node_or_null("HUD/Minimap")
 
 var current_room: Room
 
 func _ready() -> void:
 	current_room = _room_at(player.global_position)
+	if minimap:
+		minimap.setup(get_tree().get_nodes_in_group("rooms"))
 	if current_room:
 		camera.global_position = current_room.get_global_bounds().get_center()
+		if minimap:
+			minimap.set_current(current_room)
 
 func _process(_delta: float) -> void:
 	if current_room and current_room.has_point(player.global_position):
@@ -21,6 +26,8 @@ func _process(_delta: float) -> void:
 	if room == null or room == current_room:
 		return
 	current_room = room
+	if minimap:
+		minimap.set_current(room)
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(camera, "global_position", room.get_global_bounds().get_center(), transition_time)
 

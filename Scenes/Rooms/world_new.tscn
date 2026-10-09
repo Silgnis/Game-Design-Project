@@ -6,6 +6,17 @@
 [ext_resource type="PackedScene" path="res://Scenes/player_new.tscn" id="4_player"]
 [ext_resource type="PackedScene" path="res://Scenes/gun_new.tscn" id="5_gun"]
 [ext_resource type="PackedScene" uid="uid://r0wha1du3xq5" path="res://Scenes/myling_ghost.tscn" id="6_ghost"]
+[ext_resource type="PackedScene" path="res://Scenes/Rooms/room3_new.tscn" id="room3"]
+[ext_resource type="PackedScene" path="res://Scenes/Rooms/room4_new.tscn" id="room4"]
+[ext_resource type="PackedScene" path="res://Scenes/Rooms/room5_new.tscn" id="room5"]
+[ext_resource type="PackedScene" path="res://Scenes/Rooms/room6_new.tscn" id="room6"]
+[ext_resource type="PackedScene" path="res://Scenes/Rooms/room7_new.tscn" id="room7"]
+[ext_resource type="PackedScene" path="res://Scenes/Rooms/room8_new.tscn" id="room8"]
+[ext_resource type="PackedScene" path="res://Scenes/Rooms/room9_new.tscn" id="room9"]
+[ext_resource type="PackedScene" path="res://Scenes/Rooms/room10_new.tscn" id="room10"]
+[ext_resource type="PackedScene" path="res://Scenes/Rooms/room11_new.tscn" id="room11"]
+[ext_resource type="PackedScene" path="res://Scenes/Rooms/room12_new.tscn" id="room12"]
+[ext_resource type="Script" path="res://Scripts/minimap.gd" id="7_minimap"]
 
 [node name="World" type="Node2D" unique_id=251740865]
 script = ExtResource("1_world")
@@ -16,6 +27,36 @@ script = ExtResource("1_world")
 
 [node name="Room2" parent="Rooms" unique_id=2077056097 instance=ExtResource("3_room2")]
 position = Vector2(560, 0)
+
+[node name="Room3" parent="Rooms" instance=ExtResource("room3")]
+position = Vector2(1120, 0)
+
+[node name="Room4" parent="Rooms" instance=ExtResource("room4")]
+position = Vector2(1680, 0)
+
+[node name="Room5" parent="Rooms" instance=ExtResource("room5")]
+position = Vector2(1120, -320)
+
+[node name="Room6" parent="Rooms" instance=ExtResource("room6")]
+position = Vector2(1680, -320)
+
+[node name="Room7" parent="Rooms" instance=ExtResource("room7")]
+position = Vector2(560, -320)
+
+[node name="Room8" parent="Rooms" instance=ExtResource("room8")]
+position = Vector2(1120, 320)
+
+[node name="Room9" parent="Rooms" instance=ExtResource("room9")]
+position = Vector2(1120, 640)
+
+[node name="Room10" parent="Rooms" instance=ExtResource("room10")]
+position = Vector2(2240, -320)
+
+[node name="Room11" parent="Rooms" instance=ExtResource("room11")]
+position = Vector2(2240, 0)
+
+[node name="Room12" parent="Rooms" instance=ExtResource("room12")]
+position = Vector2(0, -320)
 
 [node name="Player" parent="." unique_id=71103916 groups=["player"] instance=ExtResource("4_player")]
 motion_mode = 1
@@ -28,3 +69,15 @@ target = NodePath("../Player")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1221796341]
 zoom = Vector2(2.1, 2.1)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Minimap" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("7_minimap")
