@@ -15,11 +15,11 @@ func has_point(point: Vector2) -> bool:
 	return get_global_bounds().has_point(point)
 	
 func on_player_entered() -> void:
-	for spawner in get_children():
-		if spawner is EnemySpawner:
-			spawner.spawn_enemy()
+	for node in get_children():
+		if node is EnemySpawner:
+			node.spawn_enemy()
 
 func on_player_exited() -> void:
-	for spawner in get_children():
-		if spawner is EnemySpawner:
-			spawner.despawn_enemy()
+	for node in get_children():
+		if node is EnemySpawner:
+			node.despawn_enemy()

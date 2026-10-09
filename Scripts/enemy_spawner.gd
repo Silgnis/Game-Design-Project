@@ -13,10 +13,8 @@ func spawn_enemy() -> void:
 	# Instantiate and place at this marker's position
 	var instance := enemy_scene.instantiate() as EnemyBase
 	instance.enemy_id = enemy_id
-	instance.global_position = global_position
-	
-	# Add child to room or main scene
 	get_parent().add_child(instance)
+	instance.global_position = global_position
 	spawned_enemy = instance
 
 func despawn_enemy() -> void:

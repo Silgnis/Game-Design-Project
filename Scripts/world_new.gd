@@ -21,7 +21,7 @@ func _process(_delta: float) -> void:
 	# Ignore checks while camera is sliding
 	if is_transitioning:
 		return
-		
+	
 	if current_room and current_room.has_point(player.global_position):
 		return
 
@@ -29,7 +29,8 @@ func _process(_delta: float) -> void:
 	if room == null or room == current_room:
 		return
 
-	# --- ROOM SWAP EVENTS ---
+	# ROOM SWAP EVENTS
+	
 	# 1. Despawn enemies in the old room
 	if current_room:
 		current_room.on_player_exited()
