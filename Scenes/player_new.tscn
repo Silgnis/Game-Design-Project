@@ -119,7 +119,6 @@ shape = SubResource("RectangleShape2D_t3rt0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=591878261]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_new")
-animation = &"dash"
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=192239709]
 stream = ExtResource("4_vgqql")

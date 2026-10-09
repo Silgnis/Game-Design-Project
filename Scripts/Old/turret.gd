@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var bullet_scene: PackedScene = preload("res://Scenes/EnemyBullet.tscn")
-@export var coin_scene: PackedScene = preload("res://Scenes/Coin.tscn")
+@export var bullet_scene: PackedScene = preload("res://Scenes/Old/EnemyBullet.tscn")
+@export var coin_scene: PackedScene = preload("res://Scenes/coin.tscn")
 @export var coin_drop_count: int = 3
 @export var coin_drop_radius: float = 12.0
 @export var target: Node2D # Drag your Player node here in the editor, or acquire via group
