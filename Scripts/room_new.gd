@@ -13,3 +13,13 @@ func get_global_bounds() -> Rect2:
 
 func has_point(point: Vector2) -> bool:
 	return get_global_bounds().has_point(point)
+	
+func on_player_entered() -> void:
+	for spawner in get_children():
+		if spawner is EnemySpawner:
+			spawner.spawn_enemy()
+
+func on_player_exited() -> void:
+	for spawner in get_children():
+		if spawner is EnemySpawner:
+			spawner.despawn_enemy()
