@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://be8qbmt0fe144"]
 
-[ext_resource type="Script" uid="uid://tyiax266x25r" path="res://Scripts/player.gd" id="1_6t5aa"]
-[ext_resource type="Texture2D" uid="uid://bxtkyg3d1jscv" path="res://Resources/kenney_pixel-platformer/Tiles/Characters/tile_0006.png" id="1_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://b6oapclcyyw88" path="res://Resources/kenney_pixel-platformer/Tiles/Characters/tile_0007.png" id="2_6t5aa"]
-[ext_resource type="AudioStream" uid="uid://qkt3mo2gpj0q" path="res://Resources/Bullet Sounds/dmg_sfx.mp3" id="4_vgqql"]
-[ext_resource type="PackedScene" path="res://Scenes/player_ui.tscn" id="5_pui"]
+[ext_resource type="Script" uid="uid://tyiax266x25r" path="res://Scripts/Old/player.gd" id="1_udwqv"]
+[ext_resource type="Texture2D" uid="uid://bxtkyg3d1jscv" path="res://Resources/kenney_pixel-platformer/Tiles/Characters/tile_0006.png" id="2_cpue7"]
+[ext_resource type="Texture2D" uid="uid://b6oapclcyyw88" path="res://Resources/kenney_pixel-platformer/Tiles/Characters/tile_0007.png" id="3_xajhp"]
+[ext_resource type="AudioStream" uid="uid://qkt3mo2gpj0q" path="res://Resources/Bullet Sounds/dmg_sfx.mp3" id="4_1fvml"]
+[ext_resource type="PackedScene" path="res://Scenes/player_ui.tscn" id="5_0ngnf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t3rt0"]
 size = Vector2(20, 24)
@@ -13,10 +13,10 @@ size = Vector2(20, 24)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_cvnsp")
+"texture": ExtResource("2_cpue7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_6t5aa")
+"texture": ExtResource("3_xajhp")
 }],
 "loop": 1,
 "name": &"default",
@@ -26,7 +26,7 @@ animations = [{
 [node name="Player" type="CharacterBody2D" unique_id=1400733540]
 collision_layer = 2
 collision_mask = 21
-script = ExtResource("1_6t5aa")
+script = ExtResource("1_udwqv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=775327215]
 shape = SubResource("RectangleShape2D_t3rt0")
@@ -37,6 +37,6 @@ sprite_frames = SubResource("SpriteFrames_qaa4w")
 frame_progress = 0.6595093
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=192239709]
-stream = ExtResource("4_vgqql")
+stream = ExtResource("4_1fvml")
 
-[node name="PlayerUI" parent="." instance=ExtResource("5_pui")]
+[node name="PlayerUI" parent="." unique_id=54133484 instance=ExtResource("5_0ngnf")]

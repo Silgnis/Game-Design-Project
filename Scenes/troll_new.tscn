@@ -1,32 +1,37 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bdqs6ug65n8m8"]
 
-[ext_resource type="Script" path="res://Scripts/troll_new.gd" id="1_troll"]
+[ext_resource type="Script" uid="uid://ba7cw8euux31w" path="res://Scripts/troll_new.gd" id="1_troll"]
 [ext_resource type="Texture2D" uid="uid://b4q758d34mhpm" path="res://Resources/Custom Assets/Troll/Troll.png" id="2_idle"]
+[ext_resource type="Texture2D" uid="uid://hjhicpv8mflb" path="res://Resources/Custom Assets/Troll/Ghost Troll Throw.png" id="3_r3s2f"]
 [ext_resource type="Texture2D" uid="uid://bfh2fipagnj7r" path="res://Resources/Custom Assets/Troll/Troll Throw.png" id="3_throw"]
+[ext_resource type="Texture2D" uid="uid://cmutffixhkvca" path="res://Resources/Custom Assets/Troll/Ghostlier Troll Throw.png" id="4_h2xhu"]
 [ext_resource type="AudioStream" uid="uid://qkt3mo2gpj0q" path="res://Resources/Bullet Sounds/dmg_sfx.mp3" id="4_sfx"]
+[ext_resource type="Texture2D" uid="uid://b5loqx4v1hk16" path="res://Resources/Custom Assets/Troll/Ghost Troll.png" id="6_l0dm8"]
+[ext_resource type="Texture2D" uid="uid://dj4o2qf0cikoh" path="res://Resources/Custom Assets/Troll/Ghostlier Troll.png" id="7_dgqep"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_troll"]
 size = Vector2(16, 18)
 
-[node name="Troll" type="StaticBody2D"]
+[node name="Troll" type="CharacterBody2D" unique_id=1728362950]
 collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_troll")
-idle_texture = ExtResource("2_idle")
-throw_texture = ExtResource("3_throw")
+stage_throw_textures = Array[Texture2D]([ExtResource("3_throw"), ExtResource("3_r3s2f"), ExtResource("4_h2xhu")])
+enemy_id = "stationary_enemy"
+stage_sprites = Array[Texture2D]([ExtResource("2_idle"), ExtResource("6_l0dm8"), ExtResource("7_dgqep")])
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2073683457]
 texture_filter = 1
 texture = ExtResource("2_idle")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=24164530]
 position = Vector2(-1, 3)
 shape = SubResource("RectangleShape2D_troll")
 
-[node name="Hand" type="Marker2D" parent="."]
+[node name="Hand" type="Marker2D" parent="." unique_id=140760853]
 position = Vector2(-8, -6)
 
-[node name="ThrowTimer" type="Timer" parent="."]
+[node name="ThrowTimer" type="Timer" parent="." unique_id=1714029304]
 
-[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=2127501769]
 stream = ExtResource("4_sfx")

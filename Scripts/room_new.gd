@@ -16,6 +16,16 @@ func get_global_bounds() -> Rect2:
 func has_point(point: Vector2) -> bool:
 	return get_global_bounds().has_point(point)
 
+func on_player_entered() -> void:
+	for node in get_children():
+		if node is EnemySpawner:
+			node.spawn_enemy()
+
+func on_player_exited() -> void:
+	for node in get_children():
+		if node is EnemySpawner:
+			node.despawn_enemy()
+
 # An exit is open when nothing solid (any enabled TileMapLayer whose TileSet has physics)
 # sits in its gap. Exits are at the centre of each edge: E/W across rows -1..1, N/S across
 # columns -2..1, so this works for rooms with ExitNorth/... layers and for hand-made ones.
