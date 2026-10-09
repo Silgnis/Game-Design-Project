@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b70f8brawfitd" path="res://Scripts/room_new.gd" id="1_mc107"]
 [ext_resource type="Texture2D" uid="uid://b03ojmpn2745v" path="res://Resources/Custom Assets/New Tileset.png" id="2_newts"]
 [ext_resource type="Texture2D" uid="uid://bjsfomosc24o3" path="res://Resources/Custom Assets/house_1x.png" id="3_6g88d"]
-[ext_resource type="PackedScene" path="res://Scenes/campfire.tscn" id="10_camp"]
+[ext_resource type="PackedScene" uid="uid://bwqtx1yctedcj" path="res://Scenes/campfire.tscn" id="5_40lmo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_newts"]
 texture = ExtResource("2_newts")
@@ -166,5 +166,5 @@ position = Vector2(7, 13)
 tile_map_data = PackedByteArray("AAD5//v/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_1wtbc")
 
-[node name="Campfire" parent="." unique_id=1523721155 instance=ExtResource("10_camp")]
-position = Vector2(-49, -48)
+[node name="Campfire" parent="." unique_id=728852670 instance=ExtResource("5_40lmo")]
+position = Vector2(-49, -66)

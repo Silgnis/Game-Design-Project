@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/player_ui.tscn" id="5_pui"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t3rt0"]
-size = Vector2(10, 14)
+size = Vector2(10, 13)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ltomf"]
 atlas = ExtResource("4_dash")
@@ -113,7 +113,7 @@ ACCELERATION = 2400.0
 DECELERATION = 1900.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=775327215]
-position = Vector2(0.5, 1)
+position = Vector2(0.5, 1.5)
 shape = SubResource("RectangleShape2D_t3rt0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=591878261]
