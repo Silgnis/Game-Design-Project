@@ -120,7 +120,11 @@ shape = SubResource("RectangleShape2D_t3rt0")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_new")
 
+[node name="HandMarker" type="Marker2D" parent="." unique_id=1838279170]
+position = Vector2(-7, -6)
+
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=192239709]
+position = Vector2(5, -2)
 stream = ExtResource("4_vgqql")
 
 [node name="PlayerUI" parent="." unique_id=335293472 instance=ExtResource("5_pui")]

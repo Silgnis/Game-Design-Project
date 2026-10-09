@@ -1,4 +1,4 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://du63meltaxsox"]
 
 [ext_resource type="Texture2D" uid="uid://bwr5xfohb1nf5" path="res://Resources/Custom Assets/Player/Gun.png" id="1_gun"]
 [ext_resource type="Script" uid="uid://is1eft3wfpy6" path="res://Scripts/gun.gd" id="1_oqrbh"]

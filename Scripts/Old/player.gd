@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name player
+# class_name player
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
