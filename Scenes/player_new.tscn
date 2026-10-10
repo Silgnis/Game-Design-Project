@@ -112,6 +112,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qaa4w"]
+radius = 57.00877
+
 [node name="Player" type="CharacterBody2D" unique_id=1400733540]
 collision_layer = 2
 collision_mask = 21
@@ -145,3 +148,9 @@ position = Vector2(5, -2)
 stream = ExtResource("4_vgqql")
 
 [node name="PlayerUI" parent="." unique_id=335293472 instance=ExtResource("5_pui")]
+
+[node name="Myling_range" type="Area2D" parent="." unique_id=430109818]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Myling_range" unique_id=1601438161]
+shape = SubResource("CircleShape2D_qaa4w")

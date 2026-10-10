@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var coin_scene: PackedScene = preload("res://Scenes/Coin.tscn")
 @export var coin_drop_count: int = 3
 @export var coin_drop_radius: float = 12.0
+@export var is_frozen: bool = false
 @onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
 @onready var attack_area: Area2D = $AttackArea
 @onready var attack_timer: Timer = $AttackTimer

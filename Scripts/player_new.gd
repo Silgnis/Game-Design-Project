@@ -6,6 +6,7 @@ class_name Player
 @onready var gunshot_sfx: AudioStreamPlayer2D = $GunShotSFX
 @onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
 @onready var player_ui: PlayerUI = $PlayerUI
+@onready var myling_area: Area2D = $Myling_range
 
 # The rifle flips itself when aiming left (see gun.gd); the body follows it
 @onready var rifle: Sprite2D = get_node_or_null("Gun/rifle")
@@ -107,6 +108,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("Shoot") and shoot_cooldown_timer <= 0.0:
 		shoot()
 		shoot_cooldown_timer = fire_rate  # Reset cooldown
+	
+	if Input.is_action_just_released("myling"):
+		myling_attack()
 	
 	update_dash(delta)
 	if Input.is_action_just_pressed("dash"):
@@ -216,6 +220,17 @@ func shoot():
 	if gunshot_sfx:
 		gunshot_sfx.pitch_scale = randf_range(0.9, 1.1)
 		gunshot_sfx.play()
+		
+func myling_attack():
+	var enemies = myling_area.get_overlapping_bodies()
+	for body in enemies:
+		body.process_mode = Node.PROCESS_MODE_DISABLED
+		body.is_frozen = true
+		body.get_node("Sprite2D").texture = load("res://Resources/kenney_pixel-platformer/Tiles/tile_0073.png")
+	await get_tree().create_timer(3.0).timeout
+	for body in enemies:
+		body.process_mode = Node.PROCESS_MODE_INHERIT
+		body.is_frozen = false
 	
 func take_damage(_amount: int) -> void:
 	if is_dashing and dash_invincible:
