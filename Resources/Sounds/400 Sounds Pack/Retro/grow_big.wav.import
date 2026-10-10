@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://brgr5d506jxsl"
+path="res://.godot/imported/grow_big.wav-b1d3e934e9208994940428ad7e65fc0a.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/400 Sounds Pack/Retro/grow_big.wav"
+dest_files=["res://.godot/imported/grow_big.wav-b1d3e934e9208994940428ad7e65fc0a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

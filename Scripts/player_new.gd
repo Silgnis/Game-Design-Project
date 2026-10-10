@@ -18,6 +18,10 @@ class_name Player
 var current_footstep_index: int = 0
 var last_played_frame: int = -1
 
+# Coins Audio Configuration
+@export var coin_pickup_sound: AudioStream
+@export var coin_spend_sound: AudioStream
+
 @export var max_health: int = 6
 @export var MOVE_SPEED = 100.0
 @export var ACCELERATION = 2000.0
@@ -27,9 +31,17 @@ var last_played_frame: int = -1
 @export var fire_rate: float = 0.25  # Time in seconds between shots
 var shoot_cooldown_timer: float = 0.0
 
+var is_initializing: bool = true
 var current_health: int
 var currency: int = 0:
 	set(value):
+		# Check if currency increased or decreased to play the appropriate SFX
+		if not is_initializing and value != currency:
+			if value > currency:
+				play_coin_sound(coin_pickup_sound)
+			elif value < currency:
+				play_coin_sound(coin_spend_sound)
+				
 		currency = value
 		if is_node_ready():
 			player_ui.update_coins(currency)
@@ -53,6 +65,8 @@ func _ready() -> void:
 	# If returning from a checkpoint, place player at saved coordinates instead
 	if GameManager.has_checkpoint:
 		global_position = GameManager.current_checkpoint_pos
+		
+	is_initializing = false
 
 func _on_spawn(position: Vector2):
 	global_position = position
@@ -124,6 +138,23 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	else:
 		# Reset when stopped or in idle state
 		last_played_frame = -1
+		
+func play_coin_sound(stream_resource: AudioStream) -> void:
+	if not stream_resource:
+		return
+		
+	# Instantiate a dynamic audio player so sounds can overlap freely
+	var dynamic_sfx := AudioStreamPlayer2D.new()
+	add_child(dynamic_sfx)
+	
+	dynamic_sfx.stream = stream_resource
+	# Slight pitch increase gives great feedback when collecting multiple coins quickly
+	dynamic_sfx.pitch_scale = randf_range(0.95, 1.05)
+	
+	# Delete the node from memory once the sound finishes
+	dynamic_sfx.finished.connect(dynamic_sfx.queue_free)
+	
+	dynamic_sfx.play()
 
 func shoot():
 	var b = bullet_scene.instantiate()

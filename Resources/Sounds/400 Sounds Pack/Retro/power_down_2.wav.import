@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c2tumeqctpohg"
+path="res://.godot/imported/power_down_2.wav-a452ddc0e1de5ee87c16380e013b3e88.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/400 Sounds Pack/Retro/power_down_2.wav"
+dest_files=["res://.godot/imported/power_down_2.wav-a452ddc0e1de5ee87c16380e013b3e88.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

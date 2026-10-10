@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://duta38tb0wjq"
+path="res://.godot/imported/crunch_splat_2.wav-9f3f6bc065664f978de0837bed411275.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/400 Sounds Pack/Combat and Gore/crunch_splat_2.wav"
+dest_files=["res://.godot/imported/crunch_splat_2.wav-9f3f6bc065664f978de0837bed411275.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://xcqdko363t6n"
+path="res://.godot/imported/whistle.wav-4628dba7d3f8239ce1073b9a5302825a.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/400 Sounds Pack/Human/whistle.wav"
+dest_files=["res://.godot/imported/whistle.wav-4628dba7d3f8239ce1073b9a5302825a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

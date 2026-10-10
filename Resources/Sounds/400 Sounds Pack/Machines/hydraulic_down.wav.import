@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://j14iydkgewst"
+path="res://.godot/imported/hydraulic_down.wav-58cf844c0fa68c6915b4a6d7e12a35da.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/400 Sounds Pack/Machines/hydraulic_down.wav"
+dest_files=["res://.godot/imported/hydraulic_down.wav-58cf844c0fa68c6915b4a6d7e12a35da.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

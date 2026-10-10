@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dfkp6t87oadey"
+path="res://.godot/imported/synth_bass_chime_positive.wav-db1c01810ef2909a639fe197ca2ae49e.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/400 Sounds Pack/Musical Effects/synth_bass_chime_positive.wav"
+dest_files=["res://.godot/imported/synth_bass_chime_positive.wav-db1c01810ef2909a639fe197ca2ae49e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d3ocjwted6g1h"
+path="res://.godot/imported/harpsichord_negative.wav-f90be8a62dfedd17afbd9f719b402c82.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/400 Sounds Pack/Musical Effects/harpsichord_negative.wav"
+dest_files=["res://.godot/imported/harpsichord_negative.wav-f90be8a62dfedd17afbd9f719b402c82.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
