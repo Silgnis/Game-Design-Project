@@ -1,0 +1,100 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/dialogue_box.gd" id="1_dialogue"]
+[ext_resource type="FontFile" uid="uid://cgmxuumocyl8e" path="res://Resources/Custom Assets/Font/boldpixels.ttf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_box"]
+content_margin_left = 28.0
+content_margin_top = 24.0
+content_margin_right = 28.0
+content_margin_bottom = 20.0
+bg_color = Color(0.082, 0.102, 0.078, 0.94)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.56, 0.62, 0.5, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_name"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 2.0
+bg_color = Color(0.56, 0.62, 0.5, 1)
+anti_aliasing = false
+
+[node name="Dialogue" type="CanvasLayer"]
+layer = 50
+script = ExtResource("1_dialogue")
+
+[node name="Box" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -164.0
+offset_right = 400.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_box")
+
+[node name="Text" type="RichTextLabel" parent="Box"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 30.0
+offset_right = -28.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.93, 0.95, 0.88, 1)
+theme_override_fonts/normal_font = ExtResource("2_font")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Dialogue text goes here."
+scroll_active = false
+autowrap_mode = 3
+
+[node name="NameTab" type="PanelContainer" parent="Box"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = -20.0
+offset_right = 140.0
+offset_bottom = 10.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_name")
+
+[node name="Name" type="Label" parent="Box/NameTab"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.082, 0.102, 0.078, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "Speaker"
+
+[node name="Arrow" type="Label" parent="Box"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -40.0
+offset_right = -16.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.93, 0.95, 0.88, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "▶"
+horizontal_alignment = 1
+vertical_alignment = 1

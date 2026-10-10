@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b03ojmpn2745v" path="res://Resources/Custom Assets/New Tileset.png" id="2_newts"]
 [ext_resource type="Texture2D" uid="uid://bjsfomosc24o3" path="res://Resources/Custom Assets/house_1x.png" id="3_6g88d"]
 [ext_resource type="PackedScene" uid="uid://bwqtx1yctedcj" path="res://Scenes/campfire.tscn" id="5_40lmo"]
+[ext_resource type="Script" path="res://Scripts/dialogue_trigger.gd" id="6_dlgtrig"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_newts"]
 texture = ExtResource("2_newts")
@@ -126,6 +127,9 @@ texture_region_size = Vector2i(54, 74)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_glwgt")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dlgtrig"]
+size = Vector2(72, 48)
+
 [node name="Room1" type="Node2D" unique_id=1224556216]
 script = ExtResource("1_mc107")
 
@@ -168,3 +172,12 @@ tile_set = SubResource("TileSet_1wtbc")
 
 [node name="Campfire" parent="." unique_id=728852670 instance=ExtResource("5_40lmo")]
 position = Vector2(-49, -66)
+
+[node name="CampfireDialogue" type="Area2D" parent="."]
+position = Vector2(-49, -60)
+script = ExtResource("6_dlgtrig")
+speaker = "???"
+lines = Array[String](["...A traveller? Sit by the fire a while.", "These woods weren't always this dark. Something woke up out there."])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CampfireDialogue"]
+shape = SubResource("RectangleShape2D_dlgtrig")
