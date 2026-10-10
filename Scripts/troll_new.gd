@@ -11,6 +11,9 @@ extends EnemyBase
 @onready var hand: Marker2D = $Hand
 @onready var throw_timer: Timer = $ThrowTimer
 
+# Array to track all active projectile instances (rocks and pebbles)
+var spawned_projectiles: Array[Node2D] = []
+
 var target: Node2D
 var room: Room
 
@@ -47,27 +50,32 @@ func _process(_delta: float) -> void:
 func throw_rock() -> void:
 	if is_dead or not is_instance_valid(target) or rock_scene == null:
 		return
-	# Only attack while the player is in this troll's room
 	if room and not room.has_point(target.global_position):
 		return
+		
 	var rock = rock_scene.instantiate()
 	var dir = (target.global_position - hand.global_position).normalized()
 	rock.global_position = hand.global_position
 	rock.direction = dir
 	
-	# Track the rock instance
-	spawned_rocks.append(rock)
-	# Clean up our reference when the rock destroys itself (e.g., hitting a wall/player)
-	rock.tree_exited.connect(func(): spawned_rocks.erase(rock))
+	# Assign creator reference
+	if "spawner_enemy" in rock:
+		rock.spawner_enemy = self
+	
+	register_spawned_node(rock)
 	
 	get_tree().current_scene.add_child(rock)
 	show_throw_pose()
 
+func register_spawned_node(node: Node2D) -> void:
+	spawned_projectiles.append(node)
+	node.tree_exited.connect(func(): spawned_projectiles.erase(node))
+
 func despawn_all_rocks() -> void:
-	for rock in spawned_rocks:
-		if is_instance_valid(rock):
-			rock.queue_free()
-	spawned_rocks.clear()
+	for proj in spawned_projectiles:
+		if is_instance_valid(proj):
+			proj.queue_free()
+	spawned_projectiles.clear()
 
 func show_throw_pose() -> void:
 	if stage_index < stage_throw_textures.size() and stage_throw_textures[stage_index] != null:
