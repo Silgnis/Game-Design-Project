@@ -14,6 +14,9 @@ extends EnemyBase
 var target: Node2D
 var room: Room
 
+# Array to track all active rocks thrown by this enemy
+var spawned_rocks: Array[Node2D] = []
+
 func _init() -> void:
 	enemy_id = "stationary"
 	max_health = 60
@@ -31,6 +34,10 @@ func _ready() -> void:
 	# Stagger the first throw so trolls in the same room don't throw in sync
 	throw_timer.start(randf_range(1.0, min(throw_interval, 4.0)))
 
+func _exit_tree() -> void:
+	# Triggered automatically when enemy is queue_free()'d or despawned
+	despawn_all_rocks()
+
 func _process(_delta: float) -> void:
 	if is_instance_valid(target):
 		# The sprite faces left; turn toward the player
@@ -47,8 +54,20 @@ func throw_rock() -> void:
 	var dir = (target.global_position - hand.global_position).normalized()
 	rock.global_position = hand.global_position
 	rock.direction = dir
+	
+	# Track the rock instance
+	spawned_rocks.append(rock)
+	# Clean up our reference when the rock destroys itself (e.g., hitting a wall/player)
+	rock.tree_exited.connect(func(): spawned_rocks.erase(rock))
+	
 	get_tree().current_scene.add_child(rock)
 	show_throw_pose()
+
+func despawn_all_rocks() -> void:
+	for rock in spawned_rocks:
+		if is_instance_valid(rock):
+			rock.queue_free()
+	spawned_rocks.clear()
 
 func show_throw_pose() -> void:
 	if stage_index < stage_throw_textures.size() and stage_throw_textures[stage_index] != null:

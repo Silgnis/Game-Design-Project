@@ -36,11 +36,10 @@ func _process(_delta: float) -> void:
 
 	# ROOM SWAP EVENTS
 	
-	# 1. Despawn enemies in the old room
-	if current_room:
-		current_room.on_player_exited()
+	# Store reference to the room being left behind
+	var old_room := current_room
 	
-	# 2. Update to new room and spawn its enemies
+	# Update to new room and spawn its enemies immediately
 	current_room = room
 	if minimap:
 		minimap.set_current(room)
@@ -48,9 +47,16 @@ func _process(_delta: float) -> void:
 	
 	is_transitioning = true
 	
+	# Animate camera to the new room center
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(camera, "global_position", room.get_global_bounds().get_center(), transition_time)
-	tween.finished.connect(func(): is_transitioning = false)
+	
+	# Despawn enemies in the old room only after camera slide is complete
+	tween.finished.connect(func():
+		is_transitioning = false
+		if is_instance_valid(old_room):
+			old_room.on_player_exited()
+	)
 
 func _room_at(point: Vector2) -> Room:
 	for room in rooms:

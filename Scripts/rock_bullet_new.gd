@@ -13,8 +13,15 @@ var direction = Vector2.RIGHT
 var _age := 0.0
 var _done := false
 
+# Track spawned pebbles so they despawn if this rock (or parent) is removed
+var spawned_pebbles: Array[Node2D] = []
+
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
+
+func _exit_tree() -> void:
+	# Automatically clean up any remaining pebbles spawned by this rock
+	despawn_all_pebbles()
 
 func _physics_process(delta: float) -> void:
 	position += direction * SPEED * delta
@@ -35,8 +42,15 @@ func split() -> void:
 		p.global_position = global_position
 		p.direction = dir
 		p.rotation = dir.angle()
+		
+		# Track pebble and automatically untrack when it destroys itself
+		spawned_pebbles.append(p)
+		p.tree_exited.connect(func(): spawned_pebbles.erase(p))
+		
 		get_tree().current_scene.add_child.call_deferred(p)
-	queue_free()
+	
+	# Note: Do not call despawn_all_pebbles() here! 
+	# queue_free() will wait until node tree exit, so _exit_tree() handles cleanup if interrupted.
 
 func _on_body_entered(body: Node2D) -> void:
 	if _done:
@@ -45,3 +59,9 @@ func _on_body_entered(body: Node2D) -> void:
 		body.take_damage(damage)
 	_done = true
 	queue_free()
+
+func despawn_all_pebbles() -> void:
+	for pebble in spawned_pebbles:
+		if is_instance_valid(pebble):
+			pebble.queue_free()
+	spawned_pebbles.clear()
