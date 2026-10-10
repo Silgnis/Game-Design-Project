@@ -3,12 +3,19 @@ class_name Player
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
+@onready var footstep_sfx: AudioStreamPlayer2D = $FootstepSFX
 @onready var player_ui: PlayerUI = $PlayerUI
+
 # The rifle flips itself when aiming left (see gun.gd); the body follows it
 @onready var rifle: Sprite2D = get_node_or_null("Gun/rifle")
 @export var gun_flipped_offset_x: float = -10.0 # Adjust this value so that gun stays in player's hands
 @export var bullet_scene = load("res://Scenes/bullet.tscn")
 
+# Footstep Audio Configuration
+@export var footstep_sounds: Array[AudioStream] = []
+@export var footstep_frame: int = 2 # The frame index where a step occurs
+var current_footstep_index: int = 0
+var last_played_frame: int = -1
 
 @export var max_health: int = 6
 @export var MOVE_SPEED = 100.0
@@ -27,6 +34,10 @@ var currency: int = 0:
 			player_ui.update_coins(currency)
 
 func _ready() -> void:
+	# Connect frame_changed signal to handle footsteps precisely when feet hit the ground
+	if not animated_sprite_2d.frame_changed.is_connected(_on_animated_sprite_2d_frame_changed):
+		animated_sprite_2d.frame_changed.connect(_on_animated_sprite_2d_frame_changed)
+
 	# Load saved stats if they exist, otherwise use defaults
 	if GameManager.saved_health != -1:
 		current_health = GameManager.saved_health
@@ -83,6 +94,35 @@ func movement(delta: float) -> void:
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, DECELERATION * delta)
 		animated_sprite_2d.play("idle")
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	# Only execute when walking and actively moving
+	if animated_sprite_2d.animation == "default" and velocity.length() > 10.0:
+		var current_frame = animated_sprite_2d.frame
+		
+		# Check if we hit our target step frame and haven't already triggered on this exact loop
+		if current_frame == footstep_frame and current_frame != last_played_frame:
+			last_played_frame = current_frame
+			
+			if not footstep_sounds.is_empty():
+				# Stop previous sound if it's still finishing to prevent overlap/layering
+				if footstep_sfx.is_playing():
+					footstep_sfx.stop()
+				
+				# Play the current sound from the list
+				footstep_sfx.stream = footstep_sounds[current_footstep_index]
+				footstep_sfx.pitch_scale = randf_range(0.96, 1.04)
+				footstep_sfx.play()
+				
+				# Cycle to the next step index for the next impact
+				current_footstep_index = (current_footstep_index + 1) % footstep_sounds.size()
+		
+		# Reset frame lock when animation advances past the step frame
+		elif current_frame != footstep_frame:
+			last_played_frame = -1
+	else:
+		# Reset when stopped or in idle state
+		last_played_frame = -1
 
 func shoot():
 	var b = bullet_scene.instantiate()

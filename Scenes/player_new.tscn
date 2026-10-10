@@ -2,9 +2,13 @@
 
 [ext_resource type="Script" uid="uid://d2j5chtp1vodb" path="res://Scripts/player_new.gd" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://cnt3tkf8kmdc1" path="res://Resources/Custom Assets/Player/Player_Idle.png" id="2_idle"]
+[ext_resource type="AudioStream" uid="uid://dy8k4gbngo3d0" path="res://Resources/Footsteps/footstep1.mp3" id="2_k7q4m"]
+[ext_resource type="AudioStream" uid="uid://c45rnwqv4pfv2" path="res://Resources/Footsteps/footstep2.mp3" id="3_i8trj"]
 [ext_resource type="Texture2D" uid="uid://ctkhljuf33nxk" path="res://Resources/Custom Assets/Player/Player_Walk.png" id="3_walk"]
 [ext_resource type="Texture2D" uid="uid://bewcqmxgvjxhe" path="res://Resources/Custom Assets/Player/Player_Dash.png" id="4_dash"]
+[ext_resource type="AudioStream" uid="uid://cgj6hvt14bpfa" path="res://Resources/Footsteps/footstep3.mp3" id="4_vgit6"]
 [ext_resource type="AudioStream" uid="uid://qkt3mo2gpj0q" path="res://Resources/Bullet Sounds/dmg_sfx.mp3" id="4_vgqql"]
+[ext_resource type="AudioStream" uid="uid://7tqyv2kudjso" path="res://Resources/Footsteps/footstep4.mp3" id="5_d6dxo"]
 [ext_resource type="PackedScene" path="res://Scenes/player_ui.tscn" id="5_pui"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t3rt0"]
@@ -109,6 +113,7 @@ animations = [{
 collision_layer = 2
 collision_mask = 21
 script = ExtResource("1_6t5aa")
+footstep_sounds = Array[AudioStream]([ExtResource("2_k7q4m"), ExtResource("3_i8trj"), ExtResource("4_vgit6"), ExtResource("5_d6dxo")])
 ACCELERATION = 2400.0
 DECELERATION = 1900.0
 
@@ -119,10 +124,12 @@ shape = SubResource("RectangleShape2D_t3rt0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=591878261]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_new")
-animation = &"idle"
 
 [node name="HandMarker" type="Marker2D" parent="." unique_id=1838279170]
 position = Vector2(-7, -6)
+
+[node name="FootstepSFX" type="AudioStreamPlayer2D" parent="." unique_id=1331631538]
+position = Vector2(0.5, 1.5)
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=192239709]
 position = Vector2(5, -2)
