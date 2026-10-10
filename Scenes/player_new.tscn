@@ -134,7 +134,7 @@ position = Vector2(0.5, 1.5)
 
 [node name="GunShotSFX" type="AudioStreamPlayer2D" parent="." unique_id=1351520491]
 stream = ExtResource("9_k7q4m")
-volume_db = -4.0
+volume_db = -3.0
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=192239709]
 position = Vector2(5, -2)
