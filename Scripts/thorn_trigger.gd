@@ -8,9 +8,11 @@ var room: Room
 
 func _ready() -> void:
 	room = _find_room()
-	body_exited.connect(_on_body_exited)
+	# Changed from body_exited to body_entered
+	body_entered.connect(_on_body_entered)
 
-func _on_body_exited(body: Node2D) -> void:
+# Renamed to _on_body_entered
+func _on_body_entered(body: Node2D) -> void:
 	if _triggered and trigger_once:
 		return
 	
