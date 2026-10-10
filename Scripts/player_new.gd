@@ -2,8 +2,9 @@ extends CharacterBody2D
 class_name Player
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
 @onready var footstep_sfx: AudioStreamPlayer2D = $FootstepSFX
+@onready var gunshot_sfx: AudioStreamPlayer2D = $GunShotSFX
+@onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
 @onready var player_ui: PlayerUI = $PlayerUI
 
 # The rifle flips itself when aiming left (see gun.gd); the body follows it
@@ -133,6 +134,10 @@ func shoot():
 	b.global_position = global_position
 	b.direction = shooting_dir
 	b.rotation = shooting_dir.angle()
+	
+	if gunshot_sfx:
+		gunshot_sfx.pitch_scale = randf_range(0.9, 1.1)
+		gunshot_sfx.play()
 	
 func take_damage(_amount: int) -> void:
 	current_health -= 1
