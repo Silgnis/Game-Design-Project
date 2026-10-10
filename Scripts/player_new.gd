@@ -27,6 +27,17 @@ var last_played_frame: int = -1
 @export var ACCELERATION = 2000.0
 @export var DECELERATION = 1600.0
 
+# Dash Controls
+@export var dash_speed: float = 320.0
+@export var dash_duration: float = 0.18
+@export var dash_cooldown: float = 1.5
+@export var dash_invincible: bool = true # Ignore damage while dashing
+var is_dashing: bool = false
+var dash_time_left: float = 0.0
+var dash_cooldown_left: float = 0.0
+var dash_direction: Vector2 = Vector2.ZERO
+var last_move_direction: Vector2 = Vector2.RIGHT
+
 # Fire Rate Controls
 @export var fire_rate: float = 0.25  # Time in seconds between shots
 var shoot_cooldown_timer: float = 0.0
@@ -97,18 +108,54 @@ func _physics_process(delta: float) -> void:
 		shoot()
 		shoot_cooldown_timer = fire_rate  # Reset cooldown
 	
-	movement(delta)
+	update_dash(delta)
+	if Input.is_action_just_pressed("dash"):
+		try_dash()
+
+	if is_dashing:
+		velocity = dash_direction * dash_speed
+	else:
+		movement(delta)
 	move_and_slide()
 
 func movement(delta: float) -> void:
 	var direction = Input.get_vector("left","right","up","down").normalized()
 	
 	if direction != Vector2.ZERO:
+		last_move_direction = direction
 		velocity = velocity.move_toward(direction * MOVE_SPEED, ACCELERATION * delta)
 		animated_sprite_2d.play("default")
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, DECELERATION * delta)
 		animated_sprite_2d.play("idle")
+
+func try_dash() -> void:
+	if is_dashing or dash_cooldown_left > 0.0:
+		return
+
+	# Dash where the player is moving, or the last direction moved if standing still
+	var input_dir = Input.get_vector("left","right","up","down")
+	var dir = input_dir if input_dir != Vector2.ZERO else last_move_direction
+	# Snap to the 8 directions so diagonals are exact 45 degrees
+	dash_direction = Vector2.RIGHT.rotated(snappedf(dir.angle(), PI / 4))
+
+	is_dashing = true
+	dash_time_left = dash_duration
+	dash_cooldown_left = dash_cooldown
+	animated_sprite_2d.play("dash")
+	player_ui.update_dash(0.0)
+
+func update_dash(delta: float) -> void:
+	if is_dashing:
+		dash_time_left -= delta
+		if dash_time_left <= 0.0:
+			is_dashing = false
+			# Exit at walking speed so the deceleration feels smooth instead of a hard stop
+			velocity = dash_direction * MOVE_SPEED
+
+	if dash_cooldown_left > 0.0:
+		dash_cooldown_left = max(dash_cooldown_left - delta, 0.0)
+		player_ui.update_dash(1.0 - dash_cooldown_left / dash_cooldown)
 
 func _on_animated_sprite_2d_frame_changed() -> void:
 	# Only execute when walking and actively moving
@@ -171,6 +218,8 @@ func shoot():
 		gunshot_sfx.play()
 	
 func take_damage(_amount: int) -> void:
+	if is_dashing and dash_invincible:
+		return
 	current_health -= 1
 	player_ui.update_hearts(current_health)
 	flash_red()
