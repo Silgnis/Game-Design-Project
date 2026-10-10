@@ -1,6 +1,8 @@
 extends Node2D
 class_name EnemyBase
 
+signal died
+
 @export_group("Enemy Identity")
 @export var enemy_id: String = "generic_enemy"
 
@@ -61,6 +63,7 @@ func die() -> void:
 	is_dead = true
 	drop_coins()
 	GameManager.register_enemy_kill(enemy_id)
+	died.emit()
 	queue_free()
 
 func drop_coins() -> void:

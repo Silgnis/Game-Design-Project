@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dwmkwdf5obo0v"]
+
+[ext_resource type="Script" uid="uid://dne3vtwe7b50a" path="res://Scripts/thorn_door.gd" id="1_oa7l7"]
+[ext_resource type="Texture2D" uid="uid://dg0dcdicmcyb5" path="res://Resources/Custom Assets/obstacles.png" id="1_ugwq7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oa7l7"]
+size = Vector2(16.5, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_luyyh"]
+size = Vector2(20, 46)
+
+[node name="ThornDoor" type="StaticBody2D" unique_id=1597312878]
+script = ExtResource("1_oa7l7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1830975021]
+position = Vector2(0, -4)
+texture = ExtResource("1_ugwq7")
+region_enabled = true
+region_rect = Rect2(79.64523, 47.06891, 16.334549, 16.963333)
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1117501336]
+position = Vector2(0, 7)
+texture = ExtResource("1_ugwq7")
+region_enabled = true
+region_rect = Rect2(79.64523, 47.06891, 16.334549, 16.963333)
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=884486930]
+position = Vector2(0, 18)
+texture = ExtResource("1_ugwq7")
+region_enabled = true
+region_rect = Rect2(79.64523, 47.06891, 16.334549, 16.963333)
+
+[node name="SolidCollision" type="CollisionShape2D" parent="." unique_id=1863321034]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_oa7l7")
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=1788762534]
+collision_mask = 2
+
+[node name="HazardCollision" type="CollisionShape2D" parent="DamageArea" unique_id=2070278523]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_luyyh")
+
+[node name="Timer" type="Timer" parent="." unique_id=1686605768]
