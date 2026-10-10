@@ -1,12 +1,17 @@
 extends CharacterBody2D
 class_name Player
 
+# The myling ghost listens to these to play its attack / recharge sprites
+signal myling_used
+signal myling_ready
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var footstep_sfx: AudioStreamPlayer2D = $FootstepSFX
 @onready var gunshot_sfx: AudioStreamPlayer2D = $GunShotSFX
 @onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
 @onready var player_ui: PlayerUI = $PlayerUI
 @onready var myling_area: Area2D = $Myling_range
+@onready var myling_shape: CollisionShape2D = $Myling_range/CollisionShape2D
 
 # The rifle flips itself when aiming left (see gun.gd); the body follows it
 @onready var rifle: Sprite2D = get_node_or_null("Gun/rifle")
@@ -38,6 +43,12 @@ var dash_time_left: float = 0.0
 var dash_cooldown_left: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
 var last_move_direction: Vector2 = Vector2.RIGHT
+
+# Myling Controls: freezes every enemy inside Myling_range
+@export var myling_cooldown: float = 8.0
+@export var myling_freeze_duration: float = 3.0
+const MYLING_PULSE_COLOR = Color(0.5, 0.95, 1.0, 0.9)
+var myling_cooldown_left: float = 0.0
 
 # Fire Rate Controls
 @export var fire_rate: float = 0.25  # Time in seconds between shots
@@ -109,9 +120,10 @@ func _physics_process(delta: float) -> void:
 		shoot()
 		shoot_cooldown_timer = fire_rate  # Reset cooldown
 	
-	if Input.is_action_just_released("myling"):
-		myling_attack()
-	
+	update_myling(delta)
+	if Input.is_action_just_pressed("myling"):
+		try_myling()
+
 	update_dash(delta)
 	if Input.is_action_just_pressed("dash"):
 		try_dash()
@@ -221,21 +233,65 @@ func shoot():
 		gunshot_sfx.pitch_scale = randf_range(0.9, 1.1)
 		gunshot_sfx.play()
 		
-func myling_attack():
-	var enemies = myling_area.get_overlapping_bodies()
-	for body in enemies:
-		body.process_mode = Node.PROCESS_MODE_DISABLED
-		body.is_frozen = true
-		body.get_node("Sprite2D").texture = load("res://Resources/kenney_pixel-platformer/Tiles/tile_0073.png")
-	await get_tree().create_timer(3.0).timeout
-	for body in enemies:
-		body.process_mode = Node.PROCESS_MODE_INHERIT
-		body.is_frozen = false
+func try_myling() -> void:
+	if myling_cooldown_left > 0.0:
+		return
+
+	# Only things that know how to be frozen (EnemyBase and subclasses) are affected
+	for body in myling_area.get_overlapping_bodies():
+		if body.has_method("freeze"):
+			body.freeze(myling_freeze_duration)
+
+	myling_cooldown_left = myling_cooldown
+	player_ui.update_myling(0.0)
+	show_myling_pulse()
+	myling_used.emit()
+
+# Makes the myling ready right away (the boss calls this when its AOE starts charging)
+func refill_myling() -> void:
+	if myling_cooldown_left <= 0.0:
+		return
+	myling_cooldown_left = 0.0
+	player_ui.update_myling(1.0)
+	myling_ready.emit()
+
+func update_myling(delta: float) -> void:
+	if myling_cooldown_left <= 0.0:
+		return
+	myling_cooldown_left = max(myling_cooldown_left - delta, 0.0)
+	player_ui.update_myling(1.0 - myling_cooldown_left / myling_cooldown)
+	if myling_cooldown_left == 0.0:
+		myling_ready.emit()
+
+# Expanding ring that shows the freeze range
+func show_myling_pulse() -> void:
+	var radius: float = myling_shape.shape.radius
+	var ring = Line2D.new()
+	ring.closed = true
+	ring.width = 2.0
+	ring.default_color = MYLING_PULSE_COLOR
+	for i in 32:
+		ring.add_point(Vector2.RIGHT.rotated(TAU * i / 32) * radius)
+	ring.position = myling_shape.position
+	ring.scale = Vector2(0.1, 0.1)
+	add_child(ring)
+
+	var tween = create_tween().set_parallel()
+	tween.tween_property(ring, "scale", Vector2.ONE, 0.25).set_ease(Tween.EASE_OUT)
+	tween.tween_property(ring, "modulate:a", 0.0, 0.4)
+	tween.chain().tween_callback(ring.queue_free)
 	
 func take_damage(_amount: int) -> void:
 	if is_dashing and dash_invincible:
 		return
-	current_health -= 1
+	lose_health(1)
+
+# For hits that can't be dodged with a dash, like the boss's AOE blast
+func take_unavoidable_damage(half_hearts: int) -> void:
+	lose_health(half_hearts)
+
+func lose_health(half_hearts: int) -> void:
+	current_health -= half_hearts
 	player_ui.update_hearts(current_health)
 	flash_red()
 	

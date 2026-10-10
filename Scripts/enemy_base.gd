@@ -21,6 +21,10 @@ signal died
 var current_health: int
 var is_dead: bool = false
 var stage_index: int = 0
+var is_frozen: bool = false
+var _freeze_id := 0
+
+const FROZEN_TINT = Color(0.55, 0.85, 1.4)
 
 func _ready() -> void:
 	var kills = GameManager.get_enemy_kills(enemy_id)
@@ -56,6 +60,29 @@ func flash_red() -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color.RED, 0.05)
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
+
+# Myling freeze: stops all processing (movement, timers, attacks) and tints the sprite icy.
+# Freezing again while frozen just restarts the duration.
+func freeze(duration: float) -> void:
+	if is_dead:
+		return
+	is_frozen = true
+	process_mode = Node.PROCESS_MODE_DISABLED
+	var sprite_node = get_node_or_null("Sprite2D")
+	if sprite_node:
+		sprite_node.modulate = FROZEN_TINT
+	_freeze_id += 1
+	# SceneTreeTimer keeps running while we're disabled; a bound method is dropped if we die
+	get_tree().create_timer(duration).timeout.connect(_on_freeze_timeout.bind(_freeze_id))
+
+func _on_freeze_timeout(id: int) -> void:
+	if id != _freeze_id or is_dead:
+		return
+	is_frozen = false
+	process_mode = Node.PROCESS_MODE_INHERIT
+	var sprite_node = get_node_or_null("Sprite2D")
+	if sprite_node:
+		sprite_node.modulate = Color.WHITE
 
 func die() -> void:
 	if is_dead:

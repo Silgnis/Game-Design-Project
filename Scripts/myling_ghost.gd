@@ -6,7 +6,13 @@ extends Node2D
 @export var bob_amplitude := 2.0                # Wobble height in pixels
 @export var bob_speed := 3.0                    # Speed of floating motion
 
+@export var attack_anim_time := 0.3
+
+const ATTACK_TEXTURE = preload("res://Resources/Custom Assets/Player/Myling Attack.png") # 4 frames
+const RECHARGE_TEXTURE = preload("res://Resources/Custom Assets/Player/Myling Recharge.png")
+
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var idle_texture: Texture2D = sprite.texture
 
 var _time := 0.0
 var _facing_right := true  # Tracks player's horizontal facing direction
@@ -16,6 +22,9 @@ func _ready() -> void:
 	# Force initial flipped state to match starting orientation
 	update_sprite_flip()
 	NavigationManager.on_trigger_player_spawn.connect(_on_player_spawn)
+	if target and target.has_signal("myling_used"):
+		target.myling_used.connect(_on_myling_used)
+		target.myling_ready.connect(_on_myling_ready)
 
 func _physics_process(delta: float) -> void:
 	if target == null:
@@ -53,3 +62,20 @@ func _on_player_spawn(spawn_position: Vector2) -> void:
 	# Teleport instantly using the current directional offset
 	global_position = spawn_position + get_calculated_offset()
 	update_sprite_flip()
+
+# Attack animation, then the dim recharge sprite until the ability is ready again
+func _on_myling_used() -> void:
+	_set_sprite(ATTACK_TEXTURE, 4)
+	var anim = create_tween()
+	anim.tween_property(sprite, "frame", 3, attack_anim_time)
+	anim.tween_callback(_set_sprite.bind(RECHARGE_TEXTURE, 1))
+
+func _on_myling_ready() -> void:
+	_set_sprite(idle_texture, 1)
+	sprite.scale = Vector2(1.4, 1.4)
+	create_tween().tween_property(sprite, "scale", Vector2.ONE, 0.2)
+
+func _set_sprite(texture: Texture2D, frames: int) -> void:
+	sprite.texture = texture
+	sprite.hframes = frames
+	sprite.frame = 0

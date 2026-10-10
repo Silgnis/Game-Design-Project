@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://d1iv0pbqmtbpo"]
+
+[ext_resource type="Script" uid="uid://0i8mrt5eda80" path="res://Scripts/world_new.gd" id="1_world"]
+[ext_resource type="PackedScene" path="res://Scenes/Rooms/room3_new.tscn" id="2_room"]
+[ext_resource type="PackedScene" uid="uid://heeqd3p6dtrp" path="res://Scenes/player_new.tscn" id="3_player"]
+[ext_resource type="PackedScene" uid="uid://du63meltaxsox" path="res://Scenes/gun_new.tscn" id="4_gun"]
+[ext_resource type="PackedScene" uid="uid://r0wha1du3xq5" path="res://Scenes/myling_ghost.tscn" id="5_ghost"]
+[ext_resource type="PackedScene" path="res://Scenes/Boss/forest_boss.tscn" id="6_boss"]
+
+[node name="BossArenaTest" type="Node2D" unique_id=528083281]
+script = ExtResource("1_world")
+
+[node name="Rooms" type="Node2D" parent="." unique_id=1224343674]
+
+[node name="Arena" parent="Rooms" unique_id=759874625 instance=ExtResource("2_room")]
+
+[node name="ForestBoss" parent="." unique_id=683666932 instance=ExtResource("6_boss")]
+position = Vector2(0, -60)
+debug_kills_override = 4
+
+[node name="Player" parent="." unique_id=2077247023 groups=["player"] instance=ExtResource("3_player")]
+position = Vector2(0, 90)
+motion_mode = 1
+
+[node name="Gun" parent="Player" unique_id=273188661 instance=ExtResource("4_gun")]
+position = Vector2(5, -3)
+
+[node name="Ghost" parent="." unique_id=444851594 node_paths=PackedStringArray("target") instance=ExtResource("5_ghost")]
+position = Vector2(0, 90)
+target = NodePath("../Player")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1554096853]
+zoom = Vector2(2.1, 2.1)

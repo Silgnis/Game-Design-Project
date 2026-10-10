@@ -28,3 +28,9 @@ func register_enemy_kill(enemy_id: String) -> void:
 	if enemy_id == "":
 		return
 	enemy_kill_counts[enemy_id] = get_enemy_kills(enemy_id) + 1
+
+func get_total_kills() -> int:
+	var total := 0
+	for kills in enemy_kill_counts.values():
+		total += kills
+	return total

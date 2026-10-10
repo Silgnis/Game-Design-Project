@@ -1,0 +1,79 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/forest_boss.gd" id="1_boss"]
+[ext_resource type="Texture2D" uid="uid://cyahrsdnyb8ql" path="res://Resources/Custom Assets/Pine_Tree_-_NIGHT_lighter.png" id="2_pine"]
+[ext_resource type="AudioStream" uid="uid://qkt3mo2gpj0q" path="res://Resources/Sounds/Bullet Sounds/dmg_sfx.mp3" id="3_sfx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]
+size = Vector2(28, 70)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
+bg_color = Color(0.08, 0.08, 0.12, 0.8)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.85, 0.85, 0.9, 0.9)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_fill"]
+bg_color = Color(0.36, 0.72, 0.3, 1)
+
+[node name="ForestBoss" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_boss")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_pine")
+
+[node name="LeftEye" type="Polygon2D" parent="Sprite2D"]
+position = Vector2(-5, 4)
+color = Color(1, 0.9, 0.3, 1)
+polygon = PackedVector2Array(-1.5, -1, 1.5, -1, 1.5, 1, -1.5, 1)
+
+[node name="RightEye" type="Polygon2D" parent="Sprite2D"]
+position = Vector2(5, 4)
+color = Color(1, 0.9, 0.3, 1)
+polygon = PackedVector2Array(-1.5, -1, 1.5, -1, 1.5, 1, -1.5, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_boss")
+
+[node name="ThrowPoint" type="Marker2D" parent="."]
+position = Vector2(0, 10)
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_sfx")
+
+[node name="BossUI" type="CanvasLayer" parent="."]
+
+[node name="Bar" type="VBoxContainer" parent="BossUI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 16.0
+offset_right = 250.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_constants/separation = 4
+
+[node name="BossName" type="Label" parent="BossUI/Bar"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Forest Elemental"
+horizontal_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="BossUI/Bar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bar_fill")
+value = 100.0
+show_percentage = false

@@ -7,8 +7,6 @@ extends EnemyBase
 # Throw sprite per stage. The idle sprites come from stage_sprites in EnemyBase.
 @export var stage_throw_textures: Array[Texture2D] = []
 
-@export var is_frozen: bool = false
-
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var hand: Marker2D = $Hand
 @onready var throw_timer: Timer = $ThrowTimer
