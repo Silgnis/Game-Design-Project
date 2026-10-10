@@ -230,7 +230,7 @@ func shoot():
 	b.rotation = shooting_dir.angle()
 	
 	if gunshot_sfx:
-		gunshot_sfx.pitch_scale = randf_range(0.9, 1.1)
+		gunshot_sfx.pitch_scale = randf_range(0.7, 1.2)
 		gunshot_sfx.play()
 		
 func try_myling() -> void:
