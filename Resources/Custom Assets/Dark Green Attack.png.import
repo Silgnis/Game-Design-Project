@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0gvoxtxnrh6l"
-valid=false
+uid="uid://dw376rftp1k8k"
+path="res://.godot/imported/Dark Green Attack.png-87859eeaa9811e4fd55fa27ce63175e9.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://Resources/Custom Assets/Font/boldpixels.svg"
+source_file="res://Resources/Custom Assets/Dark Green Attack.png"
+dest_files=["res://.godot/imported/Dark Green Attack.png-87859eeaa9811e4fd55fa27ce63175e9.ctex"]
 
 [params]
 
@@ -34,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d08w70s0wbjcm" path="res://Resources/Custom Assets/Tileset and tree.png" id="1_0plju"]
 [ext_resource type="Script" uid="uid://bhgm6sfwrsrgk" path="res://Scripts/Old/level.gd" id="1_5awjf"]
 [ext_resource type="TileSet" uid="uid://cdr018fxgilse" path="res://Resources/tree_tileset.tres" id="3_5awjf"]
-[ext_resource type="PackedScene" uid="uid://bsl7npd3rj82l" path="res://Scenes/door.tscn" id="3_ms0wi"]
+[ext_resource type="PackedScene" uid="uid://bsl7npd3rj82l" path="res://Scenes/Old/door.tscn" id="3_ms0wi"]
 [ext_resource type="PackedScene" uid="uid://be8qbmt0fe144" path="res://Scenes/Old/player.tscn" id="5_ehjmi"]
 [ext_resource type="PackedScene" uid="uid://dnodgevy3ctaj" path="res://Scenes/Old/gun.tscn" id="6_p4u3k"]
 [ext_resource type="PackedScene" uid="uid://r0wha1du3xq5" path="res://Scenes/myling_ghost.tscn" id="7_70df5"]

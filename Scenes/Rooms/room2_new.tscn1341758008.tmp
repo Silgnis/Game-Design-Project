@@ -118,9 +118,8 @@ sources/0 = SubResource("TileSetAtlasSource_pine0")
 sources/1 = SubResource("TileSetAtlasSource_pine1")
 sources/2 = SubResource("TileSetAtlasSource_pine2")
 
-[node name="Room2" type="Node2D" unique_id=1347433097 node_paths=PackedStringArray("trap_doors")]
+[node name="Room2" type="Node2D" unique_id=1347433097]
 script = ExtResource("1_room")
-trap_doors = [NodePath("ThornTrigger/ThornDoor"), NodePath("ThornTrigger2/ThornDoor")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1058378739]
 texture_filter = 1
@@ -177,18 +176,10 @@ script = ExtResource("4_ygkkw")
 enemy_scene = ExtResource("3_troll")
 enemy_id = "troll2_4"
 
-[node name="ThornTrigger" parent="." unique_id=375187269 node_paths=PackedStringArray("thorn_door") instance=ExtResource("6_pekw8")]
+[node name="ThornDoor" parent="." unique_id=1597312878 instance=ExtResource("5_u2nnp")]
 position = Vector2(-161, -10)
-collision_mask = 2
-thorn_door = NodePath("ThornDoor")
 
-[node name="ThornDoor" parent="ThornTrigger" unique_id=1597312878 instance=ExtResource("5_u2nnp")]
-collision_mask = 6
-
-[node name="ThornTrigger2" parent="." unique_id=1817712350 node_paths=PackedStringArray("thorn_door") instance=ExtResource("6_pekw8")]
-position = Vector2(157, -6)
-collision_mask = 2
-thorn_door = NodePath("ThornDoor")
-
-[node name="ThornDoor" parent="ThornTrigger2" unique_id=805895035 instance=ExtResource("5_u2nnp")]
-collision_mask = 6
+[node name="ThornTrigger" parent="." unique_id=375187269 node_paths=PackedStringArray("thorn_door") instance=ExtResource("6_pekw8")]
+position = Vector2(-133, -1)
+scale = Vector2(1.7677921, 3.3999996)
+thorn_door = NodePath("../ThornDoor")
