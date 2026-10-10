@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b03ojmpn2745v" path="res://Resources/Custom Assets/New Tileset.png" id="2_newts"]
 [ext_resource type="PackedScene" uid="uid://bdqs6ug65n8m8" path="res://Scenes/troll_new.tscn" id="3_troll"]
 [ext_resource type="Script" uid="uid://gfal27gsmqx2" path="res://Scripts/enemy_spawner.gd" id="4_ygkkw"]
+[ext_resource type="PackedScene" uid="uid://bf8hkj8p6pfa6" path="res://Scenes/enemy_melee.tscn" id="5_pekw8"]
 [ext_resource type="PackedScene" uid="uid://dwmkwdf5obo0v" path="res://Scenes/thorn_door.tscn" id="5_u2nnp"]
 [ext_resource type="PackedScene" uid="uid://esuv0yme7gbv" path="res://Scenes/thorn_trigger.tscn" id="6_pekw8"]
 
@@ -171,24 +172,22 @@ script = ExtResource("4_ygkkw")
 enemy_scene = ExtResource("3_troll")
 enemy_id = "troll2_3"
 
-[node name="Troll4" type="Marker2D" parent="." unique_id=457872025]
+[node name="Wolf1" type="Marker2D" parent="." unique_id=457872025]
 position = Vector2(120, 120)
 script = ExtResource("4_ygkkw")
-enemy_scene = ExtResource("3_troll")
-enemy_id = "troll2_4"
+enemy_scene = ExtResource("5_pekw8")
+enemy_id = "wolf2_1"
 
-[node name="ThornTrigger" parent="." unique_id=375187269 node_paths=PackedStringArray("thorn_door") instance=ExtResource("6_pekw8")]
+[node name="ThornTrigger" parent="." unique_id=375187269 instance=ExtResource("6_pekw8")]
 position = Vector2(-161, -10)
 collision_mask = 2
-thorn_door = NodePath("ThornDoor")
 
 [node name="ThornDoor" parent="ThornTrigger" unique_id=1597312878 instance=ExtResource("5_u2nnp")]
 collision_mask = 6
 
-[node name="ThornTrigger2" parent="." unique_id=1817712350 node_paths=PackedStringArray("thorn_door") instance=ExtResource("6_pekw8")]
+[node name="ThornTrigger2" parent="." unique_id=1817712350 instance=ExtResource("6_pekw8")]
 position = Vector2(157, -6)
 collision_mask = 2
-thorn_door = NodePath("ThornDoor")
 
 [node name="ThornDoor" parent="ThornTrigger2" unique_id=805895035 instance=ExtResource("5_u2nnp")]
 collision_mask = 6

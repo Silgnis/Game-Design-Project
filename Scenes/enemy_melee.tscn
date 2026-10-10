@@ -1,28 +1,93 @@
 [gd_scene format=3 uid="uid://bf8hkj8p6pfa6"]
 
 [ext_resource type="Script" uid="uid://bvodc4yhq33rf" path="res://Scripts/enemy_melee.gd" id="1_3dfpd"]
-[ext_resource type="Texture2D" uid="uid://vc6m2k4w5bx2" path="res://Resources/kenney_pixel-platformer/Tiles/Characters/tile_0008.png" id="2_s1fu1"]
-[ext_resource type="AudioStream" uid="uid://qkt3mo2gpj0q" path="res://Resources/Bullet Sounds/dmg_sfx.mp3" id="3_s1fu1"]
+[ext_resource type="Texture2D" uid="uid://dds45cy742s3u" path="res://Resources/Custom Assets/Wolf/Wolf Running.png" id="2_b7o5j"]
+[ext_resource type="Texture2D" uid="uid://cqbb33c2futkp" path="res://Resources/Custom Assets/Wolf/Ghost Wolf.png" id="3_84rqt"]
+[ext_resource type="AudioStream" uid="uid://qkt3mo2gpj0q" path="res://Resources/Sounds/Bullet Sounds/dmg_sfx.mp3" id="3_s1fu1"]
+[ext_resource type="Texture2D" uid="uid://dxax7jake0sgw" path="res://Resources/Custom Assets/Wolf/Ghostlier Wolf.png" id="4_84rqt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc88t"]
+atlas = ExtResource("2_b7o5j")
+region = Rect2(0, 3, 20, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwgco"]
+atlas = ExtResource("2_b7o5j")
+region = Rect2(20, 3, 20, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7suon"]
+atlas = ExtResource("2_b7o5j")
+region = Rect2(40, 3, 20, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qe287"]
+atlas = ExtResource("2_b7o5j")
+region = Rect2(60, 3, 20, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fymte"]
+atlas = ExtResource("3_84rqt")
+region = Rect2(0, 3, 20, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdmsp"]
+atlas = ExtResource("4_84rqt")
+region = Rect2(0, 3, 20, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r0pp3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rc88t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwgco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7suon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qe287")
+}],
+"loop": 1,
+"name": &"stage_0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fymte")
+}],
+"loop": 1,
+"name": &"stage_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdmsp")
+}],
+"loop": 1,
+"name": &"stage_2",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eu64u"]
+size = Vector2(15, 9)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v1gob"]
-radius = 13.0
+radius = 7.0
 
 [node name="EnemyMelee" type="CharacterBody2D" unique_id=778502133]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_3dfpd")
+stage_sprites = Array[Texture2D]([null, null, null])
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=149151036]
-texture_filter = 1
-texture = ExtResource("2_s1fu1")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1120445744]
+sprite_frames = SubResource("SpriteFrames_r0pp3")
+animation = &"stage_2"
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=583183493]
 stream = ExtResource("3_s1fu1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=518826974]
+position = Vector2(-2.5, -0.5)
 shape = SubResource("RectangleShape2D_eu64u")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=333268419]
@@ -30,6 +95,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=658461672]
+position = Vector2(-4, -1)
 shape = SubResource("CircleShape2D_v1gob")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=1921615030]

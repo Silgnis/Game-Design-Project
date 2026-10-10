@@ -1,28 +1,66 @@
-extends CharacterBody2D
+extends EnemyBase
+class_name MeleeEnemy
 
-@export var target: Node2D          
 @export var move_speed: float = 40.0
-@export var max_health: int = 80
 @export var damage: int = 20
-@export var coin_scene: PackedScene = preload("res://Scenes/Coin.tscn")
-@export var coin_drop_count: int = 3
-@export var coin_drop_radius: float = 12.0
-@export var is_frozen: bool = false
-@onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
+
 @onready var attack_area: Area2D = $AttackArea
 @onready var attack_timer: Timer = $AttackTimer
-var is_dead: bool = false
-var current_health: int
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+var target: Node2D
+
+func _init() -> void:
+	enemy_id = "melee_enemy"
+	max_health = 80
 
 func _ready() -> void:
-	current_health = max_health
-	attack_area.body_entered.connect(_on_attack_area_body_entered)
-	attack_timer.timeout.connect(_on_attack_timer_timeout)
-	attack_area.body_exited.connect(_on_attack_area_body_exited)
-	pass
+	super._ready() # This will automatically call our overridden update_appearance()
+	
+	if is_queued_for_deletion():
+		return
+		
+	target = get_tree().get_first_node_in_group("player")
+	
+	if attack_area:
+		attack_area.body_entered.connect(_on_attack_area_body_entered)
+		attack_area.body_exited.connect(_on_attack_area_body_exited)
+	
+	if attack_timer:
+		attack_timer.timeout.connect(_on_attack_timer_timeout)
+
+# OVERRIDE for the animation in first stage
+func update_appearance() -> void:
+	if not animated_sprite:
+		return
+	
+	print_debug(stage_index)
+	var anim_name = "stage_" + str(stage_index)
+	
+	if animated_sprite.sprite_frames.has_animation(anim_name):
+		animated_sprite.play(anim_name)
+	else:
+		print_debug("hey")
+		# Fallback if a specific stage animation doesn't exist
+		animated_sprite.play("default")
+
+func _physics_process(delta: float) -> void:
+	if is_dead or is_frozen or not is_instance_valid(target):
+		return
+		
+	var direction = (target.global_position - global_position).normalized()
+	velocity = direction * move_speed
+	
+	# Optional: Flip the sprite based on movement direction
+	if direction.x != 0:
+		animated_sprite.flip_h = direction.x > 0
+		
+	move_and_slide()
 
 func attack() -> void:
-	if is_instance_valid(target):
+	if is_dead or is_frozen:
+		return
+	if is_instance_valid(target) and target.has_method("take_damage"):
 		target.take_damage(damage)
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
@@ -36,43 +74,3 @@ func _on_attack_area_body_exited(body: Node2D) -> void:
 
 func _on_attack_timer_timeout() -> void:
 	attack()
-
-func _physics_process(_delta: float) -> void:
-	if not is_instance_valid(target):
-		return
-	var direction = (target.global_position - global_position).normalized()
-	velocity = direction * move_speed
-	move_and_slide()
-func take_damage(amount: int) -> void:
-	current_health -= amount
-	flash_red()
-	
-	if hurt_sfx:
-		# Randomize pitch slightly (0.9 to 1.1) so repeated hits don't sound repetitive
-		hurt_sfx.pitch_scale = randf_range(0.9, 1.1)
-		hurt_sfx.play()
-	
-	if current_health <= 0:
-		die()
-
-func flash_red() -> void:
-	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color.RED, 0.05)
-	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
-
-func die() -> void:
-	if is_dead:
-		return
-	is_dead = true
-	drop_coins()
-	queue_free()
-
-func drop_coins() -> void:
-	if coin_scene == null:
-		return
-	for i in coin_drop_count:
-		var coin = coin_scene.instantiate()
-		var offset = Vector2.RIGHT.rotated(randf() * TAU) * randf_range(4.0, coin_drop_radius)
-		coin.global_position = global_position + offset
-		# Deferred because die() usually runs inside a physics callback (bullet hit)
-		get_tree().current_scene.add_child.call_deferred(coin)
