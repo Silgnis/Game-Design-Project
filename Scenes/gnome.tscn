@@ -1,0 +1,110 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/shop_npc.gd" id="1_npc"]
+[ext_resource type="Script" path="res://Scripts/shop_item.gd" id="4_item"]
+[ext_resource type="Texture2D" uid="uid://b2caths4o5qn3" path="res://Resources/Custom Assets/Gnome.png" id="2_gnome"]
+[ext_resource type="Texture2D" path="res://Resources/Custom Assets/Speech Bubbles/speech_bubble_animation-11x11.png" id="3_bubble"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0"]
+atlas = ExtResource("3_bubble")
+region = Rect2(0, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1"]
+atlas = ExtResource("3_bubble")
+region = Rect2(11, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2"]
+atlas = ExtResource("3_bubble")
+region = Rect2(22, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3"]
+atlas = ExtResource("3_bubble")
+region = Rect2(33, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4"]
+atlas = ExtResource("3_bubble")
+region = Rect2(44, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5"]
+atlas = ExtResource("3_bubble")
+region = Rect2(55, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6"]
+atlas = ExtResource("3_bubble")
+region = Rect2(66, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7"]
+atlas = ExtResource("3_bubble")
+region = Rect2(77, 0, 11, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bubble"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7")
+}],
+"loop": false,
+"name": &"pop",
+"speed": 16.0
+}]
+
+[sub_resource type="Resource" id="ShopItem_ghost_food"]
+script = ExtResource("4_item")
+id = "ghost_food"
+display_name = "Ghost food"
+description = "Nutrition for the Myling. With this, it can let out a stunning scream twice as fast as before."
+price = 20
+
+[sub_resource type="Resource" id="ShopItem_silver_bullets"]
+script = ExtResource("4_item")
+id = "silver_bullets"
+display_name = "Silver bullets"
+description = "New, refined bullets. They deal more damage than the regular ones from your home."
+price = 30
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_talk"]
+radius = 26.0
+
+[node name="Gnome" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_npc")
+speaker = "Gnome"
+lines = Array[String](["Hello traveler. Do you want to see my wares?"])
+items = Array[ExtResource("4_item")]([SubResource("ShopItem_ghost_food"), SubResource("ShopItem_silver_bullets")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_gnome")
+offset = Vector2(0, -5)
+
+[node name="TalkRange" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_talk")
+
+[node name="Bubble" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(4, -23)
+sprite_frames = SubResource("SpriteFrames_bubble")
+animation = &"pop"
