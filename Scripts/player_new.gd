@@ -49,6 +49,8 @@ var last_move_direction: Vector2 = Vector2.RIGHT
 @export var myling_freeze_duration: float = 3.0
 const MYLING_PULSE_COLOR = Color(0.5, 0.95, 1.0, 0.9)
 var myling_cooldown_left: float = 0.0
+@export var ghost_food_cooldown_mult: float = 0.5
+@export var silver_bullet_damage: int = 15
 
 # Fire Rate Controls
 @export var fire_rate: float = 0.25  # Time in seconds between shots
@@ -228,6 +230,8 @@ func shoot():
 	b.global_position = global_position
 	b.direction = shooting_dir
 	b.rotation = shooting_dir.angle()
+	if GameManager.has_item("silver_bullets"):
+		b.damage = silver_bullet_damage
 	
 	if gunshot_sfx:
 		gunshot_sfx.pitch_scale = randf_range(0.7, 1.2)
@@ -242,7 +246,7 @@ func try_myling() -> void:
 		if body.has_method("freeze"):
 			body.freeze(myling_freeze_duration)
 
-	myling_cooldown_left = myling_cooldown
+	myling_cooldown_left = get_myling_cooldown()
 	player_ui.update_myling(0.0)
 	show_myling_pulse()
 	myling_used.emit()
@@ -255,11 +259,16 @@ func refill_myling() -> void:
 	player_ui.update_myling(1.0)
 	myling_ready.emit()
 
+func get_myling_cooldown() -> float:
+	if GameManager.has_item("ghost_food"):
+		return myling_cooldown * ghost_food_cooldown_mult
+	return myling_cooldown
+
 func update_myling(delta: float) -> void:
 	if myling_cooldown_left <= 0.0:
 		return
-	myling_cooldown_left = max(myling_cooldown_left - delta, 0.0)
-	player_ui.update_myling(1.0 - myling_cooldown_left / myling_cooldown)
+	myling_cooldown_left = clampf(myling_cooldown_left - delta, 0.0, get_myling_cooldown())
+	player_ui.update_myling(1.0 - myling_cooldown_left / get_myling_cooldown())
 	if myling_cooldown_left == 0.0:
 		myling_ready.emit()
 

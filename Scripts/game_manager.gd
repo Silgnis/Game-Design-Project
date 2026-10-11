@@ -12,6 +12,8 @@ var has_checkpoint: bool = false
 # Progression / Kills
 var enemy_kill_counts: Dictionary = {}
 
+var owned_items: Array[String] = []
+
 func save_player_state(health: int, currency: int) -> void:
 	saved_health = health
 	saved_currency = currency
@@ -34,3 +36,10 @@ func get_total_kills() -> int:
 	for kills in enemy_kill_counts.values():
 		total += kills
 	return total
+
+func has_item(item_id: String) -> bool:
+	return item_id in owned_items
+
+func add_item(item_id: String) -> void:
+	if not has_item(item_id):
+		owned_items.append(item_id)
