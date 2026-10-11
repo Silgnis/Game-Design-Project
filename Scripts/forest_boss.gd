@@ -18,9 +18,6 @@ class_name ForestBoss
 @export var second_circle_delay: float = 0.8 # When a tier casts 2 circles, the 2nd lands on the player this much later
 # With 2 circles in a row the rings close this much faster
 @export var multi_circle_close_faster_by: float = 0.2
-# Angry phase 2 opens with a tree circle (no wind-up) whose bushes take over this long after
-# the cutscene ends
-@export var angry_opener_fill_time: float = 1.0
 
 @export_group("Furious Trap")
 # Furious phase 2 opens by trapping the player in a ring of breakable trees, then fires
@@ -52,6 +49,9 @@ class_name ForestBoss
 @export var tier_pace: Array[float] = [0.9, 0.8, 0.65]
 @export var tier_extra_pinecones: Array[int] = [0, 1, 2]
 @export var tier_tree_circles: Array[int] = [1, 1, 2]
+# Phase 2 opens with a tree attack right after the cutscene (no wind-up). Per tier, how long
+# from the end of the cutscene until the bushes take over. Furious uses the trap ring.
+@export var tier_opener_fill_time: Array[float] = [4.0, 3.0, 2.0]
 @export var debug_kills_override: int = -1 # Set >= 0 in the test arena to try each tier
 # Every enemy the player kills is a ghost, so each kill is a soul that never gets its
 # eternal rest. {kills} is replaced with that number. spared_lines is used for 0 kills.
@@ -283,14 +283,12 @@ func _start_phase_two() -> void:
 	_enter_phase_two()
 	is_transitioning = false
 
-	# Calm continues straight away; angry opens with a tree circle; furious with the trap
-	match kill_tier:
-		1:
-			last_attack = attack_tree_circle
-			await attack_tree_circle(angry_opener_fill_time, true)
-		2:
-			last_attack = attack_tree_circle
-			await attack_tree_trap()
+	# Calm and angry open with a closing tree circle, furious with the trap
+	last_attack = attack_tree_circle
+	if kill_tier == 2:
+		await attack_tree_trap()
+	else:
+		await attack_tree_circle(tier_opener_fill_time[kill_tier], true)
 	_attack_loop()
 
 func _enter_phase_two() -> void:
@@ -369,7 +367,7 @@ func attack_tree_circle(fill_time: float = -1.0, skip_telegraph: bool = false) -
 		await wait(circle.close_time + circle.closed_hold)
 
 func attack_tree_trap() -> void:
-	var trap = spawn_tree_circle(true, true)
+	var trap = spawn_tree_circle(true, true, 0.0, NAN, tier_opener_fill_time[kill_tier])
 	if trap == null:
 		return
 
@@ -392,6 +390,7 @@ func spawn_tree_circle(instant: bool = false, breakable: bool = false, close_fas
 	circle.close_time = maxf(circle.close_time - close_faster_by, 0.1)
 	if fill_time > 0.0:
 		circle.close_time = maxf(fill_time - circle.closed_hold, 0.1)
+		circle.trap_time = fill_time # The instant (trap) ring has no closing, just this wait
 	circle.start_angle = start_angle
 	register_spawned_node(circle)
 	get_tree().current_scene.add_child(circle)
