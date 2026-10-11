@@ -57,25 +57,29 @@ texture_region_size = Vector2i(25, 41)
 0:0/next_alternative_id = 6
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 13)
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 8, -10, 8)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 8, -10, -18, -6, -22, 0, -33, 6, -22, 10, -18, 10, 8)
 0:0/1 = 1
 0:0/1/flip_h = true
 0:0/1/texture_origin = Vector2i(0, 13)
-0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 8, -10, 8)
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 8, -10, -18, -6, -22, 0, -33, 6, -22, 10, -18, 10, 8)
 0:0/2 = 2
 0:0/2/texture_origin = Vector2i(0, 18)
-0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 8, -10, 8)
+0:0/2/y_sort_origin = -5
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 3, -10, -23, -6, -27, 0, -38, 6, -27, 10, -23, 10, 3)
 0:0/3 = 3
 0:0/3/flip_h = true
 0:0/3/texture_origin = Vector2i(0, 18)
-0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 8, -10, 8)
+0:0/3/y_sort_origin = -5
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 3, -10, -23, -6, -27, 0, -38, 6, -27, 10, -23, 10, 3)
 0:0/4 = 4
 0:0/4/texture_origin = Vector2i(0, -2)
-0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 8, -10, 8)
+0:0/4/y_sort_origin = 15
+0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 23, -10, -3, -6, -7, 0, -18, 6, -7, 10, -3, 10, 23)
 0:0/5 = 5
 0:0/5/flip_h = true
 0:0/5/texture_origin = Vector2i(0, -2)
-0:0/5/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 8, -10, 8)
+0:0/5/y_sort_origin = 15
+0:0/5/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 23, -10, -3, -6, -7, 0, -18, 6, -7, 10, -3, 10, 23)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pine1"]
 texture = ExtResource("2_newts")
@@ -91,18 +95,22 @@ texture_region_size = Vector2i(25, 31)
 0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:0/2 = 2
 0:0/2/texture_origin = Vector2i(0, 18)
-0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/2/y_sort_origin = -10
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -18, 8, -18, 8, -2, -8, -2)
 0:0/3 = 3
 0:0/3/flip_h = true
 0:0/3/texture_origin = Vector2i(0, 18)
-0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/3/y_sort_origin = -10
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -18, 8, -18, 8, -2, -8, -2)
 0:0/4 = 4
 0:0/4/texture_origin = Vector2i(0, -2)
-0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/4/y_sort_origin = 10
+0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2, 8, 2, 8, 18, -8, 18)
 0:0/5 = 5
 0:0/5/flip_h = true
 0:0/5/texture_origin = Vector2i(0, -2)
-0:0/5/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/5/y_sort_origin = 10
+0:0/5/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2, 8, 2, 8, 18, -8, 18)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pine2"]
 texture = ExtResource("2_newts")
@@ -118,18 +126,22 @@ texture_region_size = Vector2i(14, 20)
 0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 7, -6, 7)
 0:0/2 = 2
 0:0/2/texture_origin = Vector2i(0, 18)
-0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 7, -6, 7)
+0:0/2/y_sort_origin = -15
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -21, 6, -21, 6, -8, -6, -8)
 0:0/3 = 3
 0:0/3/flip_h = true
 0:0/3/texture_origin = Vector2i(0, 18)
-0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 7, -6, 7)
+0:0/3/y_sort_origin = -15
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -21, 6, -21, 6, -8, -6, -8)
 0:0/4 = 4
 0:0/4/texture_origin = Vector2i(0, -2)
-0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 7, -6, 7)
+0:0/4/y_sort_origin = 5
+0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -1, 6, -1, 6, 12, -6, 12)
 0:0/5 = 5
 0:0/5/flip_h = true
 0:0/5/texture_origin = Vector2i(0, -2)
-0:0/5/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 7, -6, 7)
+0:0/5/y_sort_origin = 5
+0:0/5/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -1, 6, -1, 6, 12, -6, 12)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rocks"]
 texture = ExtResource("2_newts")
@@ -196,6 +208,7 @@ y_sort_enabled = true
 y_sort_enabled = true
 texture_filter = 1
 tile_map_data = PackedByteArray("AADu//b/AQAAAAAAAQDu//f/AAAAAAAAAADu//j/AAAAAAAAAgDu//n/AgAAAAAABADu//r/AQAAAAAABQDu//v/AAAAAAAAAADu//z/AAAAAAAAAgDu//3/AQAAAAAAAgDu//7/AQAAAAAAAwDu/wIAAAAAAAAAAwDu/wQAAAAAAAAAAgDu/wUAAAAAAAAAAADu/wcAAAAAAAAAAQDu/wgAAAAAAAAAAADu/wkAAQAAAAAAAQDv//b/AAAAAAAABQDv//f/AAAAAAAAAADv//j/AAAAAAAAAgDv//n/AAAAAAAAAgDv//r/AAAAAAAAAgDv//v/AAAAAAAAAgDv//z/AAAAAAAAAQDv//3/AAAAAAAAAADv//7/AAAAAAAAAgDv/wIAAAAAAAAAAgDv/wMAAQAAAAAAAgDv/wQAAQAAAAAAAwDv/wUAAAAAAAAAAwDv/wYAAAAAAAAAAwDv/wcAAAAAAAAAAgDv/wgAAAAAAAAAAwDw//b/AAAAAAAABQDw//f/AAAAAAAAAADw//j/AQAAAAAAAADw//v/AgAAAAAAAADw//3/AQAAAAAAAQDw/wcAAAAAAAAAAwDw/wgAAAAAAAAAAADw/wkAAgAAAAAAAgDx//b/AgAAAAAAAwDx//f/AAAAAAAAAgDx/wgAAAAAAAAAAQDx/wkAAQAAAAAAAADy//b/AAAAAAAABQDy//f/AgAAAAAAAwDy//j/AAAAAAAAAQDy/wgAAQAAAAAAAADy/wkAAAAAAAAAAwDz//b/AAAAAAAABADz//f/AAAAAAAAAwDz//j/AAAAAAAAAwDz/wgAAQAAAAAAAQDz/wkAAQAAAAAAAwD0//b/AAAAAAAABQD0//f/AAAAAAAAAwD0/wgAAAAAAAAAAAD0/wkAAQAAAAAAAQD1//b/AAAAAAAAAAD1//f/AAAAAAAAAAD1/wcAAAAAAAAAAQD1/wgAAgAAAAAAAQD1/wkAAAAAAAAAAgD2//b/AQAAAAAAAwD2//f/AAAAAAAAAgD2/wgAAAAAAAAAAgD3//b/AAAAAAAAAQD3//f/AAAAAAAAAgD3//j/AAAAAAAAAwD3/wgAAAAAAAAAAQD3/wkAAAAAAAAAAQD4//b/AgAAAAAAAwD4//f/AAAAAAAAAAD4/wgAAQAAAAAAAQD4/wkAAQAAAAAAAwD5//b/AQAAAAAAAQD5//f/AQAAAAAAAAD5/wgAAQAAAAAAAAD6//b/AAAAAAAAAQD6//f/AQAAAAAAAwD6/wgAAgAAAAAAAwD6/wkAAgAAAAAAAgD7//b/AAAAAAAAAAD7//f/AAAAAAAAAwD7/wIAAAAAAAAAAgD7/wMAAAAAAAAAAQD7/wQAAgAAAAAAAgD7/wUAAAAAAAAAAAD7/wYAAAAAAAAAAAD7/wcAAAAAAAAAAwD7/wgAAQAAAAAAAQD7/wkAAAAAAAAABQD8//b/AAAAAAAAAgD8//f/AQAAAAAAAQD8//j/AAAAAAAAAgD8/wEAAQAAAAAAAAD8/wIAAAAAAAAAAAD8/wMAAAAAAAAAAwD8/wQAAAAAAAAAAwD8/wUAAQAAAAAABAD8/wYAAAAAAAAAAgD8/wgAAAAAAAAAAQD8/wkAAAAAAAAABAD9//b/AAAAAAAAAQD9//f/AQAAAAAAAwD9/wEAAAAAAAAAAwD9/wIAAgAAAAAAAgD9/wMAAgAAAAAAAgD9/wQAAAAAAAAAAAD9/wUAAQAAAAAAAwD9/wYAAgAAAAAAAAD9/wcAAAAAAAAAAQD9/wgAAAAAAAAAAQD9/wkAAAAAAAAAAgACAPb/AAAAAAAAAQACAPf/AAAAAAAAAgACAPj/AAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAwACAAMAAAAAAAAAAwACAAQAAAAAAAAAAgACAAUAAAAAAAAAAwACAAYAAAAAAAAAAwACAAcAAQAAAAAAAAACAAgAAQAAAAAAAQACAAkAAAAAAAAAAgADAPb/AAAAAAAABQADAPf/AQAAAAAAAgADAPj/AQAAAAAAAAADAAEAAAAAAAAAAQADAAIAAAAAAAAAAwADAAMAAgAAAAAAAgADAAQAAAAAAAAAAQADAAUAAAAAAAAAAQADAAYAAgAAAAAABAADAAcAAAAAAAAAAQADAAgAAAAAAAAAAwADAAkAAAAAAAAAAgAEAPf/AAAAAAAAAAAEAAIAAAAAAAAAAwAEAAMAAAAAAAAAAgAEAAQAAgAAAAAAAQAEAAUAAAAAAAAAAgAEAAYAAAAAAAAAAgAEAAcAAAAAAAAAAgAEAAgAAQAAAAAAAAAEAAkAAAAAAAAABQAFAPb/AQAAAAAAAQAFAPf/AQAAAAAAAAAFAAgAAAAAAAAAAAAFAAkAAAAAAAAABQAGAPb/AAAAAAAAAwAGAPf/AAAAAAAAAAAGAAcAAQAAAAAAAwAGAAgAAQAAAAAAAAAGAAkAAQAAAAAAAgAHAPb/AgAAAAAAAAAHAPf/AgAAAAAAAwAHAAgAAAAAAAAAAgAHAAkAAAAAAAAABQAIAPb/AAAAAAAAAAAIAPf/AAAAAAAAAQAIAPj/AAAAAAAAAQAIAAgAAQAAAAAAAgAIAAkAAAAAAAAAAwAJAPb/AQAAAAAAAwAJAPf/AAAAAAAAAAAJAAgAAAAAAAAAAQAJAAkAAQAAAAAABAAKAPb/AAAAAAAAAAAKAPf/AQAAAAAAAQAKAAgAAAAAAAAAAgAKAAkAAAAAAAAAAwALAPb/AAAAAAAABQALAPf/AAAAAAAAAAALAPj/AAAAAAAAAQALAAgAAQAAAAAAAQALAAkAAAAAAAAABAAMAPf/AQAAAAAAAQAMAAgAAQAAAAAAAQAMAAkAAAAAAAAAAAANAPb/AQAAAAAAAgANAPf/AAAAAAAAAAANAAgAAgAAAAAAAAANAAkAAgAAAAAABAAOAPb/AAAAAAAAAwAOAPf/AgAAAAAAAgAOAAgAAgAAAAAAAwAPAPb/AQAAAAAAAQAPAPf/AAAAAAAAAAAPAPj/AAAAAAAAAAAPAPr/AQAAAAAAAwAPAPz/AAAAAAAAAwAPAAIAAQAAAAAAAwAPAAUAAAAAAAAAAAAPAAcAAQAAAAAAAAAPAAgAAQAAAAAAAAAPAAkAAAAAAAAAAgAQAPb/AQAAAAAABQAQAPf/AAAAAAAAAQAQAPj/AAAAAAAAAwAQAPn/AAAAAAAAAAAQAPr/AAAAAAAAAQAQAPv/AAAAAAAAAwAQAPz/AAAAAAAAAQAQAP3/AQAAAAAAAAAQAP7/AAAAAAAAAQAQAAIAAAAAAAAAAQAQAAMAAQAAAAAAAQAQAAQAAAAAAAAAAgAQAAUAAAAAAAAAAwAQAAYAAAAAAAAAAgAQAAcAAgAAAAAAAgAQAAgAAAAAAAAAAQAQAAkAAAAAAAAABAARAPb/AgAAAAAAAAARAPf/AAAAAAAAAwARAPj/AgAAAAAABQARAPn/AgAAAAAAAwARAPr/AgAAAAAAAQARAPv/AQAAAAAAAAARAPz/AAAAAAAAAQARAP3/AAAAAAAAAAARAP7/AAAAAAAAAwARAAIAAAAAAAAAAQARAAMAAAAAAAAABAARAAQAAQAAAAAABQARAAUAAQAAAAAAAAARAAYAAAAAAAAABQARAAcAAgAAAAAAAgARAAgAAQAAAAAABQARAAkAAAAAAAAABQA=")
+physics_quadrant_size = 1
 tile_set = SubResource("TileSet_forest")
 
 [node name="ExitNorth" type="TileMapLayer" parent="Forest"]
@@ -203,12 +216,14 @@ enabled = false
 y_sort_enabled = true
 texture_filter = 1
 tile_map_data = PackedByteArray("AAD+//b/AgAAAAAAAAD+//f/AQAAAAAAAQD///b/AAAAAAAAAAD///f/AQAAAAAAAwAAAPb/AQAAAAAAAgAAAPf/AAAAAAAAAQABAPb/AAAAAAAAAgABAPf/AgAAAAAAAwA=")
+physics_quadrant_size = 1
 tile_set = SubResource("TileSet_forest")
 
 [node name="ExitEast" type="TileMapLayer" parent="Forest"]
 y_sort_enabled = true
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAQAP//AAAAAAAAAgAQAAAAAgAAAAAAAAAQAAEAAAAAAAAAAwARAP//AgAAAAAAAAARAAAAAAAAAAAAAgARAAEAAAAAAAAAAQA=")
+physics_quadrant_size = 1
 tile_set = SubResource("TileSet_forest")
 
 [node name="ExitSouth" type="TileMapLayer" parent="Forest"]
@@ -216,10 +231,12 @@ enabled = false
 y_sort_enabled = true
 texture_filter = 1
 tile_map_data = PackedByteArray("AAD+/wEAAAAAAAAAAAD+/wIAAQAAAAAAAAD+/wMAAAAAAAAAAQD+/wQAAgAAAAAAAgD+/wUAAAAAAAAAAwD+/wYAAQAAAAAAAgD+/wcAAAAAAAAAAwD+/wgAAAAAAAAAAwD+/wkAAAAAAAAAAQD//wEAAAAAAAAAAQD//wIAAAAAAAAAAgD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAgD//wYAAAAAAAAAAQD//wcAAAAAAAAAAQD//wgAAAAAAAAAAQD//wkAAAAAAAAAAQAAAAEAAAAAAAAAAgAAAAIAAAAAAAAAAgAAAAMAAAAAAAAAAwAAAAQAAAAAAAAAAwAAAAUAAgAAAAAAAQAAAAYAAQAAAAAAAgAAAAcAAgAAAAAAAQAAAAgAAAAAAAAAAQAAAAkAAAAAAAAAAAABAAEAAAAAAAAAAQABAAIAAAAAAAAAAgABAAMAAAAAAAAAAgABAAQAAAAAAAAAAwABAAUAAAAAAAAAAAABAAYAAQAAAAAAAgABAAcAAQAAAAAAAQABAAgAAgAAAAAAAQABAAkAAAAAAAAAAAA=")
+physics_quadrant_size = 1
 tile_set = SubResource("TileSet_forest")
 
 [node name="ExitWest" type="TileMapLayer" parent="Forest"]
 y_sort_enabled = true
 texture_filter = 1
 tile_map_data = PackedByteArray("AADu////AAAAAAAAAwDu/wAAAAAAAAAAAwDu/wEAAAAAAAAAAQDv////AAAAAAAAAADv/wAAAAAAAAAAAgDv/wEAAgAAAAAAAAA=")
+physics_quadrant_size = 1
 tile_set = SubResource("TileSet_forest")
