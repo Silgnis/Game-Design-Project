@@ -25,6 +25,9 @@ var is_frozen: bool = false
 var _freeze_id := 0
 
 const FROZEN_TINT = Color(0.55, 0.85, 1.4)
+# Over-bright on purpose: plain RED only removes green/blue, which barely shows on dark
+# sprites like the wolves. Values above 1 brighten the red channel instead.
+const HIT_FLASH_COLOR = Color(3.0, 0.6, 0.6)
 
 func _ready() -> void:
 	var kills = GameManager.get_enemy_kills(enemy_id)
@@ -57,9 +60,10 @@ func take_damage(amount: int) -> void:
 		die()
 
 func flash_red() -> void:
-	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color.RED, 0.05)
-	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
+	# Keeps running while frozen (disabled), so hits on a frozen enemy still show
+	var tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.tween_property(self, "modulate", HIT_FLASH_COLOR, 0.05)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.15)
 
 # Myling freeze: stops all processing (movement, timers, attacks) and tints the sprite icy.
 # Freezing again while frozen just restarts the duration.
@@ -67,6 +71,10 @@ func freeze(duration: float) -> void:
 	if is_dead:
 		return
 	is_frozen = true
+	# By default a disabled physics body is removed from the physics space, which would make
+	# bullets fly straight through a frozen enemy. Keep its collision active instead.
+	if self is CollisionObject2D:
+		set("disable_mode", CollisionObject2D.DISABLE_MODE_KEEP_ACTIVE)
 	process_mode = Node.PROCESS_MODE_DISABLED
 	var sprite_node = get_node_or_null("Sprite2D")
 	if sprite_node:

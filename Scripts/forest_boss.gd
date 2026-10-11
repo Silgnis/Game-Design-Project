@@ -18,8 +18,9 @@ class_name ForestBoss
 @export var second_circle_delay: float = 0.8 # When a tier casts 2 circles, the 2nd lands on the player this much later
 # With 2 circles in a row the rings close this much faster
 @export var multi_circle_close_faster_by: float = 0.2
-# Angry phase 2 opens with a tree circle whose bushes take over this long after the first tree
-@export var angry_opener_fill_time: float = 1.5
+# Angry phase 2 opens with a tree circle (no wind-up) whose bushes take over this long after
+# the cutscene ends
+@export var angry_opener_fill_time: float = 1.0
 
 @export_group("Furious Trap")
 # Furious phase 2 opens by trapping the player in a ring of breakable trees, then fires
@@ -286,7 +287,7 @@ func _start_phase_two() -> void:
 	match kill_tier:
 		1:
 			last_attack = attack_tree_circle
-			await attack_tree_circle(angry_opener_fill_time)
+			await attack_tree_circle(angry_opener_fill_time, true)
 		2:
 			last_attack = attack_tree_circle
 			await attack_tree_trap()
@@ -346,8 +347,9 @@ func fire_pinecone_volley(count: int = -1, buffed: bool = false) -> void:
 # --- Attack: tree circle around the player ---
 
 # All tree circles can be shot down. fill_time > 0 overrides how long until the bushes.
-func attack_tree_circle(fill_time: float = -1.0) -> void:
-	await telegraph()
+func attack_tree_circle(fill_time: float = -1.0, skip_telegraph: bool = false) -> void:
+	if not skip_telegraph:
+		await telegraph()
 	if is_dead or tree_circle_scene == null:
 		return
 
