@@ -16,6 +16,19 @@ border_width_bottom = 4
 border_color = Color(0.56, 0.62, 0.5, 1)
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_choices"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 22.0
+content_margin_bottom = 10.0
+bg_color = Color(0.082, 0.102, 0.078, 0.94)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.56, 0.62, 0.5, 1)
+anti_aliasing = false
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_name"]
 content_margin_left = 12.0
 content_margin_top = 4.0
@@ -98,3 +111,23 @@ theme_override_font_sizes/font_size = 24
 text = "▶"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Choices" type="PanelContainer" parent="Box"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -24.0
+offset_top = -16.0
+offset_right = -24.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_choices")
+
+[node name="List" type="VBoxContainer" parent="Box/Choices"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
