@@ -11,7 +11,7 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is player and not is_active:
+	if body is Player and not is_active:
 		is_active = true
 		NavigationManager.save_checkpoint(global_position, level_tag)
 		
