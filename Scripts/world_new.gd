@@ -33,7 +33,8 @@ func _process(_delta: float) -> void:
 	var room := _room_at(player.global_position)
 	if room == null or room == current_room:
 		return
-
+	
+	
 	# ROOM SWAP EVENTS
 	
 	# Store reference to the room being left behind

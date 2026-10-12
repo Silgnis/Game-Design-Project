@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://d1x8842e4bs3p"]
+
+[ext_resource type="Script" uid="uid://d4hfv8hasmiyu" path="res://Scripts/main_menu.gd" id="1_v3fht"]
+[ext_resource type="Texture2D" uid="uid://om3j036j1hkl" path="res://Resources/dark_forest.png" id="2_b42ut"]
+[ext_resource type="FontFile" uid="uid://cgmxuumocyl8e" path="res://Resources/Custom Assets/Font/boldpixels.ttf" id="3_hqtmt"]
+
+[sub_resource type="Theme" id="Theme_b42ut"]
+default_font_size = 58
+
+[sub_resource type="Theme" id="Theme_tfrft"]
+default_font = ExtResource("3_hqtmt")
+default_font_size = 60
+
+[sub_resource type="Theme" id="Theme_uv623"]
+default_font = ExtResource("3_hqtmt")
+default_font_size = 60
+
+[sub_resource type="Theme" id="Theme_t3rt0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2vlcc"]
+font = ExtResource("3_hqtmt")
+font_size = 90
+font_color = Color(1, 0, 0, 1)
+
+[node name="MainMenu" type="Control" unique_id=2057266013]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 23.0
+offset_top = 43.0
+offset_right = 23.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v3fht")
+
+[node name="Background" type="TextureRect" parent="." unique_id=243584519]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = -43.0
+offset_right = -22.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_b42ut")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=557557924]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -38.0
+offset_right = -24.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=545801492]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_b42ut")
+
+[node name="Start_game" type="Button" parent="MarginContainer/VBoxContainer" unique_id=642398941]
+layout_mode = 2
+size_flags_stretch_ratio = 4.78
+theme = SubResource("Theme_tfrft")
+text = "Start game"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=148398465]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_uv623")
+text = "Quit"
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=1409325068]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 150)
+theme = SubResource("Theme_t3rt0")
+theme_override_fonts/font = ExtResource("3_hqtmt")
+theme_override_font_sizes/font_size = 70
+text = "Ett uselt mylingspel"
+label_settings = SubResource("LabelSettings_2vlcc")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Start_game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
