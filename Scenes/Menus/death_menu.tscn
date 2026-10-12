@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bqomn74ru4cnl"]
+
+[ext_resource type="Script" uid="uid://bnglecm57tyxf" path="res://Scripts/death_menu.gd" id="1_eawuk"]
+[ext_resource type="FontFile" uid="uid://cgmxuumocyl8e" path="res://Resources/Custom Assets/Font/boldpixels.ttf" id="2_eawuk"]
+
+[node name="DeathMenu" type="Control" unique_id=1891839749]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -32.0
+offset_right = -1087.0
+offset_bottom = -609.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eawuk")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1612500340]
+layout_mode = 0
+offset_right = 216.0
+offset_bottom = 111.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=129564552]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=115768178]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_eawuk")
+theme_override_font_sizes/font_size = 40
+text = "You Died"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1854584054]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_eawuk")
+text = "Restart
+"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=187389708]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_eawuk")
+text = "Quit
+"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

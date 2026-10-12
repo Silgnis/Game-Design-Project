@@ -12,7 +12,6 @@ signal myling_ready
 @onready var player_ui: PlayerUI = $PlayerUI
 @onready var myling_area: Area2D = $Myling_range
 @onready var myling_shape: CollisionShape2D = $Myling_range/CollisionShape2D
-
 # The rifle flips itself when aiming left (see gun.gd); the body follows it
 @onready var rifle: Sprite2D = get_node_or_null("Gun/rifle")
 @export var gun_flipped_offset_x: float = -10.0 # Adjust this value so that gun stays in player's hands
@@ -317,5 +316,5 @@ func flash_red() -> void:
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
 
 func die() -> void:
-	GameManager.save_player_state(max_health, currency)
-	NavigationManager.respawn_player()
+	get_tree().paused = true
+	get_node("/root/Main/World/HUD/DeathMenu").show()

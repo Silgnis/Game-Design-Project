@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://r0wha1du3xq5" path="res://Scenes/myling_ghost.tscn" id="6_ghost"]
 [ext_resource type="Script" uid="uid://bbw6at1hx2wti" path="res://Scripts/minimap.gd" id="7_minimap"]
 [ext_resource type="PackedScene" uid="uid://d3q8x4ph012ya" path="res://Scenes/Menus/PauseMenu.tscn" id="17_61pkf"]
+[ext_resource type="PackedScene" uid="uid://bqomn74ru4cnl" path="res://Scenes/Menus/death_menu.tscn" id="19_5sjgs"]
+[ext_resource type="Texture2D" uid="uid://1h05ckuxpc7u" path="res://Resources/Custom Assets/boss_map_icon.png" id="boss_icon"]
+[ext_resource type="PackedScene" path="res://Scenes/Boss/forest_boss.tscn" id="boss_scene"]
+[ext_resource type="Script" uid="uid://gfal27gsmqx2" path="res://Scripts/enemy_spawner.gd" id="enemy_spawner"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room3_new.tscn" id="room3"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room4_new.tscn" id="room4"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room5_new.tscn" id="room5"]
@@ -18,9 +22,6 @@
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room10_new.tscn" id="room10"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room11_new.tscn" id="room11"]
 [ext_resource type="PackedScene" uid="uid://cvevc6wdncubj" path="res://Scenes/Rooms/room12_new.tscn" id="room12"]
-[ext_resource type="PackedScene" path="res://Scenes/Boss/forest_boss.tscn" id="boss_scene"]
-[ext_resource type="Texture2D" path="res://Resources/Custom Assets/boss_map_icon.png" id="boss_icon"]
-[ext_resource type="Script" uid="uid://gfal27gsmqx2" path="res://Scripts/enemy_spawner.gd" id="enemy_spawner"]
 
 [node name="World" type="Node2D" unique_id=251740865]
 script = ExtResource("1_world")
@@ -104,24 +105,25 @@ enabled = false
 [node name="ExitWest" parent="Rooms/Room11/Forest"]
 enabled = true
 
-[node name="BossRoom" parent="Rooms" instance=ExtResource("room3")]
+[node name="BossRoom" parent="Rooms" unique_id=1607106466 instance=ExtResource("room3")]
 position = Vector2(1120, 1040)
 scale = Vector2(1.5, 1.5)
 map_icon = ExtResource("boss_icon")
+music_type = 2
 
-[node name="ExitNorth" parent="Rooms/BossRoom/Forest"]
+[node name="ExitNorth" parent="Rooms/BossRoom/Forest" index="1"]
 enabled = false
 
-[node name="ExitEast" parent="Rooms/BossRoom/Forest"]
+[node name="ExitEast" parent="Rooms/BossRoom/Forest" index="2"]
 enabled = true
 
-[node name="ExitWest" parent="Rooms/BossRoom/Forest"]
+[node name="ExitWest" parent="Rooms/BossRoom/Forest" index="4"]
 enabled = true
 
-[node name="ExitSouth" parent="Rooms/BossRoom/Forest"]
+[node name="ExitSouth" parent="Rooms/BossRoom/Forest" index="3"]
 enabled = true
 
-[node name="BossSpawner" type="Marker2D" parent="Rooms/BossRoom"]
+[node name="BossSpawner" type="Marker2D" parent="Rooms/BossRoom" unique_id=1846863529]
 position = Vector2(0, -60)
 script = ExtResource("enemy_spawner")
 enemy_scene = ExtResource("boss_scene")
@@ -129,6 +131,7 @@ enemy_id = "forest_boss"
 
 [node name="Room12" parent="Rooms" unique_id=2017466004 instance=ExtResource("room12")]
 position = Vector2(1680, 320)
+music_type = 1
 
 [node name="ExitNorth" parent="Rooms/Room12/Forest"]
 enabled = true
@@ -170,6 +173,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("7_minimap")
+
+[node name="DeathMenu" parent="HUD" unique_id=775556556 instance=ExtResource("19_5sjgs")]
+visible = false
+offset_left = 479.0
+offset_top = 289.0
+offset_right = -545.0
+offset_bottom = -288.0
 
 [editable path="Rooms/BossRoom"]
 

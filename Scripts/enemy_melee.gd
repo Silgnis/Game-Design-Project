@@ -34,7 +34,6 @@ func update_appearance() -> void:
 	if not animated_sprite:
 		return
 	
-	print_debug(stage_index)
 	var anim_name = "stage_" + str(stage_index)
 	
 	if animated_sprite.sprite_frames.has_animation(anim_name):
