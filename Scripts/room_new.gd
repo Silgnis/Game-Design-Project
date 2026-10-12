@@ -27,6 +27,7 @@ func on_player_entered() -> void:
 			var enemy = node.spawn_enemy()
 			if enemy:
 				active_enemies += 1
+				enemy.set_active(trap_doors.is_empty())
 				# Listen for this specific enemy dying
 				enemy.died.connect(_on_enemy_died)
 	
@@ -52,6 +53,9 @@ func _on_enemy_died() -> void:
 func lock_room() -> void:
 	if is_cleared:
 		return
+	for node in get_children():
+		if node is EnemySpawner and is_instance_valid(node.spawned_enemy):
+			node.spawned_enemy.set_active(true)
 	# Close all doors
 	for door in trap_doors:
 		if is_instance_valid(door):

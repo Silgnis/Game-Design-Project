@@ -1,12 +1,11 @@
 [gd_scene format=4 uid="uid://nxda4m4muu33"]
 
-[ext_resource type="Script" uid="uid://b70f8brawfitd" path="res://Scripts/room_new.gd" id="1_room"]
 [ext_resource type="Texture2D" uid="uid://b03ojmpn2745v" path="res://Resources/Custom Assets/New Tileset.png" id="2_newts"]
-[ext_resource type="PackedScene" uid="uid://bdqs6ug65n8m8" path="res://Scenes/troll_new.tscn" id="3_troll"]
 [ext_resource type="Script" uid="uid://gfal27gsmqx2" path="res://Scripts/enemy_spawner.gd" id="4_ygkkw"]
 [ext_resource type="PackedScene" uid="uid://bf8hkj8p6pfa6" path="res://Scenes/enemy_melee.tscn" id="5_pekw8"]
 [ext_resource type="PackedScene" uid="uid://dwmkwdf5obo0v" path="res://Scenes/thorn_door.tscn" id="5_u2nnp"]
 [ext_resource type="PackedScene" uid="uid://esuv0yme7gbv" path="res://Scenes/thorn_trigger.tscn" id="6_pekw8"]
+[ext_resource type="Script" path="res://Scripts/room2_tutorial.gd" id="7_tutorial"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_newts"]
 texture = ExtResource("2_newts")
@@ -137,15 +136,21 @@ texture_region_size = Vector2i(14, 20)
 0:0/5/y_sort_origin = 5
 0:0/5/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -1, 6, -1, 6, 12, -6, 12)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit_warning"]
+size = Vector2(24, 48)
+
 [sub_resource type="TileSet" id="TileSet_pine"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_pine0")
 sources/1 = SubResource("TileSetAtlasSource_pine1")
 sources/2 = SubResource("TileSetAtlasSource_pine2")
 
-[node name="Room2" type="Node2D" unique_id=1347433097 node_paths=PackedStringArray("trap_doors")]
-script = ExtResource("1_room")
+[node name="Room2" type="Node2D" unique_id=1347433097 node_paths=PackedStringArray("trap_doors", "wolf", "exit_door", "exit_warning")]
+script = ExtResource("7_tutorial")
 trap_doors = [NodePath("ThornTrigger/ThornDoor"), NodePath("ThornTrigger2/ThornDoor")]
+wolf = NodePath("Wolf1")
+exit_door = NodePath("ThornTrigger2/ThornDoor")
+exit_warning = NodePath("ExitWarning")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1058378739]
 texture_filter = 1
@@ -179,26 +184,8 @@ tile_map_data = PackedByteArray("AADv//j/AAAAAAAAAADv//n/AAAAAAAAAQDv//r/AQAAAAA
 physics_quadrant_size = 1
 tile_set = SubResource("TileSet_pine")
 
-[node name="Troll1" type="Marker2D" parent="." unique_id=897046798]
-position = Vector2(-120, -104)
-script = ExtResource("4_ygkkw")
-enemy_scene = ExtResource("3_troll")
-enemy_id = "troll2_1"
-
-[node name="Troll2" type="Marker2D" parent="." unique_id=611281625]
-position = Vector2(120, -104)
-script = ExtResource("4_ygkkw")
-enemy_scene = ExtResource("3_troll")
-enemy_id = "troll2_2"
-
-[node name="Troll3" type="Marker2D" parent="." unique_id=2120764576]
-position = Vector2(-120, 120)
-script = ExtResource("4_ygkkw")
-enemy_scene = ExtResource("3_troll")
-enemy_id = "troll2_3"
-
 [node name="Wolf1" type="Marker2D" parent="." unique_id=457872025]
-position = Vector2(120, 120)
+position = Vector2(112, 0)
 script = ExtResource("4_ygkkw")
 enemy_scene = ExtResource("5_pekw8")
 enemy_id = "wolf2_1"
@@ -218,3 +205,11 @@ collision_mask = 2
 [node name="ThornDoor" parent="ThornTrigger2" unique_id=805895035 instance=ExtResource("5_u2nnp")]
 position = Vector2(27, 0)
 collision_mask = 6
+
+[node name="ExitWarning" type="Area2D" parent="."]
+position = Vector2(132, 8)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitWarning"]
+shape = SubResource("RectangleShape2D_exit_warning")

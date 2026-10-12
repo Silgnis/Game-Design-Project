@@ -22,6 +22,7 @@ var current_health: int
 var is_dead: bool = false
 var stage_index: int = 0
 var is_frozen: bool = false
+var is_active: bool = true
 var _freeze_id := 0
 # >= 0 skips the kill-count lookup and spawns straight in that stage (clamped to the last).
 # Used for the ghosts the boss summons.
@@ -56,6 +57,9 @@ func update_appearance() -> void:
 	var sprite_node = get_node_or_null("Sprite2D")
 	if sprite_node is Sprite2D and stage_sprites[stage_index] != null:
 		sprite_node.texture = stage_sprites[stage_index]
+
+func set_active(active: bool) -> void:
+	is_active = active
 
 func take_damage(amount: int) -> void:
 	if is_dead:
