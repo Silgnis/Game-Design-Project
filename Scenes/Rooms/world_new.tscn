@@ -36,41 +36,89 @@ position = Vector2(560, 0)
 position = Vector2(1120, 0)
 
 [node name="Room4" parent="Rooms" unique_id=2089788250 instance=ExtResource("room4")]
-position = Vector2(1680, 0)
-
-[node name="Room5" parent="Rooms" unique_id=883150449 instance=ExtResource("room5")]
-position = Vector2(1120, -320)
-
-[node name="Room6" parent="Rooms" unique_id=1811937955 instance=ExtResource("room6")]
-position = Vector2(1680, -320)
-
-[node name="Room7" parent="Rooms" unique_id=1834749456 instance=ExtResource("room7")]
-position = Vector2(560, -320)
-
-[node name="Room8" parent="Rooms" unique_id=446522328 instance=ExtResource("room8")]
 position = Vector2(1120, 320)
 
-[node name="Room9" parent="Rooms" unique_id=1323401023 instance=ExtResource("room9")]
-position = Vector2(1120, 640)
+[node name="ExitNorth" parent="Rooms/Room4/Forest"]
+enabled = false
 
-[node name="Room10" parent="Rooms" unique_id=895727152 instance=ExtResource("room10")]
-position = Vector2(2240, -320)
+[node name="ExitSouth" parent="Rooms/Room4/Forest"]
+enabled = false
 
-[node name="Room11" parent="Rooms" unique_id=260754728 instance=ExtResource("room11")]
+[node name="ExitWest" parent="Rooms/Room4/Forest"]
+enabled = true
+
+[node name="Room5" parent="Rooms" unique_id=883150449 instance=ExtResource("room5")]
 position = Vector2(2240, 0)
 
+[node name="ExitEast" parent="Rooms/Room5/Forest"]
+enabled = true
+
+[node name="ExitSouth" parent="Rooms/Room5/Forest"]
+enabled = true
+
+[node name="Room6" parent="Rooms" unique_id=1811937955 instance=ExtResource("room6")]
+position = Vector2(1120, -320)
+
+[node name="ExitNorth" parent="Rooms/Room6/Forest"]
+enabled = false
+
+[node name="ExitSouth" parent="Rooms/Room6/Forest"]
+enabled = false
+
+[node name="ExitEast" parent="Rooms/Room6/Forest"]
+enabled = true
+
+[node name="Room7" parent="Rooms" unique_id=1834749456 instance=ExtResource("room7")]
+position = Vector2(1680, 0)
+
+[node name="Room8" parent="Rooms" unique_id=446522328 instance=ExtResource("room8")]
+position = Vector2(1120, 640)
+
+[node name="Room9" parent="Rooms" unique_id=1323401023 instance=ExtResource("room9")]
+position = Vector2(1120, -640)
+
+[node name="ExitNorth" parent="Rooms/Room9/Forest"]
+enabled = true
+
+[node name="ExitEast" parent="Rooms/Room9/Forest"]
+enabled = false
+
+[node name="ExitSouth" parent="Rooms/Room9/Forest"]
+enabled = false
+
+[node name="Room10" parent="Rooms" unique_id=895727152 instance=ExtResource("room10")]
+position = Vector2(1680, -640)
+
+[node name="ExitSouth" parent="Rooms/Room10/Forest"]
+enabled = true
+
+[node name="Room11" parent="Rooms" unique_id=260754728 instance=ExtResource("room11")]
+position = Vector2(560, -320)
+
+[node name="ExitNorth" parent="Rooms/Room11/Forest"]
+enabled = true
+
+[node name="ExitEast" parent="Rooms/Room11/Forest"]
+enabled = false
+
+[node name="ExitWest" parent="Rooms/Room11/Forest"]
+enabled = true
+
 [node name="BossRoom" parent="Rooms" instance=ExtResource("room3")]
-position = Vector2(0, -720)
+position = Vector2(1120, 1040)
 scale = Vector2(1.5, 1.5)
 map_icon = ExtResource("boss_icon")
 
 [node name="ExitNorth" parent="Rooms/BossRoom/Forest"]
-enabled = true
+enabled = false
 
 [node name="ExitEast" parent="Rooms/BossRoom/Forest"]
 enabled = true
 
 [node name="ExitWest" parent="Rooms/BossRoom/Forest"]
+enabled = true
+
+[node name="ExitSouth" parent="Rooms/BossRoom/Forest"]
 enabled = true
 
 [node name="BossSpawner" type="Marker2D" parent="Rooms/BossRoom"]
@@ -80,7 +128,16 @@ enemy_scene = ExtResource("boss_scene")
 enemy_id = "forest_boss"
 
 [node name="Room12" parent="Rooms" unique_id=2017466004 instance=ExtResource("room12")]
-position = Vector2(0, -320)
+position = Vector2(1680, 320)
+
+[node name="ExitNorth" parent="Rooms/Room12/Forest"]
+enabled = true
+
+[node name="ExitEast" parent="Rooms/Room12/Forest"]
+enabled = true
+
+[node name="ExitWest" parent="Rooms/Room12/Forest"]
+enabled = false
 
 [node name="Player" parent="." unique_id=71103916 groups=["player"] instance=ExtResource("4_player")]
 motion_mode = 1
@@ -115,3 +172,17 @@ mouse_filter = 2
 script = ExtResource("7_minimap")
 
 [editable path="Rooms/BossRoom"]
+
+[editable path="Rooms/Room4"]
+
+[editable path="Rooms/Room5"]
+
+[editable path="Rooms/Room6"]
+
+[editable path="Rooms/Room9"]
+
+[editable path="Rooms/Room10"]
+
+[editable path="Rooms/Room11"]
+
+[editable path="Rooms/Room12"]
