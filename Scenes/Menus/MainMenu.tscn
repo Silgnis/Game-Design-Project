@@ -19,8 +19,8 @@ default_font_size = 60
 
 [sub_resource type="LabelSettings" id="LabelSettings_2vlcc"]
 font = ExtResource("3_hqtmt")
-font_size = 90
-font_color = Color(1, 0, 0, 1)
+font_size = 100
+font_color = Color(0.6911139, 2.4787337e-06, 4.813075e-07, 1)
 
 [node name="MainMenu" type="Control" unique_id=2057266013]
 layout_mode = 3
@@ -64,7 +64,10 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 27)
 theme = SubResource("Theme_b42ut")
+alignment = 1
 
 [node name="Start_game" type="Button" parent="MarginContainer/VBoxContainer" unique_id=642398941]
 layout_mode = 2
@@ -81,11 +84,11 @@ text = "Quit"
 [node name="Title" type="Label" parent="MarginContainer" unique_id=1409325068]
 layout_mode = 2
 offset_transform_enabled = true
-offset_transform_position = Vector2(0, 150)
+offset_transform_position = Vector2(0, 180)
 theme = SubResource("Theme_t3rt0")
 theme_override_fonts/font = ExtResource("3_hqtmt")
 theme_override_font_sizes/font_size = 70
-text = "Ett uselt mylingspel"
+text = "Mylingen"
 label_settings = SubResource("LabelSettings_2vlcc")
 horizontal_alignment = 1
 
