@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/tree_circle.gd" id="1_circle"]
 
 [node name="TreeCircle" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_circle")
 
 [node name="Timer" type="Timer" parent="."]

@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://Scripts/pinecone.gd" id="1_pinecone"]
+[ext_resource type="Texture2D" path="res://Resources/Custom Assets/Boss/pinecone.png" id="2_sprite"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pinecone"]
 radius = 4.0
@@ -12,3 +13,7 @@ script = ExtResource("1_pinecone")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_pinecone")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_sprite")
