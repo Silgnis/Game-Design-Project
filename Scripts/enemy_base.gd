@@ -8,7 +8,7 @@ signal died
 
 @export_group("Stats")
 @export var max_health: int = 100
-@export var coin_scene: PackedScene = preload("res://Scenes/Coin.tscn")
+@export var coin_scene: PackedScene = preload("res://Scenes/coin.tscn")
 @export var coin_drop_radius: float = 12.0
 
 @export_group("Progression Stages")
