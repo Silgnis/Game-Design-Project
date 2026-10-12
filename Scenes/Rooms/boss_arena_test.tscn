@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d1iv0pbqmtbpo"]
 
 [ext_resource type="Script" uid="uid://0i8mrt5eda80" path="res://Scripts/world_new.gd" id="1_world"]
-[ext_resource type="PackedScene" path="res://Scenes/Rooms/room3_new.tscn" id="2_room"]
+[ext_resource type="PackedScene" uid="uid://c20anb7cwcje2" path="res://Scenes/Rooms/room3_new.tscn" id="2_room"]
 [ext_resource type="PackedScene" uid="uid://heeqd3p6dtrp" path="res://Scenes/player_new.tscn" id="3_player"]
 [ext_resource type="PackedScene" uid="uid://du63meltaxsox" path="res://Scenes/gun_new.tscn" id="4_gun"]
 [ext_resource type="PackedScene" uid="uid://r0wha1du3xq5" path="res://Scenes/myling_ghost.tscn" id="5_ghost"]
@@ -15,13 +15,13 @@ script = ExtResource("1_world")
 [node name="Arena" parent="Rooms" unique_id=759874625 instance=ExtResource("2_room")]
 scale = Vector2(1.5, 1.5)
 
-[node name="ExitNorth" parent="Rooms/Arena/Forest"]
+[node name="ExitNorth" parent="Rooms/Arena/Forest" parent_id_path=PackedInt32Array(759874625, 1387840988) index="1" unique_id=1625864307]
 enabled = true
 
-[node name="ExitEast" parent="Rooms/Arena/Forest"]
+[node name="ExitEast" parent="Rooms/Arena/Forest" parent_id_path=PackedInt32Array(759874625, 1387840988) index="2" unique_id=213870740]
 enabled = true
 
-[node name="ExitWest" parent="Rooms/Arena/Forest"]
+[node name="ExitWest" parent="Rooms/Arena/Forest" parent_id_path=PackedInt32Array(759874625, 1387840988) index="4" unique_id=429686959]
 enabled = true
 
 [node name="ForestBoss" parent="." unique_id=683666932 instance=ExtResource("6_boss")]
