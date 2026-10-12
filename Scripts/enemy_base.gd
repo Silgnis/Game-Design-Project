@@ -23,6 +23,9 @@ var is_dead: bool = false
 var stage_index: int = 0
 var is_frozen: bool = false
 var _freeze_id := 0
+# >= 0 skips the kill-count lookup and spawns straight in that stage (clamped to the last).
+# Used for the ghosts the boss summons.
+var forced_stage := -1
 
 const FROZEN_TINT = Color(0.55, 0.85, 1.4)
 # Over-bright on purpose: plain RED only removes green/blue, which barely shows on dark
@@ -30,6 +33,12 @@ const FROZEN_TINT = Color(0.55, 0.85, 1.4)
 const HIT_FLASH_COLOR = Color(3.0, 0.6, 0.6)
 
 func _ready() -> void:
+	if forced_stage >= 0:
+		stage_index = clampi(forced_stage, 0, max(stage_sprites.size() - 1, 0))
+		current_health = max_health
+		update_appearance()
+		return
+
 	var kills = GameManager.get_enemy_kills(enemy_id)
 
 	# Past the final stage: don't spawn at all
@@ -98,6 +107,9 @@ func die() -> void:
 	is_dead = true
 	drop_coins()
 	GameManager.register_enemy_kill(enemy_id)
+	# Killing the last ghost form destroys the soul for good: it never spawns again
+	if enemy_id != "" and stage_sprites.size() > 0 and stage_index == stage_sprites.size() - 1:
+		GameManager.register_soul_destroyed(enemy_id, scene_file_path)
 	died.emit()
 	queue_free()
 

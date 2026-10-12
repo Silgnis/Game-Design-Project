@@ -18,6 +18,9 @@
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room10_new.tscn" id="room10"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room11_new.tscn" id="room11"]
 [ext_resource type="PackedScene" uid="uid://cvevc6wdncubj" path="res://Scenes/Rooms/room12_new.tscn" id="room12"]
+[ext_resource type="PackedScene" path="res://Scenes/Boss/forest_boss.tscn" id="boss_scene"]
+[ext_resource type="Texture2D" path="res://Resources/Custom Assets/boss_map_icon.png" id="boss_icon"]
+[ext_resource type="Script" uid="uid://gfal27gsmqx2" path="res://Scripts/enemy_spawner.gd" id="enemy_spawner"]
 
 [node name="World" type="Node2D" unique_id=251740865]
 script = ExtResource("1_world")
@@ -56,6 +59,26 @@ position = Vector2(2240, -320)
 [node name="Room11" parent="Rooms" unique_id=260754728 instance=ExtResource("room11")]
 position = Vector2(2240, 0)
 
+[node name="BossRoom" parent="Rooms" instance=ExtResource("room3")]
+position = Vector2(0, -720)
+scale = Vector2(1.5, 1.5)
+map_icon = ExtResource("boss_icon")
+
+[node name="ExitNorth" parent="Rooms/BossRoom/Forest"]
+enabled = true
+
+[node name="ExitEast" parent="Rooms/BossRoom/Forest"]
+enabled = true
+
+[node name="ExitWest" parent="Rooms/BossRoom/Forest"]
+enabled = true
+
+[node name="BossSpawner" type="Marker2D" parent="Rooms/BossRoom"]
+position = Vector2(0, -60)
+script = ExtResource("enemy_spawner")
+enemy_scene = ExtResource("boss_scene")
+enemy_id = "forest_boss"
+
 [node name="Room12" parent="Rooms" unique_id=2017466004 instance=ExtResource("room12")]
 position = Vector2(0, -320)
 
@@ -90,3 +113,5 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("7_minimap")
+
+[editable path="Rooms/BossRoom"]

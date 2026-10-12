@@ -7,16 +7,19 @@ extends Node2D
 @onready var minimap: Minimap = get_node_or_null("HUD/Minimap")
 
 var current_room: Room
+var base_zoom: Vector2
 var is_transitioning := false 
 var rooms: Array = []
 
 func _ready() -> void:
 	rooms = get_tree().get_nodes_in_group("rooms")
+	base_zoom = camera.zoom
 	current_room = _room_at(player.global_position)
 	if minimap:
 		minimap.setup(rooms)
 	if current_room:
 		camera.global_position = current_room.get_global_bounds().get_center()
+		camera.zoom = _zoom_for(current_room)
 		# Spawn enemies in the initial starting room immediately
 		current_room.on_player_entered()
 		if minimap:
@@ -51,6 +54,7 @@ func _process(_delta: float) -> void:
 	# Animate camera to the new room center
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(camera, "global_position", room.get_global_bounds().get_center(), transition_time)
+	tween.parallel().tween_property(camera, "zoom", _zoom_for(room), transition_time)
 	
 	# Despawn enemies in the old room only after camera slide is complete
 	tween.finished.connect(func():
@@ -64,3 +68,7 @@ func _room_at(point: Vector2) -> Room:
 		if room is Room and room.has_point(point):
 			return room
 	return null
+
+# A room scaled up by 1.5 needs the camera zoomed out by 1.5 to fit on screen
+func _zoom_for(room: Room) -> Vector2:
+	return base_zoom / room.global_scale.x
