@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dak7nngajqojt"
-path="res://.godot/imported/guns_v1.png-026765631117f05abbff95299b4f73fb.ctex"
+uid="uid://c8xp4rl1bprys"
+path="res://.godot/imported/boss_gate.png-fe13c6946c5da03f9be09822c512b626.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/guns_v1.png"
-dest_files=["res://.godot/imported/guns_v1.png-026765631117f05abbff95299b4f73fb.ctex"]
+source_file="res://Resources/Temp/boss_gate.png"
+dest_files=["res://.godot/imported/boss_gate.png-fe13c6946c5da03f9be09822c512b626.ctex"]
 
 [params]
 

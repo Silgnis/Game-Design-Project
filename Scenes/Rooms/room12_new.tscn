@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bwqtx1yctedcj" path="res://Scenes/campfire.tscn" id="4_kcj6o"]
 [ext_resource type="TileSet" uid="uid://dryk2kwaslu3x" path="res://Resources/new_trees_tiletes.tres" id="4_scrn3"]
 [ext_resource type="PackedScene" path="res://Scenes/gnome.tscn" id="5_gnome"]
+[ext_resource type="Script" uid="uid://bf1srdns76puj" path="res://Scripts/shop_item.gd" id="7_qay8b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mapicon"]
 atlas = ExtResource("4_campicon")
@@ -181,6 +182,28 @@ sources/2 = SubResource("TileSetAtlasSource_pine2")
 sources/3 = SubResource("TileSetAtlasSource_rocks")
 sources/4 = SubResource("TileSetAtlasSource_stump")
 
+[sub_resource type="Resource" id="Resource_scrn3"]
+script = ExtResource("7_qay8b")
+id = "boss_key"
+display_name = "Rusty key"
+description = "An old looking key that seems important to be able to open something."
+price = 8
+metadata/_custom_type_script = "uid://bf1srdns76puj"
+
+[sub_resource type="Resource" id="ShopItem_ghost_food"]
+script = ExtResource("7_qay8b")
+id = "ghost_food"
+display_name = "Ghost food"
+description = "Nutrition for the Myling. With this, it can let out a stunning scream twice as fast as before."
+price = 20
+
+[sub_resource type="Resource" id="ShopItem_silver_bullets"]
+script = ExtResource("7_qay8b")
+id = "silver_bullets"
+display_name = "Silver bullets"
+description = "New, refined bullets. They deal more damage than the regular ones from your home."
+price = 30
+
 [node name="Room12" type="Node2D" unique_id=1061136137]
 script = ExtResource("1_room")
 map_icon = SubResource("AtlasTexture_mapicon")
@@ -257,3 +280,4 @@ position = Vector2(9, -8)
 
 [node name="Gnome" parent="Forest" unique_id=408881881 instance=ExtResource("5_gnome")]
 position = Vector2(-28, 9)
+items = Array[ExtResource("7_qay8b")]([SubResource("Resource_scrn3"), SubResource("ShopItem_ghost_food"), SubResource("ShopItem_silver_bullets")])

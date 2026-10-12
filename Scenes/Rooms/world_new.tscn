@@ -12,15 +12,15 @@
 [ext_resource type="Texture2D" uid="uid://1h05ckuxpc7u" path="res://Resources/Custom Assets/boss_map_icon.png" id="boss_icon"]
 [ext_resource type="PackedScene" path="res://Scenes/Boss/forest_boss.tscn" id="boss_scene"]
 [ext_resource type="Script" uid="uid://gfal27gsmqx2" path="res://Scripts/enemy_spawner.gd" id="enemy_spawner"]
-[ext_resource type="PackedScene" path="res://Scenes/Rooms/room3_new.tscn" id="room3"]
-[ext_resource type="PackedScene" path="res://Scenes/Rooms/room4_new.tscn" id="room4"]
-[ext_resource type="PackedScene" path="res://Scenes/Rooms/room5_new.tscn" id="room5"]
-[ext_resource type="PackedScene" path="res://Scenes/Rooms/room6_new.tscn" id="room6"]
-[ext_resource type="PackedScene" path="res://Scenes/Rooms/room7_new.tscn" id="room7"]
-[ext_resource type="PackedScene" path="res://Scenes/Rooms/room8_new.tscn" id="room8"]
-[ext_resource type="PackedScene" path="res://Scenes/Rooms/room9_new.tscn" id="room9"]
-[ext_resource type="PackedScene" path="res://Scenes/Rooms/room10_new.tscn" id="room10"]
-[ext_resource type="PackedScene" path="res://Scenes/Rooms/room11_new.tscn" id="room11"]
+[ext_resource type="PackedScene" uid="uid://c20anb7cwcje2" path="res://Scenes/Rooms/room3_new.tscn" id="room3"]
+[ext_resource type="PackedScene" uid="uid://dudv6mou7xjwq" path="res://Scenes/Rooms/room4_new.tscn" id="room4"]
+[ext_resource type="PackedScene" uid="uid://bk64grcq4dcyw" path="res://Scenes/Rooms/room5_new.tscn" id="room5"]
+[ext_resource type="PackedScene" uid="uid://dekl1pdfiv3uh" path="res://Scenes/Rooms/room6_new.tscn" id="room6"]
+[ext_resource type="PackedScene" uid="uid://dcwacdfhxmyv2" path="res://Scenes/Rooms/room7_new.tscn" id="room7"]
+[ext_resource type="PackedScene" uid="uid://18gc31xr22mh" path="res://Scenes/Rooms/room8_new.tscn" id="room8"]
+[ext_resource type="PackedScene" uid="uid://jrx08x3bc3k4" path="res://Scenes/Rooms/room9_new.tscn" id="room9"]
+[ext_resource type="PackedScene" uid="uid://d2m31inxanakp" path="res://Scenes/Rooms/room10_new.tscn" id="room10"]
+[ext_resource type="PackedScene" uid="uid://0f7wv1kr6c46" path="res://Scenes/Rooms/room11_new.tscn" id="room11"]
 [ext_resource type="PackedScene" uid="uid://cvevc6wdncubj" path="res://Scenes/Rooms/room12_new.tscn" id="room12"]
 
 [node name="World" type="Node2D" unique_id=251740865]
@@ -39,35 +39,35 @@ position = Vector2(1120, 0)
 [node name="Room4" parent="Rooms" unique_id=2089788250 instance=ExtResource("room4")]
 position = Vector2(1120, 320)
 
-[node name="ExitNorth" parent="Rooms/Room4/Forest"]
+[node name="ExitNorth" parent="Rooms/Room4/Forest" parent_id_path=PackedInt32Array(2089788250, 1256072442) index="1" unique_id=1674185285]
 enabled = false
 
-[node name="ExitSouth" parent="Rooms/Room4/Forest"]
+[node name="ExitSouth" parent="Rooms/Room4/Forest" parent_id_path=PackedInt32Array(2089788250, 1256072442) index="3" unique_id=76260699]
 enabled = false
 
-[node name="ExitWest" parent="Rooms/Room4/Forest"]
+[node name="ExitWest" parent="Rooms/Room4/Forest" parent_id_path=PackedInt32Array(2089788250, 1256072442) index="4" unique_id=279542508]
 enabled = true
 
 [node name="Room5" parent="Rooms" unique_id=883150449 instance=ExtResource("room5")]
 position = Vector2(2240, 0)
 
-[node name="ExitEast" parent="Rooms/Room5/Forest"]
+[node name="ExitEast" parent="Rooms/Room5/Forest" parent_id_path=PackedInt32Array(883150449, 1562204503) index="2" unique_id=1235336571]
 enabled = true
 
-[node name="ExitSouth" parent="Rooms/Room5/Forest"]
+[node name="ExitSouth" parent="Rooms/Room5/Forest" parent_id_path=PackedInt32Array(883150449, 1562204503) index="3" unique_id=798378625]
 enabled = true
 
 [node name="Room6" parent="Rooms" unique_id=1811937955 instance=ExtResource("room6")]
 position = Vector2(1120, -320)
 
-[node name="ExitNorth" parent="Rooms/Room6/Forest"]
+[node name="ExitNorth" parent="Rooms/Room6/Forest" parent_id_path=PackedInt32Array(1811937955, 827532767) index="1" unique_id=1678139204]
 enabled = false
 
-[node name="ExitSouth" parent="Rooms/Room6/Forest"]
-enabled = false
-
-[node name="ExitEast" parent="Rooms/Room6/Forest"]
+[node name="ExitEast" parent="Rooms/Room6/Forest" parent_id_path=PackedInt32Array(1811937955, 827532767) index="2" unique_id=1823037367]
 enabled = true
+
+[node name="ExitSouth" parent="Rooms/Room6/Forest" parent_id_path=PackedInt32Array(1811937955, 827532767) index="3" unique_id=1515755413]
+enabled = false
 
 [node name="Room7" parent="Rooms" unique_id=1834749456 instance=ExtResource("room7")]
 position = Vector2(1680, 0)
@@ -78,31 +78,31 @@ position = Vector2(1120, 640)
 [node name="Room9" parent="Rooms" unique_id=1323401023 instance=ExtResource("room9")]
 position = Vector2(1120, -640)
 
-[node name="ExitNorth" parent="Rooms/Room9/Forest"]
+[node name="ExitNorth" parent="Rooms/Room9/Forest" parent_id_path=PackedInt32Array(1323401023, 1624827910) index="1" unique_id=38397108]
 enabled = true
 
-[node name="ExitEast" parent="Rooms/Room9/Forest"]
+[node name="ExitEast" parent="Rooms/Room9/Forest" parent_id_path=PackedInt32Array(1323401023, 1624827910) index="2" unique_id=923109930]
 enabled = false
 
-[node name="ExitSouth" parent="Rooms/Room9/Forest"]
+[node name="ExitSouth" parent="Rooms/Room9/Forest" parent_id_path=PackedInt32Array(1323401023, 1624827910) index="3" unique_id=784423920]
 enabled = false
 
 [node name="Room10" parent="Rooms" unique_id=895727152 instance=ExtResource("room10")]
 position = Vector2(1680, -640)
 
-[node name="ExitSouth" parent="Rooms/Room10/Forest"]
+[node name="ExitSouth" parent="Rooms/Room10/Forest" parent_id_path=PackedInt32Array(895727152, 44372639) index="3" unique_id=831646265]
 enabled = true
 
 [node name="Room11" parent="Rooms" unique_id=260754728 instance=ExtResource("room11")]
 position = Vector2(560, -320)
 
-[node name="ExitNorth" parent="Rooms/Room11/Forest"]
+[node name="ExitNorth" parent="Rooms/Room11/Forest" parent_id_path=PackedInt32Array(260754728, 1508907068) index="1" unique_id=117270667]
 enabled = true
 
-[node name="ExitEast" parent="Rooms/Room11/Forest"]
+[node name="ExitEast" parent="Rooms/Room11/Forest" parent_id_path=PackedInt32Array(260754728, 1508907068) index="2" unique_id=1206503565]
 enabled = false
 
-[node name="ExitWest" parent="Rooms/Room11/Forest"]
+[node name="ExitWest" parent="Rooms/Room11/Forest" parent_id_path=PackedInt32Array(260754728, 1508907068) index="4" unique_id=1164262016]
 enabled = true
 
 [node name="BossRoom" parent="Rooms" unique_id=1607106466 instance=ExtResource("room3")]
@@ -111,16 +111,13 @@ scale = Vector2(1.5, 1.5)
 map_icon = ExtResource("boss_icon")
 music_type = 2
 
-[node name="ExitNorth" parent="Rooms/BossRoom/Forest" index="1"]
-enabled = false
-
-[node name="ExitEast" parent="Rooms/BossRoom/Forest" index="2"]
+[node name="ExitEast" parent="Rooms/BossRoom/Forest" parent_id_path=PackedInt32Array(1607106466, 1387840988) index="2" unique_id=213870740]
 enabled = true
 
-[node name="ExitWest" parent="Rooms/BossRoom/Forest" index="4"]
+[node name="ExitSouth" parent="Rooms/BossRoom/Forest" parent_id_path=PackedInt32Array(1607106466, 1387840988) index="3" unique_id=1325983197]
 enabled = true
 
-[node name="ExitSouth" parent="Rooms/BossRoom/Forest" index="3"]
+[node name="ExitWest" parent="Rooms/BossRoom/Forest" parent_id_path=PackedInt32Array(1607106466, 1387840988) index="4" unique_id=429686959]
 enabled = true
 
 [node name="BossSpawner" type="Marker2D" parent="Rooms/BossRoom" unique_id=1846863529]
@@ -133,13 +130,13 @@ enemy_id = "forest_boss"
 position = Vector2(1680, 320)
 music_type = 1
 
-[node name="ExitNorth" parent="Rooms/Room12/Forest"]
+[node name="ExitNorth" parent="Rooms/Room12/Forest" parent_id_path=PackedInt32Array(2017466004, 1422740881) index="1" unique_id=1051452325]
 enabled = true
 
-[node name="ExitEast" parent="Rooms/Room12/Forest"]
+[node name="ExitEast" parent="Rooms/Room12/Forest" parent_id_path=PackedInt32Array(2017466004, 1422740881) index="2" unique_id=2034863298]
 enabled = true
 
-[node name="ExitWest" parent="Rooms/Room12/Forest"]
+[node name="ExitWest" parent="Rooms/Room12/Forest" parent_id_path=PackedInt32Array(2017466004, 1422740881) index="4" unique_id=729883295]
 enabled = false
 
 [node name="Player" parent="." unique_id=71103916 groups=["player"] instance=ExtResource("4_player")]
@@ -181,18 +178,11 @@ offset_top = 289.0
 offset_right = -545.0
 offset_bottom = -288.0
 
-[editable path="Rooms/BossRoom"]
-
 [editable path="Rooms/Room4"]
-
 [editable path="Rooms/Room5"]
-
 [editable path="Rooms/Room6"]
-
 [editable path="Rooms/Room9"]
-
 [editable path="Rooms/Room10"]
-
 [editable path="Rooms/Room11"]
-
+[editable path="Rooms/BossRoom"]
 [editable path="Rooms/Room12"]
