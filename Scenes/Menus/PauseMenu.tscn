@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://d3q8x4ph012ya"]
 
 [ext_resource type="Script" uid="uid://c0yadjk05s3h4" path="res://Scripts/pause_menu.gd" id="1_8mfmb"]
+[ext_resource type="FontFile" uid="uid://cgmxuumocyl8e" path="res://Resources/Custom Assets/Font/boldpixels.ttf" id="2_cianu"]
+
+[sub_resource type="Theme" id="Theme_8mfmb"]
 
 [node name="PauseMenu" type="Control" unique_id=1891839749]
 process_mode = 3
@@ -27,11 +30,14 @@ layout_mode = 2
 [node name="Resume" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1162843831]
 process_mode = 3
 layout_mode = 2
+theme = SubResource("Theme_8mfmb")
+theme_override_fonts/font = ExtResource("2_cianu")
 text = "Resume"
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=38318922]
 process_mode = 3
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_cianu")
 text = "Quit"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
