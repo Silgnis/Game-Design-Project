@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://heeqd3p6dtrp" path="res://Scenes/player_new.tscn" id="4_player"]
 [ext_resource type="PackedScene" uid="uid://du63meltaxsox" path="res://Scenes/gun_new.tscn" id="5_gun"]
 [ext_resource type="PackedScene" uid="uid://r0wha1du3xq5" path="res://Scenes/myling_ghost.tscn" id="6_ghost"]
+[ext_resource type="Script" uid="uid://bbw6at1hx2wti" path="res://Scripts/minimap.gd" id="7_minimap"]
+[ext_resource type="PackedScene" uid="uid://d3q8x4ph012ya" path="res://Scenes/Menus/PauseMenu.tscn" id="17_61pkf"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room3_new.tscn" id="room3"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room4_new.tscn" id="room4"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room5_new.tscn" id="room5"]
@@ -15,8 +17,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room9_new.tscn" id="room9"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room10_new.tscn" id="room10"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room11_new.tscn" id="room11"]
-[ext_resource type="PackedScene" path="res://Scenes/Rooms/room12_new.tscn" id="room12"]
-[ext_resource type="Script" path="res://Scripts/minimap.gd" id="7_minimap"]
+[ext_resource type="PackedScene" uid="uid://cvevc6wdncubj" path="res://Scenes/Rooms/room12_new.tscn" id="room12"]
 
 [node name="World" type="Node2D" unique_id=251740865]
 script = ExtResource("1_world")
@@ -28,34 +29,34 @@ script = ExtResource("1_world")
 [node name="Room2" parent="Rooms" unique_id=2077056097 instance=ExtResource("3_room2")]
 position = Vector2(560, 0)
 
-[node name="Room3" parent="Rooms" instance=ExtResource("room3")]
+[node name="Room3" parent="Rooms" unique_id=1212374177 instance=ExtResource("room3")]
 position = Vector2(1120, 0)
 
-[node name="Room4" parent="Rooms" instance=ExtResource("room4")]
+[node name="Room4" parent="Rooms" unique_id=2089788250 instance=ExtResource("room4")]
 position = Vector2(1680, 0)
 
-[node name="Room5" parent="Rooms" instance=ExtResource("room5")]
+[node name="Room5" parent="Rooms" unique_id=883150449 instance=ExtResource("room5")]
 position = Vector2(1120, -320)
 
-[node name="Room6" parent="Rooms" instance=ExtResource("room6")]
+[node name="Room6" parent="Rooms" unique_id=1811937955 instance=ExtResource("room6")]
 position = Vector2(1680, -320)
 
-[node name="Room7" parent="Rooms" instance=ExtResource("room7")]
+[node name="Room7" parent="Rooms" unique_id=1834749456 instance=ExtResource("room7")]
 position = Vector2(560, -320)
 
-[node name="Room8" parent="Rooms" instance=ExtResource("room8")]
+[node name="Room8" parent="Rooms" unique_id=446522328 instance=ExtResource("room8")]
 position = Vector2(1120, 320)
 
-[node name="Room9" parent="Rooms" instance=ExtResource("room9")]
+[node name="Room9" parent="Rooms" unique_id=1323401023 instance=ExtResource("room9")]
 position = Vector2(1120, 640)
 
-[node name="Room10" parent="Rooms" instance=ExtResource("room10")]
+[node name="Room10" parent="Rooms" unique_id=895727152 instance=ExtResource("room10")]
 position = Vector2(2240, -320)
 
-[node name="Room11" parent="Rooms" instance=ExtResource("room11")]
+[node name="Room11" parent="Rooms" unique_id=260754728 instance=ExtResource("room11")]
 position = Vector2(2240, 0)
 
-[node name="Room12" parent="Rooms" instance=ExtResource("room12")]
+[node name="Room12" parent="Rooms" unique_id=2017466004 instance=ExtResource("room12")]
 position = Vector2(0, -320)
 
 [node name="Player" parent="." unique_id=71103916 groups=["player"] instance=ExtResource("4_player")]
@@ -70,9 +71,17 @@ target = NodePath("../Player")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1221796341]
 zoom = Vector2(2.1, 2.1)
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=832162961]
+process_mode = 3
 
-[node name="Minimap" type="Control" parent="HUD"]
+[node name="PauseMenu" parent="HUD" unique_id=1891839749 instance=ExtResource("17_61pkf")]
+visible = false
+offset_left = 504.0
+offset_top = 266.0
+offset_right = -520.0
+offset_bottom = -311.0
+
+[node name="Minimap" type="Control" parent="HUD" unique_id=2000235851]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
