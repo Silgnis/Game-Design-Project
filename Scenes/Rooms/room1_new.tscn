@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b70f8brawfitd" path="res://Scripts/room_new.gd" id="1_mc107"]
 [ext_resource type="Texture2D" uid="uid://b03ojmpn2745v" path="res://Resources/Custom Assets/New Tileset.png" id="2_newts"]
 [ext_resource type="Texture2D" uid="uid://bjsfomosc24o3" path="res://Resources/Custom Assets/house_1x.png" id="3_6g88d"]
-[ext_resource type="PackedScene" path="res://Scenes/campfire.tscn" id="5_40lmo"]
+[ext_resource type="PackedScene" uid="uid://bwqtx1yctedcj" path="res://Scenes/campfire.tscn" id="5_40lmo"]
 [ext_resource type="Script" uid="uid://c20pvhcj6oand" path="res://Scripts/dialogue_trigger.gd" id="6_dlgtrig"]
 [ext_resource type="Texture2D" uid="uid://61g6trjx76hf" path="res://Resources/Custom Assets/Dark Green Move.png" id="8_tutmove"]
 [ext_resource type="Texture2D" uid="uid://dw376rftp1k8k" path="res://Resources/Custom Assets/Dark Green Attack.png" id="9_tutatk"]

@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://r0wha1du3xq5" path="res://Scenes/myling_ghost.tscn" id="6_ghost"]
 [ext_resource type="Script" uid="uid://bbw6at1hx2wti" path="res://Scripts/minimap.gd" id="7_minimap"]
 [ext_resource type="PackedScene" uid="uid://d3q8x4ph012ya" path="res://Scenes/Menus/PauseMenu.tscn" id="17_61pkf"]
+[ext_resource type="PackedScene" uid="uid://bqomn74ru4cnl" path="res://Scenes/Menus/death_menu.tscn" id="19_5sjgs"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room3_new.tscn" id="room3"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room4_new.tscn" id="room4"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room5_new.tscn" id="room5"]
@@ -90,3 +91,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("7_minimap")
+
+[node name="DeathMenu" parent="HUD" unique_id=775556556 instance=ExtResource("19_5sjgs")]
+visible = false
+offset_left = 479.0
+offset_top = 289.0
+offset_right = -545.0
+offset_bottom = -288.0
