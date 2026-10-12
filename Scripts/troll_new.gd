@@ -38,8 +38,10 @@ func _ready() -> void:
 	throw_timer.start(randf_range(1.0, min(throw_interval, 4.0)))
 
 func _exit_tree() -> void:
-	# Triggered automatically when enemy is queue_free()'d or despawned
-	despawn_all_rocks()
+	# Only clean up when the room despawns us (player left). If we died, rocks and pebbles
+	# already in the air keep flying instead of vanishing.
+	if not is_dead:
+		despawn_all_rocks()
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(target):

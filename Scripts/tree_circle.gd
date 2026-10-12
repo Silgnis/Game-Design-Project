@@ -19,9 +19,9 @@ extends Node2D
 @export var trap_time: float = 4.0 # With instant, how long until the bushes take over
 @export var tree_health: int = 40
 
-const BUSH_DARK = Color(0.12, 0.32, 0.12)
-const BUSH_LIGHT = Color(0.25, 0.5, 0.2)
-const THORN_COLOR = Color(0.55, 0.4, 0.2)
+# Brambles from obstacles.png, the same art the boss's AOE thorns use
+const BRAMBLE_TEXTURE = preload("res://Resources/Custom Assets/obstacles.png")
+const BRAMBLE_REGIONS = [Rect2(80, 48, 16, 11), Rect2(80, 69, 16, 10)]
 
 enum State { CLOSING, BUSHES }
 
@@ -30,7 +30,7 @@ enum State { CLOSING, BUSHES }
 var target: Node2D
 var state := State.CLOSING
 var trees: Array[BossTree] = []
-var bushes: Array[Vector3] = [] # x, y = position, z = size
+var bushes: Array[Vector3] = [] # x, y = position, z = which bramble region
 var damage_cooldown := 0.0
 var time_scale := 1.0 # Lowered while the boss is slowed by the myling
 var start_angle := NAN # Where the first tree grows (the gap closes opposite); random if not set
@@ -113,19 +113,18 @@ func _fill_with_bushes() -> void:
 	var count = int(radius * radius / 60.0)
 	for i in count:
 		var p = Vector2.RIGHT.rotated(randf() * TAU) * sqrt(randf()) * radius
-		bushes.append(Vector3(p.x, p.y, randf_range(5.0, 8.0)))
+		bushes.append(Vector3(p.x, p.y, randi() % BRAMBLE_REGIONS.size()))
+	# Draw back to front so lower brambles overlap the ones above them
+	bushes.sort_custom(func(a, b): return a.y < b.y)
 
 	scale = Vector2(0.6, 0.6)
 	create_tween().tween_property(self, "scale", Vector2.ONE, 0.2) \
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	queue_redraw()
 
-# Placeholder art until there are proper bush sprites
 func _draw() -> void:
 	if state != State.BUSHES:
 		return
 	for b in bushes:
-		var p = Vector2(b.x, b.y)
-		draw_circle(p, b.z, BUSH_DARK)
-		draw_circle(p + Vector2(-b.z * 0.3, -b.z * 0.3), b.z * 0.55, BUSH_LIGHT)
-		draw_line(p + Vector2(b.z * 0.4, 0), p + Vector2(b.z * 0.9, -b.z * 0.4), THORN_COLOR, 1.0)
+		var region: Rect2 = BRAMBLE_REGIONS[int(b.z)]
+		draw_texture_rect_region(BRAMBLE_TEXTURE, Rect2(Vector2(b.x, b.y) - region.size / 2, region.size), region)

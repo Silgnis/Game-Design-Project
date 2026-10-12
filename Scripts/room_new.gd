@@ -15,7 +15,7 @@ func _ready() -> void:
 	add_to_group("rooms")
 
 func get_global_bounds() -> Rect2:
-	return Rect2(global_position + bounds.position, bounds.size)
+	return Rect2(global_position + bounds.position * global_scale, bounds.size * global_scale)
 
 func has_point(point: Vector2) -> bool:
 	return get_global_bounds().has_point(point)

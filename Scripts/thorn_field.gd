@@ -20,6 +20,9 @@ const SHADOW_EDGE_COLOR = Color(0.3, 0.05, 0.15, 0.7)
 
 var target: Node2D
 var time_scale := 1.0
+# Only place thorns inside this rect (local to the field's centre); empty = no limit.
+# The boss passes the arena so the thorns stay inside the room.
+var clip_rect := Rect2()
 var damage_cooldown := 0.0
 var _inner: float
 var _shadow := 0.0
@@ -35,6 +38,8 @@ func _ready() -> void:
 		for gy in range(-steps, steps + 1):
 			var p = Vector2(gx, gy) * spacing + Vector2(randf_range(-4, 4), randf_range(-4, 4))
 			var d = p.length()
+			if clip_rect.has_area() and not clip_rect.has_point(p):
+				continue
 			if d >= safe_radius and d <= outer_radius:
 				_thorns.append(Vector3(p.x, p.y, randi() % REGIONS.size()))
 	_thorns.sort_custom(func(a, b): return Vector2(a.x, a.y).length() > Vector2(b.x, b.y).length())

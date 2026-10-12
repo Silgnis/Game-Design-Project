@@ -13,21 +13,33 @@ script = ExtResource("1_world")
 [node name="Rooms" type="Node2D" parent="." unique_id=1224343674]
 
 [node name="Arena" parent="Rooms" unique_id=759874625 instance=ExtResource("2_room")]
+scale = Vector2(1.5, 1.5)
+
+[node name="ExitNorth" parent="Rooms/Arena/Forest"]
+enabled = true
+
+[node name="ExitEast" parent="Rooms/Arena/Forest"]
+enabled = true
+
+[node name="ExitWest" parent="Rooms/Arena/Forest"]
+enabled = true
 
 [node name="ForestBoss" parent="." unique_id=683666932 instance=ExtResource("6_boss")]
-position = Vector2(0, -60)
+position = Vector2(0, -90)
 debug_kills_override = 4
 
 [node name="Player" parent="." unique_id=2077247023 groups=["player"] instance=ExtResource("3_player")]
-position = Vector2(0, 90)
+position = Vector2(0, 135)
 motion_mode = 1
 
 [node name="Gun" parent="Player" unique_id=273188661 instance=ExtResource("4_gun")]
 position = Vector2(5, -3)
 
 [node name="Ghost" parent="." unique_id=444851594 node_paths=PackedStringArray("target") instance=ExtResource("5_ghost")]
-position = Vector2(0, 90)
+position = Vector2(0, 135)
 target = NodePath("../Player")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1554096853]
 zoom = Vector2(2.1, 2.1)
+
+[editable path="Rooms/Arena"]

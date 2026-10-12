@@ -6,6 +6,17 @@ class_name ForestBoss
 @export var time_between_attacks: float = 1.2
 @export var telegraph_time: float = 0.5 # Wind-up before an attack so the player can react
 
+@export_group("Movement")
+# Between attacks, once teleport_interval has passed, the boss sinks into the ground and
+# reappears somewhere else in its arena (the Room it stands in)
+@export var teleport_interval: float = 6.0
+@export var teleport_fade_time: float = 0.25 # Sinking out and rising back in each take this long
+@export var teleport_min_player_distance: float = 100.0 # Never pops up right on top of the player
+@export var arena_margin: float = 16.0 # Rough inset from the room's edges; the real limit is spot_clearance
+# Spots are only used if the boss's collision box, grown by this much, touches nothing solid
+# on the World layer (trees, walls), so the boss stays where the player can walk too
+@export var spot_clearance: float = 10.0
+
 @export_group("Pinecones")
 @export var pinecone_scene: PackedScene = preload("res://Scenes/Boss/pinecone.tscn")
 @export var pinecone_volleys: int = 3
@@ -30,11 +41,27 @@ class_name ForestBoss
 # Phase 2 only. Thorns creep in from the edges while the boss charges; the only way to stop
 # the blast is to get close and use the myling on it, which breaks the charge and stuns it.
 @export var thorn_field_scene: PackedScene = preload("res://Scenes/Boss/thorn_field.tscn")
-@export var aoe_charge_time: float = 2.0 # Shadow grows from the boss to the edge in this time, then it blasts
+# Before charging, the boss teleports to the free spot farthest from the player
+# The charge lasts aoe_charge_time plus the time to cover the distance to the boss at
+# aoe_reach_speed (walking + dash), so reaching it is always possible but tight
+@export var aoe_charge_time: float = 2.0
+@export var aoe_reach_speed: float = 130.0
 @export var aoe_cooldown: float = 15.0 # Minimum time after an AOE ends (blast or broken) before the next
 @export var aoe_damage: int = 3 # Half hearts; can't be dashed through
 @export var stun_time: float = 3.0
 @export var stun_damage_mult: float = 2.0
+
+@export_group("Summon")
+# Phase 2: summons ghosts from the souls the player destroyed, in their last ghost form.
+# Per tier [calm, angry, furious] it summons souls / divisor, rounded up.
+@export var tier_summon_divisor: Array[int] = [6, 5, 4]
+@export var max_summons_alive: int = 6
+@export var summon_distance: Vector2 = Vector2(40, 90) # Min/max distance from the boss
+# Used instead of the real souls while debug_kills_override is set, so the arena can test it
+@export var debug_summon_pool: Array[PackedScene] = [
+	preload("res://Scenes/troll_new.tscn"),
+	preload("res://Scenes/enemy_melee.tscn"),
+]
 
 @export_group("Myling")
 # Outside the AOE charge, the myling just slows the boss and everything it has thrown
@@ -42,7 +69,7 @@ class_name ForestBoss
 
 @export_group("Phase 2")
 @export_range(0.0, 1.0) var phase_two_health: float = 0.5 # Fraction of max health that starts phase 2
-# Kill tiers: below angry_kills is calm (few or no kills), then angry, then furious
+# Tiers by destroyed souls: below angry_kills is calm (few or none), then angry, then furious
 @export var angry_kills: int = 2
 @export var furious_kills: int = 4
 # Per tier [calm, angry, furious]: multiplier on wait times, and extra pinecones per volley
@@ -52,9 +79,9 @@ class_name ForestBoss
 # Phase 2 opens with a tree attack right after the cutscene (no wind-up). Per tier, how long
 # from the end of the cutscene until the bushes take over. Furious uses the trap ring.
 @export var tier_opener_fill_time: Array[float] = [4.0, 3.0, 2.0]
-@export var debug_kills_override: int = -1 # Set >= 0 in the test arena to try each tier
-# Every enemy the player kills is a ghost, so each kill is a soul that never gets its
-# eternal rest. {kills} is replaced with that number. spared_lines is used for 0 kills.
+@export var debug_kills_override: int = -1 # Set >= 0 in the test arena to fake that many destroyed souls
+# A soul is destroyed when the player kills every form of an enemy (alive and both ghost
+# forms), so it never comes back. {kills} is replaced with that number; spared_lines is for 0.
 @export_multiline var spared_lines: Array[String] = [
 	"You walked through my forest... and destroyed none of its spirits.",
 	"Thanks to you, they will all find their eternal rest.",
@@ -88,6 +115,7 @@ const CHARGE_TINT = Color(1.8, 0.6, 0.5)
 @onready var boss_ui: CanvasLayer = $BossUI
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var name_label: Label = %BossName
+@onready var body_shape: CollisionShape2D = $CollisionShape2D
 
 var target: Node2D
 var last_attack: Callable
@@ -110,6 +138,12 @@ var _charge_tweens: Array[Tween] = []
 var _flash: ColorRect
 var aoe_cooldown_left := 0.0
 
+var _arena := Rect2()
+var _teleport_cooldown := 0.0
+var _teleport_tween: Tween
+var _summons: Array[Node2D] = []
+var _clearance_query: PhysicsShapeQueryParameters2D
+
 func _init() -> void:
 	enemy_id = "forest_boss"
 	max_health = 2000
@@ -119,7 +153,13 @@ func _ready() -> void:
 	super._ready()
 	if is_queued_for_deletion():
 		return
+	# Already beaten this run: don't come back when the player re-enters the arena
+	if GameManager.get_enemy_kills(enemy_id) > 0:
+		queue_free()
+		return
 
+	# Spawned inside the (scaled-up) boss room in the world; keep the boss its normal size
+	global_scale = Vector2.ONE
 	target = get_tree().get_first_node_in_group("player")
 	name_label.text = boss_name
 	health_bar.max_value = max_health
@@ -136,6 +176,59 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if aoe_cooldown_left > 0.0:
 		aoe_cooldown_left -= delta * time_scale
+	if _teleport_cooldown > 0.0:
+		_teleport_cooldown -= delta * time_scale
+
+# The Room the boss stands in, shrunk by arena_margin. Looked up lazily because rooms join
+# their group in _ready, which runs after the boss's when the boss is a child of the room.
+func get_arena_rect() -> Rect2:
+	if _arena.has_area():
+		return _arena
+	for room in get_tree().get_nodes_in_group("rooms"):
+		if room.has_point(global_position):
+			_arena = room.get_global_bounds().grow(-arena_margin)
+			return _arena
+	return Rect2(global_position - Vector2(100, 100), Vector2(200, 200))
+
+# True if the boss fits at this spot without touching trees or walls (plus spot_clearance)
+func is_spot_free(spot: Vector2) -> bool:
+	if _clearance_query == null:
+		var box = RectangleShape2D.new()
+		box.size = body_shape.shape.size + Vector2.ONE * spot_clearance * 2
+		_clearance_query = PhysicsShapeQueryParameters2D.new()
+		_clearance_query.shape = box
+		_clearance_query.collision_mask = 1 # World layer
+	_clearance_query.transform = Transform2D(0.0, spot + body_shape.position)
+	return get_world_2d().direct_space_state.intersect_shape(_clearance_query, 1).is_empty()
+
+# A free spot not too close to the player or to where the boss already is; null if none found
+func _random_teleport_spot() -> Variant:
+	var area = get_arena_rect()
+	for i in 30:
+		var spot = Vector2(randf_range(area.position.x, area.end.x), randf_range(area.position.y, area.end.y))
+		if is_instance_valid(target) and spot.distance_to(target.global_position) < teleport_min_player_distance:
+			continue
+		if spot.distance_to(global_position) < teleport_min_player_distance:
+			continue
+		if is_spot_free(spot):
+			return spot
+	return null
+
+# Checks a grid of spots over the arena and returns the free one farthest from point
+func _farthest_free_spot_from(point: Vector2) -> Vector2:
+	var area = get_arena_rect()
+	var best = global_position
+	var step := 20.0
+	var x = area.position.x
+	while x <= area.end.x:
+		var y = area.position.y
+		while y <= area.end.y:
+			var spot = Vector2(x, y)
+			if spot.distance_to(point) > best.distance_to(point) and is_spot_free(spot):
+				best = spot
+			y += step
+		x += step
+	return best
 
 func _exit_tree() -> void:
 	despawn_projectiles()
@@ -185,7 +278,7 @@ func set_time_scale(value: float) -> void:
 		if timer.time_left > 0.0:
 			timer.start(timer.time_left * time_scale / value)
 	time_scale = value
-	for tween in [_telegraph_tween] + _charge_tweens:
+	for tween in [_telegraph_tween, _teleport_tween] + _charge_tweens:
 		if tween and tween.is_valid():
 			tween.set_speed_scale(value)
 	for proj in spawned_projectiles:
@@ -211,12 +304,18 @@ func _attack_loop() -> void:
 		await _pick_attack().call()
 		if is_dead:
 			return
+		if _teleport_cooldown <= 0.0:
+			var spot = _random_teleport_spot()
+			if spot != null:
+				await teleport_to(spot)
 		await wait(time_between_attacks * pace)
 
 func _pick_attack() -> Callable:
 	var attacks: Array[Callable] = [attack_pinecones, attack_tree_circle]
 	if phase == 2 and aoe_cooldown_left <= 0.0:
 		attacks.append(attack_aoe)
+	if phase == 2 and _summon_count() > 0:
+		attacks.append(attack_summon)
 	# Don't repeat the same attack twice in a row
 	if attacks.size() > 1 and last_attack.is_valid():
 		attacks.erase(last_attack)
@@ -258,6 +357,8 @@ func _start_phase_two() -> void:
 	despawn_projectiles()
 	if _telegraph_tween:
 		_telegraph_tween.kill()
+	if _teleport_tween:
+		_teleport_tween.kill() # Hit mid-teleport: don't let it finish sinking after the reset
 	end_slow()
 	sprite.scale = Vector2.ONE
 
@@ -308,7 +409,7 @@ func _enter_phase_two() -> void:
 func _count_kills() -> int:
 	if debug_kills_override >= 0:
 		return debug_kills_override
-	return GameManager.get_total_kills()
+	return GameManager.get_destroyed_soul_count()
 
 # --- Attack: homing pinecones ---
 
@@ -401,22 +502,33 @@ func spawn_tree_circle(instant: bool = false, breakable: bool = false, close_fas
 func attack_aoe() -> void:
 	if not is_instance_valid(target):
 		return
+
+	# Teleport as far from the player as possible, so getting to the boss takes effort
+	await teleport_to(_farthest_free_spot_from(target.global_position))
+	if not is_instance_valid(target):
+		return
+
+	var charge_time = aoe_charge_time + global_position.distance_to(target.global_position) / aoe_reach_speed
 	is_charging_aoe = true
 	# The myling is the only counter, so it must be available
 	if target.has_method("refill_myling"):
 		target.refill_myling()
 
+	var room_rect = get_arena_rect().grow(arena_margin)
 	_aoe_field = thorn_field_scene.instantiate()
-	_aoe_field.close_time = aoe_charge_time
-	_aoe_field.shadow_time = aoe_charge_time
+	_aoe_field.close_time = charge_time
+	_aoe_field.shadow_time = charge_time
+	_aoe_field.outer_radius = _farthest_corner_distance(room_rect)
+	_aoe_field.clip_rect = Rect2(room_rect.position - global_position, room_rect.size)
 	register_spawned_node(_aoe_field)
 	# Inserted right before the boss so it draws underneath the boss and the player
 	get_parent().add_child(_aoe_field)
 	get_parent().move_child(_aoe_field, get_index())
 	_aoe_field.global_position = global_position
+	_aoe_field.global_scale = Vector2.ONE
 
-	_start_charge_visuals()
-	await wait(aoe_charge_time)
+	_start_charge_visuals(charge_time)
+	await wait(charge_time)
 
 	# Nobody stopped it
 	is_charging_aoe = false
@@ -458,12 +570,18 @@ func _stun() -> void:
 	last_attack = attack_aoe
 	_attack_loop()
 
-func _start_charge_visuals() -> void:
+func _farthest_corner_distance(rect: Rect2) -> float:
+	var far := 0.0
+	for corner in [rect.position, Vector2(rect.end.x, rect.position.y), rect.end, Vector2(rect.position.x, rect.end.y)]:
+		far = maxf(far, global_position.distance_to(corner))
+	return far
+
+func _start_charge_visuals(duration: float) -> void:
 	var pulse = create_tween().set_loops().set_speed_scale(time_scale)
 	pulse.tween_property(sprite, "scale", Vector2(1.12, 0.92), 0.25)
 	pulse.tween_property(sprite, "scale", Vector2.ONE, 0.25)
 	var glow = create_tween().set_speed_scale(time_scale)
-	glow.tween_property(sprite, "modulate", CHARGE_TINT, aoe_charge_time)
+	glow.tween_property(sprite, "modulate", CHARGE_TINT, duration)
 	_charge_tweens = [pulse, glow]
 
 func _stop_charge_visuals() -> void:
@@ -473,6 +591,83 @@ func _stop_charge_visuals() -> void:
 	_charge_tweens.clear()
 	sprite.scale = Vector2.ONE
 	sprite.modulate = base_tint
+
+# --- Teleport ---
+
+# Sinks into the ground, shows a dark patch where it's going, and rises back up there.
+# Can't be hit while it's gone.
+func teleport_to(spot: Vector2) -> void:
+	_teleport_cooldown = teleport_interval
+
+	var marker = Polygon2D.new()
+	var points = PackedVector2Array()
+	for i in 16:
+		points.append(Vector2(cos(TAU * i / 16) * 18.0, sin(TAU * i / 16) * 7.0))
+	marker.polygon = points
+	marker.color = Color(0.08, 0.15, 0.05, 0.0)
+	get_parent().add_child(marker)
+	get_parent().move_child(marker, get_index()) # Under the boss and the player
+	marker.global_position = spot + Vector2(0, body_shape.position.y + body_shape.shape.size.y / 2)
+	register_spawned_node(marker)
+	create_tween().tween_property(marker, "color:a", 0.6, teleport_fade_time)
+
+	_teleport_tween = create_tween().set_speed_scale(time_scale)
+	_teleport_tween.tween_property(sprite, "scale", Vector2(1.3, 0.0), teleport_fade_time).set_ease(Tween.EASE_IN)
+	await wait(teleport_fade_time)
+	body_shape.set_deferred("disabled", true)
+	global_position = spot
+
+	_teleport_tween = create_tween().set_speed_scale(time_scale)
+	_teleport_tween.tween_property(sprite, "scale", Vector2.ONE, teleport_fade_time) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	create_tween().tween_property(marker, "color:a", 0.0, teleport_fade_time * 2)
+	await wait(teleport_fade_time)
+	body_shape.set_deferred("disabled", false)
+	if is_instance_valid(marker):
+		marker.queue_free()
+
+# --- Attack: summon destroyed souls (phase 2) ---
+
+# One PackedScene per destroyed soul (or the debug pool while testing a fake soul count)
+func _summon_pool() -> Array:
+	if debug_kills_override >= 0:
+		var fake: Array = []
+		for i in debug_kills_override:
+			if not debug_summon_pool.is_empty():
+				fake.append(debug_summon_pool[i % debug_summon_pool.size()])
+		return fake
+	return GameManager.get_destroyed_soul_scenes().map(func(path): return load(path))
+
+func _summon_count() -> int:
+	var pool_size = _summon_pool().size()
+	if pool_size == 0:
+		return 0
+	var wanted = ceili(pool_size / float(tier_summon_divisor[kill_tier]))
+	return mini(wanted, max_summons_alive - _summons.size())
+
+func attack_summon() -> void:
+	await telegraph()
+	var pool = _summon_pool()
+	var count = _summon_count()
+	var area = get_arena_rect()
+	for i in count:
+		var scene: PackedScene = pool.pick_random()
+		var ghost = scene.instantiate()
+		# No id: summons don't count as kills, can't destroy souls and drop no coins
+		ghost.enemy_id = ""
+		ghost.forced_stage = 99 # Clamped to the last (ghostliest) form
+		var no_coins: Array[int] = [0]
+		ghost.stage_coin_drops = no_coins
+		var offset = Vector2.RIGHT.rotated(randf() * TAU) * randf_range(summon_distance.x, summon_distance.y)
+		var spot = (global_position + offset).clamp(area.position, area.end)
+		get_parent().add_child(ghost)
+		ghost.global_position = spot
+		ghost.modulate.a = 0.0
+		create_tween().tween_property(ghost, "modulate:a", 1.0, 0.4)
+		register_spawned_node(ghost)
+		_summons.append(ghost)
+		ghost.tree_exited.connect(func(): _summons.erase(ghost))
+	await wait(0.6)
 
 func register_spawned_node(node: Node2D) -> void:
 	if time_scale != 1.0 and node.has_method("set_time_scale"):
