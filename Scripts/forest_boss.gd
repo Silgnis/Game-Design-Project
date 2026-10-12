@@ -57,6 +57,10 @@ class_name ForestBoss
 @export var tier_summon_divisor: Array[int] = [6, 5, 4]
 @export var max_summons_alive: int = 6
 @export var summon_distance: Vector2 = Vector2(40, 90) # Min/max distance from the boss
+@export var summon_min_player_distance: float = 40.0 # Never pops up right on top of the player
+# A summon only spawns where a box this big touches nothing solid (fits a troll or a wolf
+# with some room to spare), so it never ends up inside the trees
+@export var summon_clearance_box: Vector2 = Vector2(32, 32)
 # Used instead of the real souls while debug_kills_override is set, so the arena can test it
 @export var debug_summon_pool: Array[PackedScene] = [
 	preload("res://Scenes/troll_new.tscn"),
@@ -142,7 +146,6 @@ var _arena := Rect2()
 var _teleport_cooldown := 0.0
 var _teleport_tween: Tween
 var _summons: Array[Node2D] = []
-var _clearance_query: PhysicsShapeQueryParameters2D
 
 func _init() -> void:
 	enemy_id = "forest_boss"
@@ -192,14 +195,17 @@ func get_arena_rect() -> Rect2:
 
 # True if the boss fits at this spot without touching trees or walls (plus spot_clearance)
 func is_spot_free(spot: Vector2) -> bool:
-	if _clearance_query == null:
-		var box = RectangleShape2D.new()
-		box.size = body_shape.shape.size + Vector2.ONE * spot_clearance * 2
-		_clearance_query = PhysicsShapeQueryParameters2D.new()
-		_clearance_query.shape = box
-		_clearance_query.collision_mask = 1 # World layer
-	_clearance_query.transform = Transform2D(0.0, spot + body_shape.position)
-	return get_world_2d().direct_space_state.intersect_shape(_clearance_query, 1).is_empty()
+	return _is_box_free(spot + body_shape.position, body_shape.shape.size + Vector2.ONE * spot_clearance * 2)
+
+# True if a box of this size centred here touches nothing on the World layer (trees, walls)
+func _is_box_free(center: Vector2, size: Vector2) -> bool:
+	var box = RectangleShape2D.new()
+	box.size = size
+	var query = PhysicsShapeQueryParameters2D.new()
+	query.shape = box
+	query.collision_mask = 1 # World layer
+	query.transform = Transform2D(0.0, center)
+	return get_world_2d().direct_space_state.intersect_shape(query, 1).is_empty()
 
 # A free spot not too close to the player or to where the boss already is; null if none found
 func _random_teleport_spot() -> Variant:
@@ -645,12 +651,28 @@ func _summon_count() -> int:
 	var wanted = ceili(pool_size / float(tier_summon_divisor[kill_tier]))
 	return mini(wanted, max_summons_alive - _summons.size())
 
+# A free spot around the boss, inside the arena and away from the player; null if none found
+func _summon_spot() -> Variant:
+	var area = get_arena_rect()
+	for i in 20:
+		var offset = Vector2.RIGHT.rotated(randf() * TAU) * randf_range(summon_distance.x, summon_distance.y)
+		var spot = global_position + offset
+		if not area.has_point(spot):
+			continue
+		if is_instance_valid(target) and spot.distance_to(target.global_position) < summon_min_player_distance:
+			continue
+		if _is_box_free(spot, summon_clearance_box):
+			return spot
+	return null
+
 func attack_summon() -> void:
 	await telegraph()
 	var pool = _summon_pool()
 	var count = _summon_count()
-	var area = get_arena_rect()
 	for i in count:
+		var spot = _summon_spot()
+		if spot == null:
+			continue
 		var scene: PackedScene = pool.pick_random()
 		var ghost = scene.instantiate()
 		# No id: summons don't count as kills, can't destroy souls and drop no coins
@@ -658,8 +680,6 @@ func attack_summon() -> void:
 		ghost.forced_stage = 99 # Clamped to the last (ghostliest) form
 		var no_coins: Array[int] = [0]
 		ghost.stage_coin_drops = no_coins
-		var offset = Vector2.RIGHT.rotated(randf() * TAU) * randf_range(summon_distance.x, summon_distance.y)
-		var spot = (global_position + offset).clamp(area.position, area.end)
 		get_parent().add_child(ghost)
 		ghost.global_position = spot
 		ghost.modulate.a = 0.0

@@ -43,8 +43,17 @@ func update_appearance() -> void:
 		# Fallback if a specific stage animation doesn't exist
 		animated_sprite.play("default")
 
+func set_active(active: bool) -> void:
+	super.set_active(active)
+	if not animated_sprite:
+		return
+	if active:
+		animated_sprite.play()
+	else:
+		animated_sprite.pause()
+
 func _physics_process(delta: float) -> void:
-	if is_dead or is_frozen or not is_instance_valid(target):
+	if is_dead or is_frozen or not is_active or not is_instance_valid(target):
 		return
 		
 	var direction = (target.global_position - global_position).normalized()
@@ -57,7 +66,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func attack() -> void:
-	if is_dead or is_frozen:
+	if is_dead or is_frozen or not is_active:
 		return
 	if is_instance_valid(target) and target.has_method("take_damage"):
 		target.take_damage(damage)

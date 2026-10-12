@@ -50,7 +50,7 @@ func _process(_delta: float) -> void:
 		hand.position.x = absf(hand.position.x) * (1 if sprite.flip_h else -1)
 
 func throw_rock() -> void:
-	if is_dead or not is_instance_valid(target) or rock_scene == null:
+	if is_dead or not is_active or not is_instance_valid(target) or rock_scene == null:
 		return
 	if room and not room.has_point(target.global_position):
 		return

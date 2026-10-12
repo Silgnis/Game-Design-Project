@@ -1,0 +1,378 @@
+[gd_resource type="TileSet" format=3 uid="uid://bq7obst4c1e5x"]
+
+[ext_resource type="Texture2D" uid="uid://dg0dcdicmcyb5" path="res://Resources/Custom Assets/obstacles.png" id="1_obstacles"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_log_v_a"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(1, 2)
+texture_region_size = Vector2i(14, 38)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(1, -11)
+0:0/0/y_sort_origin = 29
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(3, 6, 3, 16, 5, 17, 5, 20, 3, 21, 3, 27, 1, 29, -3, 29, -5, 27, -5, 16, -7, 15, -7, 11, -5, 10, -6, -4, -2, -7, 4, -6)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-7, -11)
+0:0/1/y_sort_origin = 29
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(11, 6, 11, 16, 13, 17, 13, 20, 11, 21, 11, 27, 9, 29, 5, 29, 3, 27, 3, 16, 1, 15, 1, 11, 3, 10, 2, -4, 6, -7, 12, -6)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(1, -19)
+0:0/2/y_sort_origin = 37
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(3, 14, 3, 24, 5, 25, 5, 28, 3, 29, 3, 35, 1, 37, -3, 37, -5, 35, -5, 24, -7, 23, -7, 19, -5, 18, -6, 4, -2, 1, 4, 2)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-7, -19)
+0:0/3/y_sort_origin = 37
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(11, 14, 11, 24, 13, 25, 13, 28, 11, 29, 11, 35, 9, 37, 5, 37, 3, 35, 3, 24, 1, 23, 1, 19, 3, 18, 2, 4, 6, 1, 12, 2)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_log_v_b"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(18, 2)
+texture_region_size = Vector2i(12, 38)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(2, -11)
+0:0/0/y_sort_origin = 29
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -7, 3, -6, 2, 27, 0, 29, -4, 29, -6, 27, -7, -4)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-6, -11)
+0:0/1/y_sort_origin = 29
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(5, -7, 11, -6, 10, 27, 8, 29, 4, 29, 2, 27, 1, -4)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(2, -19)
+0:0/2/y_sort_origin = 37
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-3, 1, 3, 2, 2, 35, 0, 37, -4, 37, -6, 35, -7, 4)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-6, -19)
+0:0/3/y_sort_origin = 37
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(5, 1, 11, 2, 10, 35, 8, 37, 4, 37, 2, 35, 1, 4)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_log_v_c"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(34, 2)
+texture_region_size = Vector2i(12, 38)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(2, -11)
+0:0/0/y_sort_origin = 29
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -7, 3, -6, 2, 27, 0, 29, -4, 29, -6, 27, -7, -4)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-6, -11)
+0:0/1/y_sort_origin = 29
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(5, -7, 11, -6, 10, 27, 8, 29, 4, 29, 2, 27, 1, -4)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(2, -19)
+0:0/2/y_sort_origin = 37
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-3, 1, 3, 2, 2, 35, 0, 37, -4, 37, -6, 35, -7, 4)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-6, -19)
+0:0/3/y_sort_origin = 37
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(5, 1, 11, 2, 10, 35, 8, 37, 4, 37, 2, 35, 1, 4)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_log_h_fungus"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(64, 2)
+texture_region_size = Vector2i(32, 14)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(-8, 1)
+0:0/0/y_sort_origin = 3
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, 2, -8, 2, -8, -6, 22, -7, 21, 3)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-16, 1)
+0:0/1/y_sort_origin = 3
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(5, 2, 0, 2, 0, -6, 30, -7, 29, 3)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(-8, -7)
+0:0/2/y_sort_origin = 11
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-3, 10, -8, 10, -8, 2, 22, 1, 21, 11)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-16, -7)
+0:0/3/y_sort_origin = 11
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(5, 10, 0, 10, 0, 2, 30, 1, 29, 11)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_log_h_fungus_short"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(96, 2)
+texture_region_size = Vector2i(16, 14)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 1)
+0:0/0/y_sort_origin = 3
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, 2, -6, -7, 8, -6, 8, 2)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-8, 1)
+0:0/1/y_sort_origin = 3
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(2, 2, 2, -7, 16, -6, 16, 2)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(0, -7)
+0:0/2/y_sort_origin = 11
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-6, 10, -6, 1, 8, 2, 8, 10)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-8, -7)
+0:0/3/y_sort_origin = 11
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(2, 10, 2, 1, 16, 2, 16, 10)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_log_h_plain"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(60, 20)
+texture_region_size = Vector2i(24, 12)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(-4, 2)
+0:0/0/y_sort_origin = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, -4, 15, 0, -8, -1, -7, -8, 15, -8)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-12, 2)
+0:0/1/y_sort_origin = 0
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(24, -4, 23, 0, 0, -1, 1, -8, 23, -8)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(-4, -6)
+0:0/2/y_sort_origin = 8
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(16, 4, 15, 8, -8, 7, -7, 0, 15, 0)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-12, -6)
+0:0/3/y_sort_origin = 8
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(24, 4, 23, 8, 0, 7, 1, 0, 23, 0)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_log_h_short_r"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(96, 18)
+texture_region_size = Vector2i(16, 14)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 1)
+0:0/0/y_sort_origin = 3
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2, -8, -6, 6, -7, 6, 2)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-8, 1)
+0:0/1/y_sort_origin = 3
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(0, 2, 0, -6, 14, -7, 14, 2)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(0, -7)
+0:0/2/y_sort_origin = 11
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 10, -8, 2, 6, 1, 6, 10)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-8, -7)
+0:0/3/y_sort_origin = 11
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(0, 10, 0, 2, 14, 1, 14, 10)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_log_h_long"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(48, 34)
+texture_region_size = Vector2i(48, 14)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(-16, 1)
+0:0/0/y_sort_origin = 3
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(34, -6, 38, -7, 37, 3, -6, 2, -6, -7)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-24, 1)
+0:0/1/y_sort_origin = 3
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(42, -6, 46, -7, 45, 3, 2, 2, 2, -7)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(-16, -7)
+0:0/2/y_sort_origin = 11
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(34, 2, 38, 1, 37, 11, -6, 10, -6, 1)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-24, -7)
+0:0/3/y_sort_origin = 11
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(42, 2, 46, 1, 45, 11, 2, 10, 2, 1)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_log_h_short_l"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(96, 34)
+texture_region_size = Vector2i(16, 14)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 1)
+0:0/0/y_sort_origin = 3
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, 2, -6, -7, 8, -6, 8, 2)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-8, 1)
+0:0/1/y_sort_origin = 3
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(2, 2, 2, -7, 16, -6, 16, 2)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(0, -7)
+0:0/2/y_sort_origin = 11
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-6, 10, -6, 1, 8, 2, 8, 10)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-8, -7)
+0:0/3/y_sort_origin = 11
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(2, 10, 2, 1, 16, 2, 16, 10)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_stump"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(6, 55)
+texture_region_size = Vector2i(22, 18)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(-3, -1)
+0:0/0/y_sort_origin = 8
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -8, 6, -7, 9, -4, 10, 6, 3, 6, 3, 8, 0, 8, -1, 6, -5, 7, -6, 1, -4, 0, -3, -6)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-11, -1)
+0:0/1/y_sort_origin = 8
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 14, -7, 17, -4, 18, 6, 11, 6, 11, 8, 8, 8, 7, 6, 3, 7, 2, 1, 4, 0, 5, -6)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(-3, -9)
+0:0/2/y_sort_origin = 16
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 6, 1, 9, 4, 10, 14, 3, 14, 3, 16, 0, 16, -1, 14, -5, 15, -6, 9, -4, 8, -3, 2)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-11, -9)
+0:0/3/y_sort_origin = 16
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(8, 0, 14, 1, 17, 4, 18, 14, 11, 14, 11, 16, 8, 16, 7, 14, 3, 15, 2, 9, 4, 8, 5, 2)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rock_a"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(34, 50)
+texture_region_size = Vector2i(14, 14)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(1, 1)
+0:0/0/y_sort_origin = 5
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -7, 2, -7, 4, -5, 4, 3, 0, 5, -4, 5, -8, 2, -8, -4)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-7, 1)
+0:0/1/y_sort_origin = 5
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(5, -7, 10, -7, 12, -5, 12, 3, 8, 5, 4, 5, 0, 2, 0, -4)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(1, -7)
+0:0/2/y_sort_origin = 13
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-3, 1, 2, 1, 4, 3, 4, 11, 0, 13, -4, 13, -8, 10, -8, 4)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-7, -7)
+0:0/3/y_sort_origin = 13
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(5, 1, 10, 1, 12, 3, 12, 11, 8, 13, 4, 13, 0, 10, 0, 4)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rock_b"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(34, 66)
+texture_region_size = Vector2i(14, 14)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(1, 1)
+0:0/0/y_sort_origin = 5
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, 4, -7, 3, -7, -2, -4, -6, 0, -6, 4, -2, 5, 3, 0, 5)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-7, 1)
+0:0/1/y_sort_origin = 5
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(3, 4, 1, 3, 1, -2, 4, -6, 8, -6, 12, -2, 13, 3, 8, 5)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(1, -7)
+0:0/2/y_sort_origin = 13
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-5, 12, -7, 11, -7, 6, -4, 2, 0, 2, 4, 6, 5, 11, 0, 13)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-7, -7)
+0:0/3/y_sort_origin = 13
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(3, 12, 1, 11, 1, 6, 4, 2, 8, 2, 12, 6, 13, 11, 8, 13)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rock_big"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(49, 48)
+texture_region_size = Vector2i(28, 32)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(-6, -8)
+0:0/0/y_sort_origin = 21
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -1, -4, -5, 0, -6, 2, -2, 7, -2, 9, 1, 11, 1, 16, 7, 17, 18, 14, 18, 14, 21, 6, 21, 5, 19, -7, 20, -8, 16, -5, 14)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-14, -8)
+0:0/1/y_sort_origin = 21
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(3, -1, 4, -5, 8, -6, 10, -2, 15, -2, 17, 1, 19, 1, 24, 7, 25, 18, 22, 18, 22, 21, 14, 21, 13, 19, 1, 20, 0, 16, 3, 14)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(-6, -16)
+0:0/2/y_sort_origin = 29
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-5, 7, -4, 3, 0, 2, 2, 6, 7, 6, 9, 9, 11, 9, 16, 15, 17, 26, 14, 26, 14, 29, 6, 29, 5, 27, -7, 28, -8, 24, -5, 22)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-14, -16)
+0:0/3/y_sort_origin = 29
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(3, 7, 4, 3, 8, 2, 10, 6, 15, 6, 17, 9, 19, 9, 24, 15, 25, 26, 22, 26, 22, 29, 14, 29, 13, 27, 1, 28, 0, 24, 3, 22)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bramble_a"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(80, 46)
+texture_region_size = Vector2i(16, 18)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -1)
+0:0/0/y_sort_origin = 4
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, 3, -7, 4, -7, -5, 6, -6, 7, 4)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-8, -1)
+0:0/1/y_sort_origin = 4
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(6, 3, 1, 4, 1, -5, 14, -6, 15, 4)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(0, -9)
+0:0/2/y_sort_origin = 12
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-2, 11, -7, 12, -7, 3, 6, 2, 7, 12)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-8, -9)
+0:0/3/y_sort_origin = 12
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(6, 11, 1, 12, 1, 3, 14, 2, 15, 12)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bramble_b"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(80, 64)
+texture_region_size = Vector2i(16, 16)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 0)
+0:0/0/y_sort_origin = 7
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(7, 7, -7, 7, -7, -2, 7, -2)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-8, 0)
+0:0/1/y_sort_origin = 7
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(15, 7, 1, 7, 1, -2, 15, -2)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(0, -8)
+0:0/2/y_sort_origin = 15
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(7, 15, -7, 15, -7, 6, 7, 6)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-8, -8)
+0:0/3/y_sort_origin = 15
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(15, 15, 1, 15, 1, 6, 15, 6)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_thicket"]
+texture = ExtResource("1_obstacles")
+margins = Vector2i(80, 46)
+texture_region_size = Vector2i(32, 34)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(-8, -9)
+0:0/0/y_sort_origin = 25
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(22, 25, 14, 25, 14, 10, 9, 9, 8, 4, -7, 4, -6, -6, 18, -6, 17, 7, 18, 10, 23, 11)
+0:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(-7, 24, -7, 16, 8, 16, 7, 25)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(-16, -9)
+0:0/1/y_sort_origin = 25
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(30, 25, 22, 25, 22, 10, 17, 9, 16, 4, 1, 4, 2, -6, 26, -6, 25, 7, 26, 10, 31, 11)
+0:0/1/physics_layer_0/polygon_1/points = PackedVector2Array(1, 24, 1, 16, 16, 16, 15, 25)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(-8, -17)
+0:0/2/y_sort_origin = 33
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(22, 33, 14, 33, 14, 18, 9, 17, 8, 12, -7, 12, -6, 2, 18, 2, 17, 15, 18, 18, 23, 19)
+0:0/2/physics_layer_0/polygon_1/points = PackedVector2Array(-7, 32, -7, 24, 8, 24, 7, 33)
+0:0/3 = 3
+0:0/3/texture_origin = Vector2i(-16, -17)
+0:0/3/y_sort_origin = 33
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(30, 33, 22, 33, 22, 18, 17, 17, 16, 12, 1, 12, 2, 2, 26, 2, 25, 15, 26, 18, 31, 19)
+0:0/3/physics_layer_0/polygon_1/points = PackedVector2Array(1, 32, 1, 24, 16, 24, 15, 33)
+
+[resource]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_log_v_a")
+sources/1 = SubResource("TileSetAtlasSource_log_v_b")
+sources/2 = SubResource("TileSetAtlasSource_log_v_c")
+sources/3 = SubResource("TileSetAtlasSource_log_h_fungus")
+sources/4 = SubResource("TileSetAtlasSource_log_h_fungus_short")
+sources/5 = SubResource("TileSetAtlasSource_log_h_plain")
+sources/6 = SubResource("TileSetAtlasSource_log_h_short_r")
+sources/7 = SubResource("TileSetAtlasSource_log_h_long")
+sources/8 = SubResource("TileSetAtlasSource_log_h_short_l")
+sources/9 = SubResource("TileSetAtlasSource_stump")
+sources/10 = SubResource("TileSetAtlasSource_rock_a")
+sources/11 = SubResource("TileSetAtlasSource_rock_b")
+sources/12 = SubResource("TileSetAtlasSource_rock_big")
+sources/13 = SubResource("TileSetAtlasSource_bramble_a")
+sources/14 = SubResource("TileSetAtlasSource_bramble_b")
+sources/15 = SubResource("TileSetAtlasSource_thicket")

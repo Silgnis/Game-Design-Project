@@ -1,0 +1,102 @@
+[gd_resource type="TileSet" format=3 uid="uid://dryk2kwaslu3x"]
+
+[ext_resource type="Texture2D" uid="uid://b03ojmpn2745v" path="res://Resources/Custom Assets/New Tileset.png" id="1_gg0l2"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pine0"]
+texture = ExtResource("1_gg0l2")
+margins = Vector2i(282, 87)
+texture_region_size = Vector2i(25, 41)
+0:0/next_alternative_id = 6
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 13)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 8, -10, -18, 10, -18, 10, 8)
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/1/texture_origin = Vector2i(0, 13)
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 8, -10, -18, 10, -18, 10, 8)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(0, 18)
+0:0/2/y_sort_origin = -5
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 3, -10, -23, 10, -23, 10, 3)
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/texture_origin = Vector2i(0, 18)
+0:0/3/y_sort_origin = -5
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 3, -10, -23, 10, -23, 10, 3)
+0:0/4 = 4
+0:0/4/texture_origin = Vector2i(0, -2)
+0:0/4/y_sort_origin = 15
+0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 23, -10, -3, 10, -3, 10, 23)
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/texture_origin = Vector2i(0, -2)
+0:0/5/y_sort_origin = 15
+0:0/5/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 23, -10, -3, 10, -3, 10, 23)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pine1"]
+texture = ExtResource("1_gg0l2")
+margins = Vector2i(308, 97)
+texture_region_size = Vector2i(25, 31)
+0:0/next_alternative_id = 6
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 8)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/1/texture_origin = Vector2i(0, 8)
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(0, 18)
+0:0/2/y_sort_origin = -10
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -18, 8, -18, 8, -2, -8, -2)
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/texture_origin = Vector2i(0, 18)
+0:0/3/y_sort_origin = -10
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -18, 8, -18, 8, -2, -8, -2)
+0:0/4 = 4
+0:0/4/texture_origin = Vector2i(0, -2)
+0:0/4/y_sort_origin = 10
+0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2, 8, 2, 8, 18, -8, 18)
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/texture_origin = Vector2i(0, -2)
+0:0/5/y_sort_origin = 10
+0:0/5/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2, 8, 2, 8, 18, -8, 18)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pine2"]
+texture = ExtResource("1_gg0l2")
+margins = Vector2i(335, 108)
+texture_region_size = Vector2i(14, 20)
+0:0/next_alternative_id = 6
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 3)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 7, -6, 7)
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/1/texture_origin = Vector2i(0, 3)
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 7, -6, 7)
+0:0/2 = 2
+0:0/2/texture_origin = Vector2i(0, 18)
+0:0/2/y_sort_origin = -15
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -21, 6, -21, 6, -8, -6, -8)
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/texture_origin = Vector2i(0, 18)
+0:0/3/y_sort_origin = -15
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -21, 6, -21, 6, -8, -6, -8)
+0:0/4 = 4
+0:0/4/texture_origin = Vector2i(0, -2)
+0:0/4/y_sort_origin = 5
+0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -1, 6, -1, 6, 12, -6, 12)
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/texture_origin = Vector2i(0, -2)
+0:0/5/y_sort_origin = 5
+0:0/5/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -1, 6, -1, 6, 12, -6, 12)
+
+[resource]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_pine0")
+sources/1 = SubResource("TileSetAtlasSource_pine1")
+sources/2 = SubResource("TileSetAtlasSource_pine2")
