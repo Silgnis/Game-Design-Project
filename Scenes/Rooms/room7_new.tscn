@@ -203,6 +203,7 @@ tile_map_data = PackedByteArray("AADw//3/AAAOAAgAAADw////AAAOAAgAAADw/wIAAAAOAAg
 tile_set = SubResource("TileSet_ground")
 
 [node name="Forest" type="Node2D" parent="." unique_id=2114416737]
+z_index = 10
 y_sort_enabled = true
 
 [node name="Trees" type="TileMapLayer" parent="Forest" unique_id=629130772]
