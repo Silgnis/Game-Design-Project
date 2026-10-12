@@ -6,10 +6,12 @@ class_name Room
 @export var bounds := Rect2(-280, -160, 560, 320)
 # Optional icon the map draws on this room, e.g. a campfire for a rest room.
 @export var map_icon: Texture2D
+@export var music_type: GameManager.MusicTrack = GameManager.MusicTrack.DEFAULT
 
 @export var trap_doors: Array[ThornDoor] = []
 var active_enemies: int = 0
 var is_cleared: bool = false
+
 
 func _ready() -> void:
 	add_to_group("rooms")

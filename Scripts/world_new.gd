@@ -22,11 +22,13 @@ func _ready() -> void:
 		camera.zoom = _zoom_for(current_room)
 		# Spawn enemies in the initial starting room immediately
 		current_room.on_player_entered()
+		
+		GameManager.play_room_music(current_room.music_type, 0.5)
+		
 		if minimap:
 			minimap.set_current(current_room)
 
 func _process(_delta: float) -> void:
-	# Ignore checks while camera is sliding
 	if is_transitioning:
 		return
 	
@@ -37,26 +39,23 @@ func _process(_delta: float) -> void:
 	if room == null or room == current_room:
 		return
 	
-	
 	# ROOM SWAP EVENTS
-	
-	# Store reference to the room being left behind
 	var old_room := current_room
-	
-	# Update to new room and spawn its enemies immediately
 	current_room = room
+	
+	# TRIGGER CROSSFADE FOR NEW ROOM
+	GameManager.play_room_music(current_room.music_type, transition_time)
+	
 	if minimap:
 		minimap.set_current(room)
 	current_room.on_player_entered()
 	
 	is_transitioning = true
 	
-	# Animate camera to the new room center
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(camera, "global_position", room.get_global_bounds().get_center(), transition_time)
 	tween.parallel().tween_property(camera, "zoom", _zoom_for(room), transition_time)
 	
-	# Despawn enemies in the old room only after camera slide is complete
 	tween.finished.connect(func():
 		is_transitioning = false
 		if is_instance_valid(old_room):
