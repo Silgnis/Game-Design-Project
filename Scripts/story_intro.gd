@@ -38,15 +38,11 @@ const BEATS = [
 		["Mother", [
 			"No... no, no, no. What have I done?",
 			"My little girl... I only wanted to free you.",
-			"Wake up. Please, wake up...",
+			"I'll meet you somewhere better soon, my dear.",
 		]],
 	],
 	[
-		["Mother", [
-			"There's no taking it back. Not from this.",
-			"Forgive me...",
-		]],
-		["", ["Too far gone to undo what she had done, she took her own life."]],
+		["", ["Believing they would meet again somewhere better, she followed her daughter."]],
 	],
 	[
 		["", ["Some time later..."]],
