@@ -2,7 +2,7 @@ extends EnemyBase
 
 @export var rock_scene: PackedScene = preload("res://Scenes/rock_bullet_new.tscn")
 @export var first_throw_delay: float = 1.0
-@export var throw_interval: float = 6.0
+@export var throw_interval: float = 3.5
 @export var throw_pose_time: float = 0.3
 
 # Throw sprite per stage. The idle sprites come from stage_sprites in EnemyBase.
