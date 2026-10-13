@@ -7,6 +7,7 @@ extends Node2D
 @export var bob_speed := 3.0                    # Speed of floating motion
 
 @export var attack_anim_time := 0.3
+@export var fed_scale := 1.25
 
 const ATTACK_TEXTURE = preload("res://Resources/Custom Assets/Player/Myling Attack.png") # 4 frames
 const RECHARGE_TEXTURE = preload("res://Resources/Custom Assets/Player/Myling Recharge.png")
@@ -16,9 +17,13 @@ const RECHARGE_TEXTURE = preload("res://Resources/Custom Assets/Player/Myling Re
 
 var _time := 0.0
 var _facing_right := true  # Tracks player's horizontal facing direction
+var _fed := false
 
 func _ready() -> void:
 	modulate.a = 0.7
+	if GameManager.has_item("ghost_food"):
+		_fed = true
+		scale = Vector2.ONE * fed_scale
 	# Force initial flipped state to match starting orientation
 	update_sprite_flip()
 	NavigationManager.on_trigger_player_spawn.connect(_on_player_spawn)
@@ -27,6 +32,10 @@ func _ready() -> void:
 		target.myling_ready.connect(_on_myling_ready)
 
 func _physics_process(delta: float) -> void:
+	if not _fed and GameManager.has_item("ghost_food"):
+		_fed = true
+		create_tween().tween_property(self, "scale", Vector2.ONE * fed_scale, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
 	if target == null:
 		return
 

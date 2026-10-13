@@ -77,17 +77,7 @@ func has_item(item_id: String) -> bool:
 func add_item(item_id: String) -> void:
 	if not has_item(item_id):
 		owned_items.append(item_id)
-		apply_item_effect(item_id)
 
-var player_var:PackedScene = load("res://Scenes/player_new.tscn")
-var bullet_var:PackedScene = load("res://Scenes/bullet.tscn")
-
-func apply_item_effect(item_id: String) -> void:
-	if item_id == "ghost_food":
-		player_var.myling_cooldown = player_var.myling_cooldown / 2
-	elif item_id == "silver_bullets":
-		player_var.damage = player_var.damage * 1.5
-		
 func play_room_music(track: MusicTrack, fade_duration: float = 1.0) -> void:
 	if _current_track == track:
 		return # Do nothing if the requested track is already playing
