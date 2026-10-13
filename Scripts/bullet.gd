@@ -5,7 +5,15 @@ class_name Bullet
 @export var damage: int = 10
 var direction = Vector2.RIGHT
 
+const SILVER_SHADER = preload("res://Resources/Shaders/silver.gdshader")
+static var silver_material: ShaderMaterial
+
 func _ready() -> void:
+	if GameManager.has_item("silver_bullets"):
+		if silver_material == null:
+			silver_material = ShaderMaterial.new()
+			silver_material.shader = SILVER_SHADER
+		$Sprite2D.material = silver_material
 	# Connect the Area2D collision signal programmatically
 	body_entered.connect(_on_body_entered)
 	
