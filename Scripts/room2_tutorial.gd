@@ -1,7 +1,7 @@
 extends Room
 
 const SPEAKER := "Myling"
-const INTRO_LINE := "Looks like a wolf. Get closer and then press space; I'll scare them so much they'll freeze, and then you can take care of them."
+const INTRO_LINE := "Looks like a wolf. Get closer by pressing shift to dash towards the enemy, or if they get to close, dash away."
 const STUN_LINE := "Now press space to stun the enemy. You'll be able to make quick work of them after."
 const KILL_LINE := "Now kill the wolf."
 const DEFEAT_LINE := "Odd. They didn't drop anything, and I still feel a certain presence... Let's try to go back and re-enter this room."
@@ -43,12 +43,6 @@ func on_player_entered() -> void:
 	else:
 		player.set_abilities(true, true, false)
 
-func on_player_exited() -> void:
-	super.on_player_exited()
-	var player := _player()
-	if player:
-		player.set_abilities(player.can_dash, player.can_myling, true)
-
 func lock_room() -> void:
 	var was_cleared := is_cleared
 	super.lock_room()
@@ -58,6 +52,8 @@ func lock_room() -> void:
 	var player := _player()
 	if player and not _in_tutorial():
 		player.set_abilities(true, true, true)
+	elif player:
+		player.set_abilities(_tutorial_abilities[0], _tutorial_abilities[1], _tutorial_abilities[2])
 	var kills := _wolf_kills()
 	if kills >= TUTORIAL_KILLS or _visit_lines_played.has(kills):
 		return

@@ -33,6 +33,7 @@ func on_player_entered() -> void:
 				# Listen for this specific enemy dying
 				enemy.died.connect(_on_enemy_died)
 	
+	_set_player_can_shoot(active_enemies == 0 or trap_doors.is_empty())
 	# If the room has no enemies (or they were all permanently dead from a previous visit)
 	if active_enemies == 0:
 		_unlock_room()
@@ -58,6 +59,7 @@ func lock_room() -> void:
 	for node in get_children():
 		if node is EnemySpawner and is_instance_valid(node.spawned_enemy):
 			node.spawned_enemy.set_active(true)
+	_set_player_can_shoot(true)
 	# Close all doors
 	for door in trap_doors:
 		if is_instance_valid(door):
@@ -66,11 +68,17 @@ func lock_room() -> void:
 
 func _unlock_room() -> void:
 	is_cleared = true
+	_set_player_can_shoot(true)
 	# Open all doors
 	for door in trap_doors:
 		if is_instance_valid(door):
 			door.is_locked_open = true
 			door.open_door()
+
+func _set_player_can_shoot(value: bool) -> void:
+	var player := get_tree().get_first_node_in_group("player") as Player
+	if player:
+		player.can_shoot = value
 
 # An exit is open when nothing solid (any enabled TileMapLayer whose TileSet has physics)
 # sits in its gap. Exits are at the centre of each edge: E/W across rows -1..1, N/S across
