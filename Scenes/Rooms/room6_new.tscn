@@ -1,8 +1,11 @@
 [gd_scene format=4 uid="uid://dekl1pdfiv3uh"]
 
-[ext_resource type="Script" uid="uid://b70f8brawfitd" path="res://Scripts/room_new.gd" id="1_room"]
+[ext_resource type="Script" uid="uid://bogps0umpoxjk" path="res://Scripts/mirrored_room.gd" id="1_room"]
 [ext_resource type="Texture2D" uid="uid://b03ojmpn2745v" path="res://Resources/Custom Assets/New Tileset.png" id="2_newts"]
 [ext_resource type="TileSet" uid="uid://dryk2kwaslu3x" path="res://Resources/new_trees_tiletes.tres" id="3_6hh8w"]
+[ext_resource type="Script" uid="uid://gfal27gsmqx2" path="res://Scripts/enemy_spawner.gd" id="5_spawner"]
+[ext_resource type="PackedScene" uid="uid://i3mjmjt0y0la" path="res://Scenes/goblin.tscn" id="6_goblin"]
+[ext_resource type="PackedScene" uid="uid://bdqs6ug65n8m8" path="res://Scenes/troll_new.tscn" id="7_troll"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ground"]
 texture = ExtResource("2_newts")
@@ -176,6 +179,7 @@ sources/4 = SubResource("TileSetAtlasSource_stump")
 
 [node name="Room6" type="Node2D" unique_id=631823440]
 script = ExtResource("1_room")
+layout_extents = Vector2(176, 96)
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=1717129218]
 texture_filter = 1
@@ -242,3 +246,21 @@ tile_map_data = PackedByteArray("AADu////AAAAAAAAAADu/wAAAAAAAAAAAQDu/wEAAAAAAAA
 enabled = false
 tile_set = SubResource("TileSet_forest")
 physics_quadrant_size = 1
+
+[node name="Troll1" type="Marker2D" parent="."]
+position = Vector2(0, -84)
+script = ExtResource("5_spawner")
+enemy_scene = ExtResource("7_troll")
+enemy_id = "troll6_1"
+
+[node name="Troll2" type="Marker2D" parent="."]
+position = Vector2(0, 76)
+script = ExtResource("5_spawner")
+enemy_scene = ExtResource("7_troll")
+enemy_id = "troll6_2"
+
+[node name="Goblin1" type="Marker2D" parent="."]
+position = Vector2(152, -16)
+script = ExtResource("5_spawner")
+enemy_scene = ExtResource("6_goblin")
+enemy_id = "goblin6_1"

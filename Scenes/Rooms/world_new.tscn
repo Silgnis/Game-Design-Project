@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/Boss/forest_boss.tscn" id="boss_scene"]
 [ext_resource type="Script" uid="uid://gfal27gsmqx2" path="res://Scripts/enemy_spawner.gd" id="enemy_spawner"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room3_new.tscn" id="room3"]
+[ext_resource type="PackedScene" uid="uid://4m5c1nll416u" path="res://Scenes/Rooms/boss_room.tscn" id="boss_room"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room4_new.tscn" id="room4"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room5_new.tscn" id="room5"]
 [ext_resource type="PackedScene" path="res://Scenes/Rooms/room6_new.tscn" id="room6"]
@@ -105,7 +106,7 @@ enabled = false
 [node name="ExitWest" parent="Rooms/Room11/Forest"]
 enabled = true
 
-[node name="BossRoom" parent="Rooms" unique_id=1607106466 instance=ExtResource("room3")]
+[node name="BossRoom" parent="Rooms" unique_id=1607106466 instance=ExtResource("boss_room")]
 position = Vector2(1120, 1040)
 scale = Vector2(1.5, 1.5)
 map_icon = ExtResource("boss_icon")

@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://b70f8brawfitd" path="res://Scripts/room_new.gd" id="1_room"]
 [ext_resource type="Texture2D" uid="uid://b03ojmpn2745v" path="res://Resources/Custom Assets/New Tileset.png" id="2_newts"]
 [ext_resource type="TileSet" uid="uid://dryk2kwaslu3x" path="res://Resources/new_trees_tiletes.tres" id="3_563s3"]
+[ext_resource type="TileSet" uid="uid://bq7obst4c1e5x" path="res://Resources/obstacles_tileset.tres" id="4_obstacles"]
+[ext_resource type="Script" uid="uid://gfal27gsmqx2" path="res://Scripts/enemy_spawner.gd" id="5_spawner"]
+[ext_resource type="PackedScene" uid="uid://bf8hkj8p6pfa6" path="res://Scenes/enemy_melee.tscn" id="6_wolf"]
+[ext_resource type="PackedScene" uid="uid://bdqs6ug65n8m8" path="res://Scenes/troll_new.tscn" id="7_troll"]
+[ext_resource type="Texture2D" uid="uid://df03qpeg5kome" path="res://Resources/Custom Assets/Water+.png" id="8_water"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ground"]
 texture = ExtResource("2_newts")
@@ -47,6 +52,10 @@ texture = ExtResource("2_newts")
 15:7/0 = 0
 16:7/0 = 0
 14:8/0 = 0
+1:8/0 = 0
+3:6/0 = 0
+3:10/0 = 0
+5:8/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ground"]
 sources/0 = SubResource("TileSetAtlasSource_ground")
@@ -174,6 +183,22 @@ sources/2 = SubResource("TileSetAtlasSource_pine2")
 sources/3 = SubResource("TileSetAtlasSource_rocks")
 sources/4 = SubResource("TileSetAtlasSource_stump")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pond"]
+texture = ExtResource("8_water")
+margins = Vector2i(112, 48)
+texture_region_size = Vector2i(16, 16)
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+1:0/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+4:0/0 = 0
+4:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_pond"]
+sources/0 = SubResource("TileSetAtlasSource_pond")
+
 [node name="Room7" type="Node2D" unique_id=1915924932]
 script = ExtResource("1_room")
 
@@ -184,23 +209,89 @@ tile_set = SubResource("TileSet_ground")
 
 [node name="GrassLayer" type="TileMapLayer" parent="." unique_id=1884606346]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAD1////AAAKAAIAAAD1/wAAAAALAAMAAAD1/wEAAAAKAAQAAAD2////AAALAAQAAAD2/wAAAAAMAAMAAAD2/wEAAAALAAIAAAD3////AAALAAQAAAD3/wAAAAALAAQAAAD3/wEAAAALAAIAAAD4////AAAMAAIAAAD4/wAAAAALAAQAAAD4/wEAAAAMAAQAAAACAP//AAAKAAIAAAACAAAAAAAKAAQAAAADAP//AAAKAAMAAAADAAAAAAAKAAMAAAAEAP//AAALAAIAAAAEAAAAAAALAAIAAAAFAPr/AAAKAAIAAAAFAPv/AAAKAAQAAAAFAP//AAAMAAIAAAAFAAAAAAAMAAQAAAAGAPn/AAAKAAIAAAAGAPr/AAALAAMAAAAGAPv/AAALAAMAAAAHAPn/AAAMAAIAAAAHAPr/AAAKAAMAAAAHAPv/AAAMAAMAAAAIAPr/AAAMAAIAAAAIAPv/AAAMAAQAAAAMAAEAAAAKAAIAAAAMAAIAAAAKAAQAAAANAAEAAAAMAAIAAAANAAIAAAAMAAQAAAA=")
+tile_map_data = PackedByteArray("AAD1////AAAKAAIAAAD1/wAAAAALAAMAAAD1/wEAAAAKAAQAAAD2////AAALAAQAAAD2/wAAAAAMAAMAAAD2/wEAAAALAAIAAAD3////AAALAAQAAAD3/wAAAAALAAQAAAD3/wEAAAALAAIAAAD4////AAAMAAIAAAD4/wAAAAALAAQAAAD4/wEAAAAMAAQAAAACAP//AAAKAAIAAAACAAAAAAAKAAQAAAADAP//AAAKAAMAAAADAAAAAAAKAAMAAAAEAP//AAALAAIAAAAEAAAAAAALAAIAAAAFAPr/AAAKAAIAAAAFAPv/AAAKAAQAAAAFAP//AAAMAAIAAAAFAAAAAAAMAAQAAAAGAPn/AAAKAAIAAAAGAPr/AAALAAMAAAAGAPv/AAALAAMAAAAHAPn/AAAMAAIAAAAHAPr/AAAKAAMAAAAHAPv/AAAMAAMAAAAIAPr/AAAMAAIAAAAIAPv/AAAMAAQAAAA=")
 tile_set = SubResource("TileSet_ground")
 
 [node name="GrassEdgeH" type="TileMapLayer" parent="." unique_id=862801773]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAD0////AAAJAAIAAAD0/wAAAAAJAAMAAAD0/wEAAAAJAAQAAAD5////AAANAAIAAAD5/wAAAAANAAMAAAD5/wEAAAANAAQAAAABAP//AAAJAAIAAAABAAAAAAAJAAQAAAAEAPr/AAAJAAIAAAAEAPv/AAAJAAQAAAAFAPn/AAAJAAIAAAAGAP//AAANAAIAAAAGAAAAAAANAAQAAAAIAPn/AAANAAIAAAAJAPr/AAANAAIAAAAJAPv/AAANAAQAAAALAAEAAAAJAAIAAAALAAIAAAAJAAQAAAAOAAEAAAANAAIAAAAOAAIAAAANAAQAAAA=")
+tile_map_data = PackedByteArray("AAD0////AAAJAAIAAAD0/wAAAAAJAAMAAAD0/wEAAAAJAAQAAAD5////AAANAAIAAAD5/wAAAAANAAMAAAD5/wEAAAANAAQAAAABAP//AAAJAAIAAAABAAAAAAAJAAQAAAAEAPr/AAAJAAIAAAAEAPv/AAAJAAQAAAAFAPn/AAAJAAIAAAAGAP//AAANAAIAAAAGAAAAAAANAAQAAAAIAPn/AAANAAIAAAAJAPr/AAANAAIAAAAJAPv/AAANAAQAAAA=")
 tile_set = SubResource("TileSet_ground")
 
 [node name="GrassEdgeV" type="TileMapLayer" parent="." unique_id=1254361711]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAD1//7/AAAKAAEAAAD1/wIAAAAKAAUAAAD2//7/AAALAAEAAAD2/wIAAAALAAUAAAD3//7/AAALAAEAAAD3/wIAAAALAAUAAAD4//7/AAAMAAEAAAD4/wIAAAAMAAUAAAACAP7/AAAKAAEAAAACAAEAAAAKAAUAAAADAP7/AAALAAEAAAADAAEAAAALAAUAAAAEAP7/AAALAAEAAAAEAAEAAAALAAUAAAAFAPn/AAAKAAEAAAAFAPz/AAAKAAUAAAAFAP7/AAAMAAEAAAAFAAEAAAAMAAUAAAAGAPj/AAAKAAEAAAAGAPz/AAALAAUAAAAHAPj/AAAMAAEAAAAHAPz/AAALAAUAAAAIAPn/AAAMAAEAAAAIAPz/AAAMAAUAAAAMAAAAAAAKAAEAAAAMAAMAAAAKAAUAAAANAAAAAAAMAAEAAAANAAMAAAAMAAUAAAA=")
+tile_map_data = PackedByteArray("AAD1//7/AAAKAAEAAAD1/wIAAAAKAAUAAAD2//7/AAALAAEAAAD2/wIAAAALAAUAAAD3//7/AAALAAEAAAD3/wIAAAALAAUAAAD4//7/AAAMAAEAAAD4/wIAAAAMAAUAAAACAP7/AAAKAAEAAAACAAEAAAAKAAUAAAADAP7/AAALAAEAAAADAAEAAAALAAUAAAAEAP7/AAALAAEAAAAEAAEAAAALAAUAAAAFAPn/AAAKAAEAAAAFAPz/AAAKAAUAAAAFAP7/AAAMAAEAAAAFAAEAAAAMAAUAAAAGAPj/AAAKAAEAAAAGAPz/AAALAAUAAAAHAPj/AAAMAAEAAAAHAPz/AAALAAUAAAAIAPn/AAAMAAEAAAAIAPz/AAAMAAUAAAA=")
 tile_set = SubResource("TileSet_ground")
 
 [node name="Decor" type="TileMapLayer" parent="." unique_id=1782302548]
 texture_filter = 1
 tile_map_data = PackedByteArray("AADw//3/AAAOAAgAAADw////AAAOAAgAAADw/wIAAAAOAAgAAADx//3/AAAPAAMAAADx/wQAAAAPAAMAAADy//n/AAAOAAgAAADy//r/AAAPAAMAAADy/wQAAAAGAAMAAAD0//3/AAAFAAUAAAD0/wEAAAAFAAUAAAD0/wYAAAAGAAUAAAD2/wIAAAAGAAMAAAD3//j/AAAPAAMAAAD3//r/AAAPAAIAAAD3//7/AAAOAAcAAAD3/wUAAAAFAAUAAAD5/wYAAAAOAAgAAAD6//j/AAAQAAMAAAD7//r/AAAGAAUAAAD7/wIAAAAGAAMAAAD9//v/AAAGAAUAAAACAAQAAAAGAAUAAAADAAQAAAAOAAMAAAAEAPn/AAAGAAMAAAAEAAMAAAAFAAUAAAAEAAUAAAAGAAUAAAAFAPn/AAAOAAgAAAAFAAYAAAAGAAMAAAAGAPz/AAAQAAcAAAAHAAEAAAAGAAMAAAAIAAQAAAAGAAQAAAAJAPj/AAAOAAMAAAAJAPn/AAAGAAMAAAAJAAMAAAAPAAcAAAAKAAQAAAAGAAQAAAAMAPr/AAAOAAMAAAAMAP//AAAQAAcAAAANAPr/AAAGAAUAAAAOAP3/AAAOAAMAAAAPAP7/AAAGAAMAAAA=")
 tile_set = SubResource("TileSet_ground")
+
+[node name="Pond" type="Node2D" parent="."]
+position = Vector2(112, -48)
+
+[node name="Clip" type="Polygon2D" parent="Pond"]
+clip_children = 1
+polygon = PackedVector2Array(74, 3, 74, 4, 76, 4, 76, 6, 77, 6, 77, 90, 76, 90, 76, 92, 74, 92, 74, 93, 6, 93, 6, 92, 4, 92, 4, 90, 3, 90, 3, 6, 4, 6, 4, 4, 6, 4, 6, 3)
+
+[node name="Water" type="TileMapLayer" parent="Pond/Clip"]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAEAAAACAAAAAAAAAAIAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAEAAAAAAAEAAAAAAAAAAAABAAEAAAACAAEAAAACAAEAAAAAAAIAAAADAAEAAAAEAAAAAAAEAAEAAAAAAAEAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAEAAAACAAIAAAAAAAIAAAADAAIAAAABAAAAAAAEAAIAAAAAAAEAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAEAAAACAAMAAAACAAIAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAEAAAAAAAQAAAAAAAAAAAABAAQAAAAEAAIAAAACAAQAAAAAAAIAAAADAAQAAAACAAEAAAAEAAQAAAAAAAEAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAEAAAACAAUAAAAAAAIAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAEAAAA=")
+tile_set = SubResource("TileSet_pond")
+
+[node name="BankH" type="TileMapLayer" parent="Pond/Clip"]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAAAAEAAAAFAAgAAAAEAAEAAAABAAgAAAAAAAIAAAAFAAgAAAAEAAIAAAABAAgAAAAAAAMAAAAFAAgAAAAEAAMAAAABAAgAAAAAAAQAAAAFAAgAAAAEAAQAAAABAAgAAAA=")
+tile_set = SubResource("TileSet_ground")
+
+[node name="BankV" type="TileMapLayer" parent="Pond/Clip"]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAABAAAAAAADAAoAAAABAAUAAAADAAYAAAACAAAAAAADAAoAAAACAAUAAAADAAYAAAADAAAAAAADAAoAAAADAAUAAAADAAYAAAA=")
+tile_set = SubResource("TileSet_ground")
+
+[node name="CornerTL" type="Sprite2D" parent="Pond/Clip"]
+texture_filter = 1
+position = Vector2(0, 0)
+texture = ExtResource("2_newts")
+centered = false
+region_enabled = true
+region_rect = Rect2(65, 140, 16, 16)
+
+[node name="CornerTR" type="Sprite2D" parent="Pond/Clip"]
+texture_filter = 1
+position = Vector2(64, 0)
+texture = ExtResource("2_newts")
+centered = false
+region_enabled = true
+region_rect = Rect2(34, 140, 16, 16)
+
+[node name="CornerBL" type="Sprite2D" parent="Pond/Clip"]
+texture_filter = 1
+position = Vector2(0, 80)
+texture = ExtResource("2_newts")
+centered = false
+region_enabled = true
+region_rect = Rect2(65, 115, 16, 16)
+
+[node name="CornerBR" type="Sprite2D" parent="Pond/Clip"]
+texture_filter = 1
+position = Vector2(64, 80)
+texture = ExtResource("2_newts")
+centered = false
+region_enabled = true
+region_rect = Rect2(34, 115, 16, 16)
+
+[node name="PondCollision" type="StaticBody2D" parent="Pond"]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Pond/PondCollision"]
+polygon = PackedVector2Array(18, 17, 62, 16, 62, 18, 64, 18, 64, 78, 62, 83, 18, 83, 16, 81, 16, 18)
+
+[node name="Obstacles" type="TileMapLayer" parent="."]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAD4////AAAAAAAAAAA=")
+tile_set = ExtResource("4_obstacles")
 
 [node name="Forest" type="Node2D" parent="." unique_id=2114416737]
 z_index = 10
@@ -242,3 +333,33 @@ tile_map_data = PackedByteArray("AADu////AAAAAAAAAwDu/wAAAgAAAAAAAADu/wEAAAAAAAA
 enabled = false
 tile_set = SubResource("TileSet_forest")
 physics_quadrant_size = 1
+
+[node name="Wolf1" type="Marker2D" parent="."]
+position = Vector2(-124, -84)
+script = ExtResource("5_spawner")
+enemy_scene = ExtResource("6_wolf")
+enemy_id = "wolf7_1"
+
+[node name="Wolf2" type="Marker2D" parent="."]
+position = Vector2(-124, 84)
+script = ExtResource("5_spawner")
+enemy_scene = ExtResource("6_wolf")
+enemy_id = "wolf7_2"
+
+[node name="Wolf3" type="Marker2D" parent="."]
+position = Vector2(136, -84)
+script = ExtResource("5_spawner")
+enemy_scene = ExtResource("6_wolf")
+enemy_id = "wolf7_3"
+
+[node name="Wolf4" type="Marker2D" parent="."]
+position = Vector2(136, 84)
+script = ExtResource("5_spawner")
+enemy_scene = ExtResource("6_wolf")
+enemy_id = "wolf7_4"
+
+[node name="Troll1" type="Marker2D" parent="."]
+position = Vector2(0, 0)
+script = ExtResource("5_spawner")
+enemy_scene = ExtResource("7_troll")
+enemy_id = "troll7_1"
