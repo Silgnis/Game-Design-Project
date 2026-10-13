@@ -4,6 +4,7 @@ class_name Player
 # The myling ghost listens to these to play its attack / recharge sprites
 signal myling_used
 signal myling_ready
+signal dashed
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var footstep_sfx: AudioStreamPlayer2D = $FootstepSFX
@@ -55,6 +56,10 @@ var myling_cooldown_left: float = 0.0
 @export var fire_rate: float = 0.25  # Time in seconds between shots
 var shoot_cooldown_timer: float = 0.0
 
+var can_dash: bool = false
+var can_myling: bool = false
+var can_shoot: bool = true
+
 var is_initializing: bool = true
 var current_health: int
 var currency: int = 0:
@@ -84,6 +89,8 @@ func _ready() -> void:
 		
 	player_ui.update_hearts(current_health)
 	player_ui.update_coins(currency)
+	var tutorial_passed := not GameManager.enemy_kill_counts.is_empty()
+	set_abilities(tutorial_passed, tutorial_passed, can_shoot)
 	# Connect door spawn signal as usual
 	NavigationManager.on_trigger_player_spawn.connect(_on_spawn)
 	# If returning from a checkpoint, place player at saved coordinates instead
@@ -117,7 +124,7 @@ func _physics_process(delta: float) -> void:
 		shoot_cooldown_timer = 0.0
 
 	# Check if action is held down (is_action_pressed) and timer has elapsed
-	if Input.is_action_pressed("Shoot") and shoot_cooldown_timer <= 0.0:
+	if can_shoot and Input.is_action_pressed("Shoot") and shoot_cooldown_timer <= 0.0:
 		shoot()
 		shoot_cooldown_timer = fire_rate  # Reset cooldown
 	
@@ -146,8 +153,15 @@ func movement(delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, DECELERATION * delta)
 		animated_sprite_2d.play("idle")
 
+func set_abilities(dash: bool, myling: bool, shoot_enabled: bool) -> void:
+	can_dash = dash
+	can_myling = myling
+	can_shoot = shoot_enabled
+	player_ui.dash_icon.visible = dash
+	player_ui.myling_icon.visible = myling
+
 func try_dash() -> void:
-	if is_dashing or dash_cooldown_left > 0.0:
+	if not can_dash or is_dashing or dash_cooldown_left > 0.0:
 		return
 
 	# Dash where the player is moving, or the last direction moved if standing still
@@ -161,6 +175,7 @@ func try_dash() -> void:
 	dash_cooldown_left = dash_cooldown
 	animated_sprite_2d.play("dash")
 	player_ui.update_dash(0.0)
+	dashed.emit()
 
 func update_dash(delta: float) -> void:
 	if is_dashing:
@@ -237,7 +252,7 @@ func shoot():
 		gunshot_sfx.play()
 		
 func try_myling() -> void:
-	if myling_cooldown_left > 0.0:
+	if not can_myling or myling_cooldown_left > 0.0:
 		return
 
 	# Only things that know how to be frozen (EnemyBase and subclasses) are affected
