@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://gfal27gsmqx2" path="res://Scripts/enemy_spawner.gd" id="5_spawner"]
 [ext_resource type="PackedScene" uid="uid://bf8hkj8p6pfa6" path="res://Scenes/enemy_melee.tscn" id="6_wolf"]
 [ext_resource type="PackedScene" uid="uid://i3mjmjt0y0la" path="res://Scenes/goblin.tscn" id="7_goblin"]
+[ext_resource type="PackedScene" uid="uid://esuv0yme7gbv" path="res://Scenes/thorn_trigger.tscn" id="20_trigger"]
+[ext_resource type="PackedScene" uid="uid://dwmkwdf5obo0v" path="res://Scenes/thorn_door.tscn" id="21_door"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ground"]
 texture = ExtResource("2_newts")
@@ -178,8 +180,9 @@ sources/2 = SubResource("TileSetAtlasSource_pine2")
 sources/3 = SubResource("TileSetAtlasSource_rocks")
 sources/4 = SubResource("TileSetAtlasSource_stump")
 
-[node name="Room11" type="Node2D" unique_id=1003009855]
+[node name="Room11" type="Node2D" unique_id=1003009855 node_paths=PackedStringArray("trap_doors")]
 script = ExtResource("1_room")
+trap_doors = [NodePath("ThornTriggerEast/ThornDoor")]
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=1926512399]
 texture_filter = 1
@@ -287,3 +290,11 @@ position = Vector2(0, 80)
 script = ExtResource("5_spawner")
 enemy_scene = ExtResource("7_goblin")
 enemy_id = "goblin11_2"
+
+[node name="ThornTriggerEast" parent="." instance=ExtResource("20_trigger")]
+position = Vector2(232, 0)
+collision_mask = 2
+
+[node name="ThornDoor" parent="ThornTriggerEast" instance=ExtResource("21_door")]
+position = Vector2(36, 0)
+collision_mask = 6
