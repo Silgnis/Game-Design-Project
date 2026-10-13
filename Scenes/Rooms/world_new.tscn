@@ -156,10 +156,15 @@ process_mode = 3
 
 [node name="PauseMenu" parent="HUD" unique_id=1891839749 instance=ExtResource("17_61pkf")]
 visible = false
-offset_left = 504.0
-offset_top = 266.0
-offset_right = -520.0
-offset_bottom = -311.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="Minimap" type="Control" parent="HUD" unique_id=2000235851]
 layout_mode = 3
@@ -173,10 +178,13 @@ script = ExtResource("7_minimap")
 
 [node name="DeathMenu" parent="HUD" unique_id=775556556 instance=ExtResource("19_5sjgs")]
 visible = false
-offset_left = 479.0
-offset_top = 289.0
-offset_right = -545.0
-offset_bottom = -288.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [editable path="Rooms/Room4"]
 [editable path="Rooms/Room5"]
