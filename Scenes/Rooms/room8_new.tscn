@@ -294,7 +294,6 @@ enemy_id = "goblin8_4"
 
 [node name="BossGate" parent="." unique_id=1595886427 instance=ExtResource("4_iem3n")]
 position = Vector2(0, -6.9999995)
-scale = Vector2(0.11448688, 0.11448688)
 
 [node name="ThornTriggerNorthA" parent="." unique_id=45577278 instance=ExtResource("20_trigger")]
 position = Vector2(-4, -108)
