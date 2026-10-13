@@ -36,8 +36,6 @@ const BEATS = [
 	],
 	[
 		["Mother", [
-			"No... no, no, no. What have I done?",
-			"My little girl... I only wanted to free you.",
 			"I'll meet you somewhere better soon, my dear.",
 		]],
 	],
