@@ -1,7 +1,7 @@
 extends EnemyBase
 class_name ForestBoss
 
-@export var boss_name: String = "Forest Elemental"
+@export var boss_name: String = "Skogsra"
 @export var start_delay: float = 1.5
 @export var time_between_attacks: float = 1.2
 @export var telegraph_time: float = 0.5 # Wind-up before an attack so the player can react
@@ -86,6 +86,10 @@ class_name ForestBoss
 @export var debug_kills_override: int = -1 # Set >= 0 in the test arena to fake that many destroyed souls
 # A soul is destroyed when the player kills every form of an enemy (alive and both ghost
 # forms), so it never comes back. {kills} is replaced with that number; spared_lines is for 0.
+@export_multiline var intro_lines: Array[String] = [
+	"I am the Skogsra. You are the one who was been wreaking havoc in this forest.",
+	"If you wish to continue, you will have to go through me first.",
+]
 @export_multiline var spared_lines: Array[String] = [
 	"You walked through my forest... and destroyed none of its spirits.",
 	"Thanks to you, they will all find their eternal rest.",
@@ -108,7 +112,6 @@ class_name ForestBoss
 ]
 
 const PHASE_TWO_TINT = Color(0.75, 0.6, 0.65)
-const PHASE_TWO_EYES = Color(1, 0.2, 0.15)
 const PHASE_TWO_BAR = Color(0.75, 0.25, 0.2)
 const SLOW_TINT = Color(0.6, 0.85, 1.3)
 const STUN_TINT = Color(0.55, 0.55, 0.6)
@@ -146,6 +149,7 @@ var _arena := Rect2()
 var _teleport_cooldown := 0.0
 var _teleport_tween: Tween
 var _summons: Array[Node2D] = []
+var _fight_started := false
 
 func _init() -> void:
 	enemy_id = "forest_boss"
@@ -174,6 +178,19 @@ func _ready() -> void:
 	_flash.set_anchors_preset(Control.PRESET_FULL_RECT)
 	boss_ui.add_child(_flash)
 
+	_start_if_active.call_deferred()
+
+func set_active(active: bool) -> void:
+	super.set_active(active)
+	_start_if_active()
+
+func _start_if_active() -> void:
+	if not is_active or _fight_started or is_dead or not is_inside_tree():
+		return
+	_fight_started = true
+	await Dialogue.say(boss_name, intro_lines)
+	if is_dead:
+		return
 	_attack_loop()
 
 func _process(delta: float) -> void:
@@ -405,8 +422,6 @@ func _enter_phase_two() -> void:
 
 	base_tint = PHASE_TWO_TINT
 	create_tween().tween_property(sprite, "modulate", base_tint, 0.3)
-	$Sprite2D/LeftEye.color = PHASE_TWO_EYES
-	$Sprite2D/RightEye.color = PHASE_TWO_EYES
 
 	var fill = health_bar.get_theme_stylebox("fill").duplicate()
 	fill.bg_color = PHASE_TWO_BAR
