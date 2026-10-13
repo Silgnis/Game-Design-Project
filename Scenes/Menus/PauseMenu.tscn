@@ -3,23 +3,26 @@
 [ext_resource type="Script" uid="uid://c0yadjk05s3h4" path="res://Scripts/pause_menu.gd" id="1_8mfmb"]
 [ext_resource type="FontFile" uid="uid://cgmxuumocyl8e" path="res://Resources/Custom Assets/Font/boldpixels.ttf" id="2_cianu"]
 
-[sub_resource type="Theme" id="Theme_8mfmb"]
-
 [node name="PauseMenu" type="Control" unique_id=1891839749]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -63.0
-offset_top = -32.0
-offset_right = -1087.0
-offset_bottom = -609.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8mfmb")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1612500340]
+[node name="Background" type="ColorRect" parent="." unique_id=1590347211]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.12, 0.12, 0.65)
+
+[node name="MarginContainer" type="CenterContainer" parent="." unique_id=1612500340]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,18 +32,22 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=129564552]
 layout_mode = 2
+theme_override_constants/separation = 16
 
 [node name="Resume" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1162843831]
 process_mode = 3
+custom_minimum_size = Vector2(240, 64)
 layout_mode = 2
-theme = SubResource("Theme_8mfmb")
 theme_override_fonts/font = ExtResource("2_cianu")
+theme_override_font_sizes/font_size = 32
 text = "Resume"
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=38318922]
 process_mode = 3
+custom_minimum_size = Vector2(240, 64)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_cianu")
+theme_override_font_sizes/font_size = 32
 text = "Quit"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
