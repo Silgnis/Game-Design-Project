@@ -161,3 +161,19 @@ theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 12
 text = "SPACE"
 horizontal_alignment = 2
+
+[node name="InteractHint" type="Label" parent="."]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -156.0
+offset_right = 324.0
+offset_bottom = -128.0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "Press E to interact"
+vertical_alignment = 1

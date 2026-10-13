@@ -10,11 +10,28 @@ const HEALTH_PER_HEART = 2
 @onready var coin_label: Label = $Coins/CoinLabel
 @onready var dash_icon: TextureProgressBar = %DashIcon
 @onready var myling_icon: TextureProgressBar = %MylingIcon
+@onready var interact_hint: Label = $InteractHint
 
 const ABILITY_READY_TINT = Color(1, 1, 1, 1)
 const ABILITY_CHARGING_TINT = Color(0.55, 0.75, 1, 1)
 const DASH_ICON_SCALE = Vector2(5, 5)
 const MYLING_ICON_SCALE = Vector2(7, 7)
+
+var _interact_sources: Array[Node] = []
+
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
+func _process(_delta: float) -> void:
+	_interact_sources = _interact_sources.filter(func(source): return is_instance_valid(source) and not source.is_queued_for_deletion())
+	interact_hint.visible = not _interact_sources.is_empty() and not Dialogue.is_open()
+
+func show_interact_hint(source: Node) -> void:
+	if not _interact_sources.has(source):
+		_interact_sources.append(source)
+
+func hide_interact_hint(source: Node) -> void:
+	_interact_sources.erase(source)
 
 func update_hearts(current_health: int) -> void:
 	for i in hearts.size():
