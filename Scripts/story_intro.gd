@@ -26,9 +26,10 @@ const BEATS = [
 	],
 	[
 		["Mother", [
-			"Everyone whispers about us. Unmarried, and a child born out of wedlock.",
-			"Every single day I lie to them. And one day they'll make you pay for it too.",
-			"You don't deserve that shame, my love. Neither of us does.",
+			"We never had the money to have you baptized.",
+			"And now the whole village looks at us like we're cursed. Like you're cursed.",
+			"They'll never let you be one of them. They'll torment you your whole life.",
+			"You don't deserve that, my love. Neither of us does.",
 			"I'll set us both free. It's the only way.",
 		]],
 		["", ["Her mind broken, she reached for the knife."]],
@@ -51,12 +52,15 @@ const BEATS = [
 		["", ["Some time later..."]],
 		["Father", ["Hey, honey! I'm home!", "...Hello?", "What... what happened here?!"]],
 		["Father", [
-			"You... you did this.",
-			"I will never, EVER forgive you.",
+			"No... no, no... my girls...",
+			"I'm so sorry. Both of you.",
+			"I should have done more, back when there was still time.",
 		]],
 		["Father", [
 			"...Is that you, sweetheart?",
-			"Your soul can't rest. Not like this.",
+			"Your soul can't rest. Not like this. You never got your baptism.",
+			"You're the only innocent one in all of this.",
+			"The least I can do is give you the eternal rest you deserve.",
 			"There's a church past the forest. A holy place, where you can finally be at peace.",
 			"We have a long way to go, so stick close to me, my dear.",
 		]],
