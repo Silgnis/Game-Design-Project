@@ -47,10 +47,19 @@ func set_active(active: bool) -> void:
 	super.set_active(active)
 	if not animated_sprite:
 		return
+	var anim_name = "stage_" + str(stage_index)
 	if active:
-		animated_sprite.play()
+		if animated_sprite.sprite_frames.has_animation(anim_name):
+			animated_sprite.play(anim_name)
+		else:
+			animated_sprite.play()
+	elif animated_sprite.sprite_frames.has_animation(anim_name + "_idle"):
+		animated_sprite.play(anim_name + "_idle")
 	else:
 		animated_sprite.pause()
+
+func _tint_sprite() -> CanvasItem:
+	return animated_sprite
 
 func _physics_process(delta: float) -> void:
 	if is_dead or is_frozen or not is_active or not is_instance_valid(target):

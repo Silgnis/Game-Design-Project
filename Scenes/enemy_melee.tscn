@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cqbb33c2futkp" path="res://Resources/Custom Assets/Wolf/Ghost Wolf.png" id="3_84rqt"]
 [ext_resource type="AudioStream" uid="uid://qkt3mo2gpj0q" path="res://Resources/Sounds/Bullet Sounds/dmg_sfx.mp3" id="3_s1fu1"]
 [ext_resource type="Texture2D" uid="uid://dxax7jake0sgw" path="res://Resources/Custom Assets/Wolf/Ghostlier Wolf.png" id="4_84rqt"]
+[ext_resource type="Texture2D" uid="uid://c5lodj1v2w7rl" path="res://Resources/Custom Assets/Wolf/Wolf.png" id="5_wolfi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rc88t"]
 atlas = ExtResource("2_b7o5j")
@@ -30,6 +31,10 @@ region = Rect2(0, 3, 20, 12)
 atlas = ExtResource("4_84rqt")
 region = Rect2(0, 3, 20, 12)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wolfi"]
+atlas = ExtResource("5_wolfi")
+region = Rect2(0, 3, 20, 13)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_r0pp3"]
 animations = [{
 "frames": [{
@@ -47,6 +52,14 @@ animations = [{
 }],
 "loop": 1,
 "name": &"stage_0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wolfi")
+}],
+"loop": 1,
+"name": &"stage_0_idle",
 "speed": 5.0
 }, {
 "frames": [{

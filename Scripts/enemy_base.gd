@@ -89,7 +89,7 @@ func freeze(duration: float) -> void:
 	if self is CollisionObject2D:
 		set("disable_mode", CollisionObject2D.DISABLE_MODE_KEEP_ACTIVE)
 	process_mode = Node.PROCESS_MODE_DISABLED
-	var sprite_node = get_node_or_null("Sprite2D")
+	var sprite_node := _tint_sprite()
 	if sprite_node:
 		sprite_node.modulate = FROZEN_TINT
 	_freeze_id += 1
@@ -101,9 +101,12 @@ func _on_freeze_timeout(id: int) -> void:
 		return
 	is_frozen = false
 	process_mode = Node.PROCESS_MODE_INHERIT
-	var sprite_node = get_node_or_null("Sprite2D")
+	var sprite_node := _tint_sprite()
 	if sprite_node:
 		sprite_node.modulate = Color.WHITE
+
+func _tint_sprite() -> CanvasItem:
+	return get_node_or_null("Sprite2D")
 
 func die() -> void:
 	if is_dead:
