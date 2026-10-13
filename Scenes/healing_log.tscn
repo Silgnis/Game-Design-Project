@@ -1,0 +1,103 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/healing_log.gd" id="1_log"]
+[ext_resource type="Texture2D" uid="uid://dg0dcdicmcyb5" path="res://Resources/Custom Assets/obstacles.png" id="2_obstacles"]
+[ext_resource type="Texture2D" uid="uid://dqhl3m8hg46tl" path="res://Resources/Custom Assets/Speech Bubbles/speech_bubble_animation-11x11.png" id="3_bubble"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_log"]
+atlas = ExtResource("2_obstacles")
+region = Rect2(59, 19, 26, 13)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_talk"]
+radius = 22.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_solid"]
+size = Vector2(24, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0"]
+atlas = ExtResource("3_bubble")
+region = Rect2(0, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1"]
+atlas = ExtResource("3_bubble")
+region = Rect2(11, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2"]
+atlas = ExtResource("3_bubble")
+region = Rect2(22, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3"]
+atlas = ExtResource("3_bubble")
+region = Rect2(33, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4"]
+atlas = ExtResource("3_bubble")
+region = Rect2(44, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5"]
+atlas = ExtResource("3_bubble")
+region = Rect2(55, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6"]
+atlas = ExtResource("3_bubble")
+region = Rect2(66, 0, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7"]
+atlas = ExtResource("3_bubble")
+region = Rect2(77, 0, 11, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bubble"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7")
+}],
+"loop": 0,
+"name": &"pop",
+"speed": 16.0
+}]
+
+[node name="HealingLog" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_log")
+lines = Array[String](["The log has a weird, runic marking on it... It seems to read \"IKEA\". You don't really know what that means.", "Health has been restored to full."])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_log")
+
+[node name="Solid" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Solid"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_solid")
+
+[node name="TalkRange" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_talk")
+
+[node name="Bubble" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(6, -14)
+sprite_frames = SubResource("SpriteFrames_bubble")
+animation = &"pop"

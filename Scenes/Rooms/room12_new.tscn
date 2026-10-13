@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bwqtx1yctedcj" path="res://Scenes/campfire.tscn" id="4_kcj6o"]
 [ext_resource type="TileSet" uid="uid://dryk2kwaslu3x" path="res://Resources/new_trees_tiletes.tres" id="4_scrn3"]
 [ext_resource type="PackedScene" path="res://Scenes/gnome.tscn" id="5_gnome"]
+[ext_resource type="PackedScene" path="res://Scenes/healing_log.tscn" id="6_log"]
 [ext_resource type="Script" uid="uid://bf1srdns76puj" path="res://Scripts/shop_item.gd" id="7_qay8b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mapicon"]
@@ -281,3 +282,6 @@ position = Vector2(9, -8)
 [node name="Gnome" parent="Forest" unique_id=408881881 instance=ExtResource("5_gnome")]
 position = Vector2(-28, 9)
 items = Array[ExtResource("7_qay8b")]([SubResource("Resource_scrn3"), SubResource("ShopItem_ghost_food"), SubResource("ShopItem_silver_bullets")])
+
+[node name="HealingLog" parent="Forest" instance=ExtResource("6_log")]
+position = Vector2(0, 52)
