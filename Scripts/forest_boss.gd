@@ -314,6 +314,10 @@ func die() -> void:
 	cancel_waits()
 	despawn_projectiles()
 	boss_ui.hide()
+	
+	get_tree().paused = true
+	get_node("/root/Main/World/HUD/WinMenu").show()
+	
 	super.die()
 
 func _phase_two_hp() -> int:

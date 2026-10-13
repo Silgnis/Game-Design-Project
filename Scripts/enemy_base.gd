@@ -117,6 +117,7 @@ func die() -> void:
 	# Killing the last ghost form destroys the soul for good: it never spawns again
 	if enemy_id != "" and stage_sprites.size() > 0 and stage_index == stage_sprites.size() - 1:
 		GameManager.register_soul_destroyed(enemy_id, scene_file_path)
+	
 	died.emit()
 	queue_free()
 
