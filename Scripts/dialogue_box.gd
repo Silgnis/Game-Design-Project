@@ -48,6 +48,11 @@ func _ready() -> void:
 func is_open() -> bool:
 	return _active
 
+# Closes the box right away, e.g. when a cutscene is skipped
+func close() -> void:
+	if _active:
+		_close()
+
 func say(speaker: String, lines: Array) -> void:
 	if _active or lines.is_empty():
 		return

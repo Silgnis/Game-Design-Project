@@ -1,13 +1,12 @@
 extends Control
 
-# Shown between the main menu and the game. The story strip is shown dimmed, and its panels
-# light up one at a time. Any click or key moves to the next panel, Esc skips the whole thing.
+# Shown between the main menu and the game. The story strip starts dimmed; before each panel
+# lights up, its part of the story plays in the dialogue box. Clicking skips the wait on a
+# lit panel, Esc skips the whole intro (even in the middle of a line).
 
 @export var strip: Texture2D = preload("res://Resources/Custom Assets/Story Strip.png")
-@export var panel_time: float = 5.0
+@export var panel_time: float = 5.0 # How long a panel stays highlighted before the next beat
 @export_file("*.tscn") var next_scene: String = "res://Scenes/Main.tscn"
-# Presses right after a panel appears are ignored, so a double click doesn't skip two at once
-@export var input_grace_time: float = 0.3
 
 # Panel rects inside Story Strip.png, in reading order
 const PANELS = [
@@ -17,7 +16,52 @@ const PANELS = [
 	Rect2(206, 140, 80, 102),
 	Rect2(308, 28, 140, 214),
 ]
-const UNSEEN_TINT = Color(0.18, 0.18, 0.22)
+# What plays before each panel lights up: [speaker, [lines]] pairs. An empty speaker is narration.
+const BEATS = [
+	[
+		["Father", ["Mmm, this stew is wonderful, dear."]],
+		["Daughter", ["Can I go play by the river tomorrow?"]],
+		["Mother", ["No. You're staying home, you have chores to do."]],
+		["Father", ["Listen to your mother. I have to head out to work, I'll be back late."]],
+	],
+	[
+		["Mother", [
+			"Everyone whispers about us. Unmarried, and a child born out of wedlock.",
+			"Every single day I lie to them. And one day they'll make you pay for it too.",
+			"You don't deserve that shame, my love. Neither of us does.",
+			"I'll set us both free. It's the only way.",
+		]],
+		["", ["Her mind broken, she reached for the knife."]],
+	],
+	[
+		["Mother", [
+			"No... no, no, no. What have I done?",
+			"My little girl... I only wanted to free you.",
+			"Wake up. Please, wake up...",
+		]],
+	],
+	[
+		["Mother", [
+			"There's no taking it back. Not from this.",
+			"Forgive me...",
+		]],
+		["", ["Too far gone to undo what she had done, she took her own life."]],
+	],
+	[
+		["", ["Some time later..."]],
+		["Father", ["Hey, honey! I'm home!", "...Hello?", "What... what happened here?!"]],
+		["Father", [
+			"You... you did this.",
+			"I will never, EVER forgive you.",
+		]],
+		["Father", [
+			"...Is that you, sweetheart?",
+			"Your soul can't rest. Not like this.",
+			"There's a church past the forest. A holy place, where you can finally be at peace.",
+			"We have a long way to go, so stick close to me, my dear.",
+		]],
+	],
+]
 const SEEN_TINT = Color(0.55, 0.55, 0.6)
 
 @onready var board: Control = $Board
@@ -27,13 +71,15 @@ const SEEN_TINT = Color(0.55, 0.55, 0.6)
 
 var _panels: Array[TextureRect] = []
 var _index := -1
-var _time := 0.0
 var _leaving := false
+var _skip_hold := false
 
 func _ready() -> void:
-	full.texture = strip
-	full.size = strip.get_size()
-	full.modulate = UNSEEN_TINT
+	# The dialogue box pauses the tree; the intro keeps running so Esc still works
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	# The whole strip stays hidden; only panels the story has reached are drawn
+	full.hide()
+	frame.hide()
 
 	# One bright copy of each panel on top of the dimmed strip
 	for rect in PANELS:
@@ -53,35 +99,52 @@ func _ready() -> void:
 
 	resized.connect(_fit)
 	_fit()
-	_show_panel(0)
-
-	fade.color.a = 1.0
-	create_tween().tween_property(fade, "color:a", 0.0, 0.6)
+	_run()
 
 # Scale the strip up by a whole number so the pixel art stays crisp, and centre it
 func _fit() -> void:
-	var strip_size = strip.get_size()
+	var strip_size: Vector2 = strip.get_size()
 	var fit = minf(size.x / strip_size.x, size.y / strip_size.y) * 0.95
 	var s = maxf(floorf(fit), 1.0) if fit >= 1.0 else fit
 	board.size = strip_size
 	board.scale = Vector2(s, s)
 	board.position = ((size - strip_size * s) / 2).floor()
 
-func _process(delta: float) -> void:
-	if _leaving:
-		return
-	_time += delta
-	if _time >= panel_time:
-		_next()
+func _run() -> void:
+	fade.color.a = 1.0
+	var fade_in = create_tween()
+	fade_in.tween_property(fade, "color:a", 0.0, 0.6)
+	await fade_in.finished
+
+	for i in PANELS.size():
+		for part in BEATS[i]:
+			await Dialogue.say(part[0], part[1])
+			if _leaving:
+				return
+		_show_panel(i)
+		await _hold()
+		if _leaving:
+			return
+	_finish()
+
+# Waits panel_time, or less if the player clicks
+func _hold() -> void:
+	_skip_hold = false
+	var waited := 0.0
+	while waited < panel_time and not _skip_hold and not _leaving:
+		await get_tree().process_frame
+		waited += get_process_delta_time()
 
 func _input(event: InputEvent) -> void:
 	if _leaving or not _is_press(event):
 		return
-	get_viewport().set_input_as_handled()
 	if event.is_action_pressed("ui_cancel"):
+		get_viewport().set_input_as_handled()
 		_finish()
-	elif _time >= input_grace_time:
-		_next()
+	elif not Dialogue.is_open():
+		# While a line is showing, clicks belong to the dialogue box
+		get_viewport().set_input_as_handled()
+		_skip_hold = true
 
 func _is_press(event: InputEvent) -> bool:
 	if event is InputEventKey:
@@ -94,7 +157,6 @@ func _show_panel(i: int) -> void:
 	if _index >= 0:
 		create_tween().tween_property(_panels[_index], "modulate", SEEN_TINT, 0.4)
 	_index = i
-	_time = 0.0
 
 	var panel = _panels[i]
 	panel.show()
@@ -104,17 +166,15 @@ func _show_panel(i: int) -> void:
 	pop.tween_property(panel, "modulate", Color.WHITE, 0.35)
 	pop.tween_property(panel, "scale", Vector2.ONE, 0.35)
 
+	frame.show()
 	frame.position = PANELS[i].position - Vector2(2, 2)
 	frame.size = PANELS[i].size + Vector2(4, 4)
 
-func _next() -> void:
-	if _index < PANELS.size() - 1:
-		_show_panel(_index + 1)
-	else:
-		_finish()
-
 func _finish() -> void:
+	if _leaving:
+		return
 	_leaving = true
+	Dialogue.close()
 	var out = create_tween()
 	out.tween_property(fade, "color:a", 1.0, 0.6)
 	out.tween_callback(func(): get_tree().change_scene_to_file(next_scene))
