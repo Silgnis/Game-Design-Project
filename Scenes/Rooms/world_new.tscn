@@ -58,17 +58,8 @@ enabled = true
 [node name="ExitSouth" parent="Rooms/Room5/Forest" parent_id_path=PackedInt32Array(883150449, 1562204503) index="3" unique_id=798378625]
 enabled = true
 
-[node name="Room6" parent="Rooms" unique_id=1811937955 instance=ExtResource("room6")]
+[node name="Room6" parent="Rooms" unique_id=631823440 instance=ExtResource("room6")]
 position = Vector2(1120, -320)
-
-[node name="ExitNorth" parent="Rooms/Room6/Forest" parent_id_path=PackedInt32Array(1811937955, 827532767) index="1" unique_id=1678139204]
-enabled = false
-
-[node name="ExitEast" parent="Rooms/Room6/Forest" parent_id_path=PackedInt32Array(1811937955, 827532767) index="2" unique_id=1823037367]
-enabled = true
-
-[node name="ExitSouth" parent="Rooms/Room6/Forest" parent_id_path=PackedInt32Array(1811937955, 827532767) index="3" unique_id=1515755413]
-enabled = false
 
 [node name="Room7" parent="Rooms" unique_id=1834749456 instance=ExtResource("room7")]
 position = Vector2(1680, 0)
@@ -94,17 +85,8 @@ position = Vector2(1680, -640)
 [node name="ExitSouth" parent="Rooms/Room10/Forest" parent_id_path=PackedInt32Array(895727152, 44372639) index="3" unique_id=831646265]
 enabled = true
 
-[node name="Room11" parent="Rooms" unique_id=260754728 instance=ExtResource("room11")]
+[node name="Room11" parent="Rooms" unique_id=1003009855 instance=ExtResource("room11")]
 position = Vector2(560, -320)
-
-[node name="ExitNorth" parent="Rooms/Room11/Forest" parent_id_path=PackedInt32Array(260754728, 1508907068) index="1" unique_id=117270667]
-enabled = true
-
-[node name="ExitEast" parent="Rooms/Room11/Forest" parent_id_path=PackedInt32Array(260754728, 1508907068) index="2" unique_id=1206503565]
-enabled = false
-
-[node name="ExitWest" parent="Rooms/Room11/Forest" parent_id_path=PackedInt32Array(260754728, 1508907068) index="4" unique_id=1164262016]
-enabled = true
 
 [node name="BossRoom" parent="Rooms" unique_id=1607106466 instance=ExtResource("boss_room")]
 position = Vector2(1120, 1040)
@@ -189,9 +171,7 @@ grow_vertical = 2
 
 [editable path="Rooms/Room4"]
 [editable path="Rooms/Room5"]
-[editable path="Rooms/Room6"]
 [editable path="Rooms/Room9"]
 [editable path="Rooms/Room10"]
-[editable path="Rooms/Room11"]
 [editable path="Rooms/BossRoom"]
 [editable path="Rooms/Room12"]
