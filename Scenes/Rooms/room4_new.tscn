@@ -1,11 +1,11 @@
 [gd_scene format=4 uid="uid://dudv6mou7xjwq"]
 
-[ext_resource type="Script" path="res://Scripts/mirrored_room.gd" id="1_room"]
+[ext_resource type="Script" uid="uid://bogps0umpoxjk" path="res://Scripts/mirrored_room.gd" id="1_room"]
 [ext_resource type="Texture2D" uid="uid://b03ojmpn2745v" path="res://Resources/Custom Assets/New Tileset.png" id="2_newts"]
 [ext_resource type="TileSet" uid="uid://dryk2kwaslu3x" path="res://Resources/new_trees_tiletes.tres" id="3_pkdtd"]
 [ext_resource type="TileSet" uid="uid://bq7obst4c1e5x" path="res://Resources/obstacles_tileset.tres" id="4_obstacles"]
 [ext_resource type="Script" uid="uid://gfal27gsmqx2" path="res://Scripts/enemy_spawner.gd" id="5_spawner"]
-[ext_resource type="PackedScene" path="res://Scenes/goblin.tscn" id="6_goblin"]
+[ext_resource type="PackedScene" uid="uid://i3mjmjt0y0la" path="res://Scenes/goblin.tscn" id="6_goblin"]
 [ext_resource type="PackedScene" uid="uid://bf8hkj8p6pfa6" path="res://Scenes/enemy_melee.tscn" id="7_wolf"]
 [ext_resource type="PackedScene" uid="uid://esuv0yme7gbv" path="res://Scenes/thorn_trigger.tscn" id="8_trigger"]
 [ext_resource type="PackedScene" uid="uid://dwmkwdf5obo0v" path="res://Scenes/thorn_door.tscn" id="9_door"]
@@ -61,6 +61,21 @@ texture = ExtResource("2_newts")
 
 [sub_resource type="TileSet" id="TileSet_ground"]
 sources/0 = SubResource("TileSetAtlasSource_ground")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pond"]
+texture = ExtResource("10_water")
+margins = Vector2i(112, 48)
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+1:0/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+4:0/0 = 0
+4:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_pond"]
+sources/0 = SubResource("TileSetAtlasSource_pond")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pine0"]
 texture = ExtResource("2_newts")
@@ -185,26 +200,10 @@ sources/2 = SubResource("TileSetAtlasSource_pine2")
 sources/3 = SubResource("TileSetAtlasSource_rocks")
 sources/4 = SubResource("TileSetAtlasSource_stump")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pond"]
-texture = ExtResource("10_water")
-margins = Vector2i(112, 48)
-texture_region_size = Vector2i(16, 16)
-0:0/0 = 0
-0:1/0 = 0
-0:2/0 = 0
-1:0/0 = 0
-2:1/0 = 0
-2:2/0 = 0
-4:0/0 = 0
-4:2/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_pond"]
-sources/0 = SubResource("TileSetAtlasSource_pond")
-
 [node name="Room4" type="Node2D" unique_id=810453837 node_paths=PackedStringArray("trap_doors")]
 script = ExtResource("1_room")
-trap_doors = [NodePath("ThornTriggerEast/ThornDoor"), NodePath("ThornTriggerNorthA/ThornDoor"), NodePath("ThornTriggerNorthB/ThornDoor"), NodePath("ThornTriggerSouthA/ThornDoor"), NodePath("ThornTriggerSouthB/ThornDoor")]
 layout_extents = Vector2(232, 112)
+trap_doors = [NodePath("ThornTriggerEast/ThornDoor"), NodePath("ThornTriggerNorthA/ThornDoor"), NodePath("ThornTriggerNorthB/ThornDoor"), NodePath("ThornTriggerSouthA/ThornDoor"), NodePath("ThornTriggerSouthB/ThornDoor")]
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=992649361]
 texture_filter = 1
@@ -231,29 +230,29 @@ texture_filter = 1
 tile_map_data = PackedByteArray("AADx/wUAAAAQAAMAAADy/wUAAAAPAAMAAADy/wYAAAAGAAUAAADz/wUAAAAOAAgAAAD0////AAAPAAIAAAD0/wMAAAAQAAcAAAD4//n/AAAOAAMAAAD4/wEAAAAGAAQAAAD6/wUAAAAOAAgAAAD7////AAAGAAMAAAD7/wQAAAAQAAIAAAD9//n/AAAQAAMAAAD9/wYAAAAOAAgAAAD+//n/AAAOAAgAAAD+/wMAAAAGAAQAAAAAAAYAAAAQAAIAAAABAPn/AAAOAAgAAAABAAUAAAAQAAIAAAAEAPn/AAAGAAMAAAAFAAUAAAAOAAMAAAAGAPr/AAAOAAgAAAAHAAQAAAAQAAcAAAAKAPn/AAAGAAMAAAAKAP//AAAGAAQAAAAKAAAAAAAGAAMAAAAMAAYAAAAOAAMAAAAOAPr/AAAOAAMAAAAOAP3/AAAOAAgAAAAOAP7/AAAQAAIAAAA=")
 tile_set = SubResource("TileSet_ground")
 
-[node name="Pond" type="Node2D" parent="."]
+[node name="Pond" type="Node2D" parent="." unique_id=564077850]
 position = Vector2(-8, 0)
 
-[node name="Clip" type="Polygon2D" parent="Pond"]
+[node name="Clip" type="Polygon2D" parent="Pond" unique_id=1789432404]
 clip_children = 1
 polygon = PackedVector2Array(170, -77, 170, -76, 172, -76, 172, -74, 173, -74, 173, -22, 172, -22, 172, -20, 170, -20, 170, -19, 86, -19, 86, -20, 84, -20, 84, -22, 83, -22, 83, -74, 84, -74, 84, -76, 86, -76, 86, -77)
 
-[node name="Water" type="TileMapLayer" parent="Pond/Clip"]
+[node name="Water" type="TileMapLayer" parent="Pond/Clip" unique_id=360661736]
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAFAPv/AAAAAAIAAAAFAPz/AAAAAAEAAAAFAP3/AAAAAAIAAAAFAP7/AAAAAAEAAAAGAPv/AAABAAAAAAAGAPz/AAAAAAAAAAAGAP3/AAAEAAIAAAAGAP7/AAAAAAAAAAAHAPv/AAAAAAAAAAAHAPz/AAACAAEAAAAHAP3/AAAAAAAAAAAHAP7/AAAAAAEAAAAIAPv/AAAAAAEAAAAIAPz/AAAAAAIAAAAIAP3/AAACAAIAAAAIAP7/AAAAAAIAAAAJAPv/AAAAAAAAAAAJAPz/AAAEAAAAAAAJAP3/AAAAAAAAAAAJAP7/AAABAAAAAAAKAPv/AAAAAAEAAAAKAPz/AAAAAAAAAAAKAP3/AAAAAAEAAAAKAP7/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_pond")
 
-[node name="BankH" type="TileMapLayer" parent="Pond/Clip"]
+[node name="BankH" type="TileMapLayer" parent="Pond/Clip" unique_id=401002982]
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAFAPz/AAAFAAgAAAAFAP3/AAAFAAgAAAAKAPz/AAABAAgAAAAKAP3/AAABAAgAAAA=")
 tile_set = SubResource("TileSet_ground")
 
-[node name="BankV" type="TileMapLayer" parent="Pond/Clip"]
+[node name="BankV" type="TileMapLayer" parent="Pond/Clip" unique_id=1510289375]
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAGAPv/AAADAAoAAAAGAP7/AAADAAYAAAAHAPv/AAADAAoAAAAHAP7/AAADAAYAAAAIAPv/AAADAAoAAAAIAP7/AAADAAYAAAAJAPv/AAADAAoAAAAJAP7/AAADAAYAAAA=")
 tile_set = SubResource("TileSet_ground")
 
-[node name="CornerTL" type="Sprite2D" parent="Pond/Clip"]
+[node name="CornerTL" type="Sprite2D" parent="Pond/Clip" unique_id=2016463484]
 texture_filter = 1
 position = Vector2(80, -80)
 texture = ExtResource("2_newts")
@@ -261,7 +260,7 @@ centered = false
 region_enabled = true
 region_rect = Rect2(65, 140, 16, 16)
 
-[node name="CornerTR" type="Sprite2D" parent="Pond/Clip"]
+[node name="CornerTR" type="Sprite2D" parent="Pond/Clip" unique_id=667069387]
 texture_filter = 1
 position = Vector2(160, -80)
 texture = ExtResource("2_newts")
@@ -269,7 +268,7 @@ centered = false
 region_enabled = true
 region_rect = Rect2(34, 140, 16, 16)
 
-[node name="CornerBL" type="Sprite2D" parent="Pond/Clip"]
+[node name="CornerBL" type="Sprite2D" parent="Pond/Clip" unique_id=1777612336]
 texture_filter = 1
 position = Vector2(80, -32)
 texture = ExtResource("2_newts")
@@ -277,7 +276,7 @@ centered = false
 region_enabled = true
 region_rect = Rect2(65, 115, 16, 16)
 
-[node name="CornerBR" type="Sprite2D" parent="Pond/Clip"]
+[node name="CornerBR" type="Sprite2D" parent="Pond/Clip" unique_id=334518778]
 texture_filter = 1
 position = Vector2(160, -32)
 texture = ExtResource("2_newts")
@@ -285,14 +284,14 @@ centered = false
 region_enabled = true
 region_rect = Rect2(34, 115, 16, 16)
 
-[node name="PondCollision" type="StaticBody2D" parent="Pond"]
+[node name="PondCollision" type="StaticBody2D" parent="Pond" unique_id=1661736966]
 collision_layer = 32
 collision_mask = 0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Pond/PondCollision"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Pond/PondCollision" unique_id=992502719]
 polygon = PackedVector2Array(98, -63, 158, -64, 158, -62, 160, -62, 160, -34, 158, -29, 98, -29, 96, -31, 96, -62)
 
-[node name="Obstacles" type="TileMapLayer" parent="."]
+[node name="Obstacles" type="TileMapLayer" parent="." unique_id=1678563240]
 texture_filter = 1
 tile_map_data = PackedByteArray("AAD2//v/AAAAAAAAAQD3//v/AwAAAAAAAAD3/wEADAAAAAAAAgAGAAMABwAAAAAAAQAIAAEAAAAAAAAAAQA=")
 tile_set = ExtResource("4_obstacles")
@@ -338,70 +337,64 @@ enabled = false
 tile_set = SubResource("TileSet_forest")
 physics_quadrant_size = 1
 
-[node name="Wolf1" type="Marker2D" parent="."]
-position = Vector2(-12, -88)
+[node name="Wolf1" type="Marker2D" parent="." unique_id=1837687404]
+position = Vector2(-97, -41)
 script = ExtResource("5_spawner")
 enemy_scene = ExtResource("7_wolf")
 enemy_id = "wolf4_1"
 
-[node name="Wolf2" type="Marker2D" parent="."]
-position = Vector2(4, 88)
-script = ExtResource("5_spawner")
-enemy_scene = ExtResource("7_wolf")
-enemy_id = "wolf4_2"
-
-[node name="Goblin1" type="Marker2D" parent="."]
+[node name="Goblin1" type="Marker2D" parent="." unique_id=597422674]
 position = Vector2(116, -12)
 script = ExtResource("5_spawner")
 enemy_scene = ExtResource("6_goblin")
 enemy_id = "goblin4_1"
 
-[node name="Goblin2" type="Marker2D" parent="."]
-position = Vector2(116, 12)
+[node name="Goblin2" type="Marker2D" parent="." unique_id=147115427]
+position = Vector2(-9, 51)
 script = ExtResource("5_spawner")
 enemy_scene = ExtResource("6_goblin")
 enemy_id = "goblin4_2"
 
-[node name="ThornTriggerEast" parent="." instance=ExtResource("8_trigger")]
-position = Vector2(232, 0)
+[node name="ThornTriggerEast" parent="." unique_id=2127185001 instance=ExtResource("8_trigger")]
+position = Vector2(232, -13)
 collision_mask = 2
 
-[node name="ThornDoor" parent="ThornTriggerEast" instance=ExtResource("9_door")]
-position = Vector2(36, 0)
+[node name="ThornDoor" parent="ThornTriggerEast" unique_id=74095670 instance=ExtResource("9_door")]
+position = Vector2(36, 10)
 collision_mask = 6
 
-[node name="ThornTriggerNorthA" parent="." instance=ExtResource("8_trigger")]
+[node name="ThornTriggerNorthA" parent="." unique_id=771720123 instance=ExtResource("8_trigger")]
 position = Vector2(-4, -108)
 rotation = 1.5707964
 collision_mask = 2
 
-[node name="ThornDoor" parent="ThornTriggerNorthA" instance=ExtResource("9_door")]
+[node name="ThornDoor" parent="ThornTriggerNorthA" unique_id=1915694929 instance=ExtResource("9_door")]
 position = Vector2(-40, 0)
 collision_mask = 6
 
-[node name="ThornTriggerNorthB" parent="." instance=ExtResource("8_trigger")]
+[node name="ThornTriggerNorthB" parent="." unique_id=2085570569 instance=ExtResource("8_trigger")]
 position = Vector2(18, -108)
 rotation = 1.5707964
 collision_mask = 2
 
-[node name="ThornDoor" parent="ThornTriggerNorthB" instance=ExtResource("9_door")]
+[node name="ThornDoor" parent="ThornTriggerNorthB" unique_id=461789952 instance=ExtResource("9_door")]
 position = Vector2(-40, 0)
 collision_mask = 6
 
-[node name="ThornTriggerSouthA" parent="." instance=ExtResource("8_trigger")]
+[node name="ThornTriggerSouthA" parent="." unique_id=871623225 instance=ExtResource("8_trigger")]
 position = Vector2(-18, 108)
 rotation = -1.5707964
 collision_mask = 2
 
-[node name="ThornDoor" parent="ThornTriggerSouthA" instance=ExtResource("9_door")]
+[node name="ThornDoor" parent="ThornTriggerSouthA" unique_id=1412163709 instance=ExtResource("9_door")]
 position = Vector2(-40, 0)
 collision_mask = 6
 
-[node name="ThornTriggerSouthB" parent="." instance=ExtResource("8_trigger")]
+[node name="ThornTriggerSouthB" parent="." unique_id=917711739 instance=ExtResource("8_trigger")]
 position = Vector2(4, 108)
 rotation = -1.5707964
 collision_mask = 2
 
-[node name="ThornDoor" parent="ThornTriggerSouthB" instance=ExtResource("9_door")]
+[node name="ThornDoor" parent="ThornTriggerSouthB" unique_id=773474328 instance=ExtResource("9_door")]
 position = Vector2(-40, 0)
 collision_mask = 6

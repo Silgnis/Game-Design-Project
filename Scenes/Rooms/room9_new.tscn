@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://gfal27gsmqx2" path="res://Scripts/enemy_spawner.gd" id="5_spawner"]
 [ext_resource type="PackedScene" uid="uid://bf8hkj8p6pfa6" path="res://Scenes/enemy_melee.tscn" id="6_wolf"]
 [ext_resource type="PackedScene" uid="uid://bdqs6ug65n8m8" path="res://Scenes/troll_new.tscn" id="7_troll"]
-[ext_resource type="PackedScene" uid="uid://i3mjmjt0y0la" path="res://Scenes/goblin.tscn" id="8_goblin"]
 [ext_resource type="PackedScene" uid="uid://esuv0yme7gbv" path="res://Scenes/thorn_trigger.tscn" id="20_trigger"]
 [ext_resource type="PackedScene" uid="uid://dwmkwdf5obo0v" path="res://Scenes/thorn_door.tscn" id="21_door"]
 
@@ -182,8 +181,8 @@ sources/4 = SubResource("TileSetAtlasSource_stump")
 
 [node name="Room9" type="Node2D" unique_id=873202444 node_paths=PackedStringArray("trap_doors")]
 script = ExtResource("1_room")
-trap_doors = [NodePath("ThornTriggerEast/ThornDoor"), NodePath("ThornTriggerSouthA/ThornDoor"), NodePath("ThornTriggerSouthB/ThornDoor")]
 layout_extents = Vector2(240, 104)
+trap_doors = [NodePath("ThornTriggerEast/ThornDoor"), NodePath("ThornTriggerSouthA/ThornDoor"), NodePath("ThornTriggerSouthB/ThornDoor")]
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=729802938]
 texture_filter = 1
@@ -250,58 +249,52 @@ tile_map_data = PackedByteArray("AADu////AQAAAAAAAADu/wAAAAAAAAAAAwDu/wEAAQAAAAA
 tile_set = SubResource("TileSet_forest")
 physics_quadrant_size = 1
 
-[node name="Wolf1" type="Marker2D" parent="."]
+[node name="Wolf1" type="Marker2D" parent="." unique_id=366732620]
 position = Vector2(-37, -76)
 script = ExtResource("5_spawner")
 enemy_scene = ExtResource("6_wolf")
 enemy_id = "wolf9_1"
 
-[node name="Wolf2" type="Marker2D" parent="."]
+[node name="Wolf2" type="Marker2D" parent="." unique_id=1749123527]
 position = Vector2(-37, 76)
 script = ExtResource("5_spawner")
 enemy_scene = ExtResource("6_wolf")
 enemy_id = "wolf9_2"
 
-[node name="Troll1" type="Marker2D" parent="."]
+[node name="Troll1" type="Marker2D" parent="." unique_id=1843743475]
 position = Vector2(166, -59)
 script = ExtResource("5_spawner")
 enemy_scene = ExtResource("7_troll")
 enemy_id = "troll9_1"
 
-[node name="Troll2" type="Marker2D" parent="."]
+[node name="Troll2" type="Marker2D" parent="." unique_id=48951451]
 position = Vector2(166, 59)
 script = ExtResource("5_spawner")
 enemy_scene = ExtResource("7_troll")
 enemy_id = "troll9_2"
 
-[node name="Goblin1" type="Marker2D" parent="."]
-position = Vector2(166, 0)
-script = ExtResource("5_spawner")
-enemy_scene = ExtResource("8_goblin")
-enemy_id = "goblin9_1"
-
-[node name="ThornTriggerEast" parent="." instance=ExtResource("20_trigger")]
+[node name="ThornTriggerEast" parent="." unique_id=446256252 instance=ExtResource("20_trigger")]
 position = Vector2(232, 0)
 collision_mask = 2
 
-[node name="ThornDoor" parent="ThornTriggerEast" instance=ExtResource("21_door")]
+[node name="ThornDoor" parent="ThornTriggerEast" unique_id=237716200 instance=ExtResource("21_door")]
 position = Vector2(36, 0)
 collision_mask = 6
 
-[node name="ThornTriggerSouthA" parent="." instance=ExtResource("20_trigger")]
+[node name="ThornTriggerSouthA" parent="." unique_id=1000415292 instance=ExtResource("20_trigger")]
 position = Vector2(-18, 108)
 rotation = -1.5707964
 collision_mask = 2
 
-[node name="ThornDoor" parent="ThornTriggerSouthA" instance=ExtResource("21_door")]
+[node name="ThornDoor" parent="ThornTriggerSouthA" unique_id=2049076514 instance=ExtResource("21_door")]
 position = Vector2(-40, 0)
 collision_mask = 6
 
-[node name="ThornTriggerSouthB" parent="." instance=ExtResource("20_trigger")]
+[node name="ThornTriggerSouthB" parent="." unique_id=1762188004 instance=ExtResource("20_trigger")]
 position = Vector2(4, 108)
 rotation = -1.5707964
 collision_mask = 2
 
-[node name="ThornDoor" parent="ThornTriggerSouthB" instance=ExtResource("21_door")]
+[node name="ThornDoor" parent="ThornTriggerSouthB" unique_id=1541586469 instance=ExtResource("21_door")]
 position = Vector2(-40, 0)
 collision_mask = 6
