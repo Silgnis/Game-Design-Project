@@ -1,25 +1,33 @@
 [gd_scene format=3 uid="uid://i3mjmjt0y0la"]
 
 [ext_resource type="Script" path="res://Scripts/goblin.gd" id="1_goblin"]
-[ext_resource type="Texture2D" uid="uid://cxa6x4bi3x28y" path="res://Resources/kenney_pixel-platformer/Tiles/Characters/tile_0000.png" id="2_sprite"]
-[ext_resource type="AudioStream" uid="uid://qkt3mo2gpj0q" path="res://Resources/Sounds/Bullet Sounds/dmg_sfx.mp3" id="3_sfx"]
+[ext_resource type="Texture2D" uid="uid://bq2f0sxqlc4a" path="res://Resources/Custom Assets/Evil Gnome/Evil Gnome.png" id="2_idle"]
+[ext_resource type="Texture2D" uid="uid://qk4t5twvb5od" path="res://Resources/Custom Assets/Evil Gnome/Ghost Evil Gnome.png" id="3_ghost"]
+[ext_resource type="Texture2D" uid="uid://bycam2fqdarvq" path="res://Resources/Custom Assets/Evil Gnome/Ghostlier Evil Gnome.png" id="4_ghostlier"]
+[ext_resource type="Texture2D" uid="uid://bsohotiy1h7kl" path="res://Resources/Custom Assets/Evil Gnome/Evil Gnome Walking animation.png" id="5_walk"]
+[ext_resource type="AudioStream" uid="uid://qkt3mo2gpj0q" path="res://Resources/Sounds/Bullet Sounds/dmg_sfx.mp3" id="6_sfx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_goblin"]
-size = Vector2(14, 16)
+size = Vector2(12, 13)
 
 [node name="Goblin" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 39
 script = ExtResource("1_goblin")
-stage_sprites = Array[Texture2D]([ExtResource("2_sprite"), ExtResource("2_sprite"), ExtResource("2_sprite")])
+stage_walk_textures = Array[Texture2D]([ExtResource("5_walk"), null, null])
+stage_sprites = Array[Texture2D]([ExtResource("2_idle"), ExtResource("3_ghost"), ExtResource("4_ghostlier")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_sprite")
+texture = ExtResource("2_idle")
+offset = Vector2(-1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_goblin")
 
+[node name="Hand" type="Marker2D" parent="."]
+position = Vector2(-6, 2)
+
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_sfx")
+stream = ExtResource("6_sfx")
