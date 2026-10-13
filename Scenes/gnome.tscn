@@ -21,10 +21,11 @@ price = 1
 
 [sub_resource type="Resource" id="Resource_50pl2"]
 script = ExtResource("4_item")
-id = "healing_potion"
-display_name = "Healing potion"
+id = "health_potion"
+display_name = "Health potion"
 description = "A vigorous draught to replenish your health"
 price = 1
+is_consumable = true
 metadata/_custom_type_script = "uid://bf1srdns76puj"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_talk"]

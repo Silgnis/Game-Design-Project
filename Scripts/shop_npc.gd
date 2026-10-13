@@ -50,12 +50,11 @@ func _buy(item: ShopItem) -> void:
 	if not item.is_consumable:
 		# Save permanent items to the GameManager
 		GameManager.add_item(item.id)
-	# else:
+	else:
 		# Handle consumable effects immediately
-		
-		# Example
-		# if item.id == "health_potion":
-		# 	player.current_health = min(player.current_health + 1, player.max_health)
-		#	player.player_ui.update_hearts(player.current_health)
+		if item.id == "health_potion":
+			player.current_health = player.max_health
+			#player.current_health = min(player.current_health + 1, player.max_health)
+			player.player_ui.update_hearts(player.current_health)
 			
 	await Dialogue.say(speaker, [thanks_text])

@@ -32,9 +32,6 @@ var _active_player: AudioStreamPlayer
 var _current_track: MusicTrack = -1 as MusicTrack
 var _fade_tween: Tween
 
-@onready var player = get_node("res://Scenes/player_new.tscn")
-@onready var bullet = get_node("res://Scenes/bullet.tscn")
-
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS # So that music doesn't stop during dialogues
 	
@@ -81,15 +78,15 @@ func add_item(item_id: String) -> void:
 	if not has_item(item_id):
 		owned_items.append(item_id)
 		apply_item_effect(item_id)
-		
+
+var player_var:PackedScene = load("res://Scenes/player_new.tscn")
+var bullet_var:PackedScene = load("res://Scenes/bullet.tscn")
+
 func apply_item_effect(item_id: String) -> void:
 	if item_id == "ghost_food":
-		player.myling_cooldown = player.myling_cooldown / 2
+		player_var.myling_cooldown = player_var.myling_cooldown / 2
 	elif item_id == "silver_bullets":
-		pass
-		bullet.damage = bullet.damage * 1.5
-	elif item_id == "healing_potion":
-		player.current_health = player.max_health
+		player_var.damage = player_var.damage * 1.5
 		
 func play_room_music(track: MusicTrack, fade_duration: float = 1.0) -> void:
 	if _current_track == track:
