@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bg1iw0c6a26qw"]
+
+[ext_resource type="Texture2D" uid="uid://c8xp4rl1bprys" path="res://Resources/Temp/boss_gate.png" id="1_5yf37"]
+[ext_resource type="Script" uid="uid://cwtpn3qw0cgoj" path="res://Scripts/boss_gate.gd" id="1_gqg3r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0pp3"]
+size = Vector2(290, 266)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_luyyh"]
+size = Vector2(359, 332)
+
+[node name="BossGate" type="StaticBody2D" unique_id=1595886427]
+collision_mask = 6
+script = ExtResource("1_gqg3r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=72549806]
+scale = Vector2(0.06460936, 0.06460936)
+texture = ExtResource("1_5yf37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1223023737]
+position = Vector2(3, 11)
+shape = SubResource("RectangleShape2D_r0pp3")
+
+[node name="InteractArea" type="Area2D" parent="." unique_id=699059238]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=1038686537]
+position = Vector2(1.5, 14)
+scale = Vector2(1.3999987, 1.3999987)
+shape = SubResource("RectangleShape2D_luyyh")

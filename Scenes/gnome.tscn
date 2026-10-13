@@ -1,9 +1,35 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://ba4atopdy1y8o"]
 
-[ext_resource type="Script" path="res://Scripts/shop_npc.gd" id="1_npc"]
-[ext_resource type="Script" path="res://Scripts/shop_item.gd" id="4_item"]
+[ext_resource type="Script" uid="uid://cnvouj5arg2cl" path="res://Scripts/shop_npc.gd" id="1_npc"]
 [ext_resource type="Texture2D" uid="uid://b2caths4o5qn3" path="res://Resources/Custom Assets/Gnome.png" id="2_gnome"]
-[ext_resource type="Texture2D" path="res://Resources/Custom Assets/Speech Bubbles/speech_bubble_animation-11x11.png" id="3_bubble"]
+[ext_resource type="Texture2D" uid="uid://dqhl3m8hg46tl" path="res://Resources/Custom Assets/Speech Bubbles/speech_bubble_animation-11x11.png" id="3_bubble"]
+[ext_resource type="Script" uid="uid://bf1srdns76puj" path="res://Scripts/shop_item.gd" id="4_item"]
+
+[sub_resource type="Resource" id="ShopItem_ghost_food"]
+script = ExtResource("4_item")
+id = "ghost_food"
+display_name = "Ghost food"
+description = "Nutrition for the Myling. With this, it can let out a stunning scream twice as fast as before."
+price = 1
+
+[sub_resource type="Resource" id="ShopItem_silver_bullets"]
+script = ExtResource("4_item")
+id = "silver_bullets"
+display_name = "Silver bullets"
+description = "New, refined bullets. They deal more damage than the regular ones from your home."
+price = 1
+
+[sub_resource type="Resource" id="Resource_50pl2"]
+script = ExtResource("4_item")
+id = "health_potion"
+display_name = "Health potion"
+description = "A vigorous draught to replenish your health"
+price = 1
+is_consumable = true
+metadata/_custom_type_script = "uid://bf1srdns76puj"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_talk"]
+radius = 26.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b0"]
 atlas = ExtResource("3_bubble")
@@ -64,46 +90,29 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_b7")
 }],
-"loop": false,
+"loop": 0,
 "name": &"pop",
 "speed": 16.0
 }]
 
-[sub_resource type="Resource" id="ShopItem_ghost_food"]
-script = ExtResource("4_item")
-id = "ghost_food"
-display_name = "Ghost food"
-description = "Nutrition for the Myling. With this, it can let out a stunning scream twice as fast as before."
-price = 20
-
-[sub_resource type="Resource" id="ShopItem_silver_bullets"]
-script = ExtResource("4_item")
-id = "silver_bullets"
-display_name = "Silver bullets"
-description = "New, refined bullets. They deal more damage than the regular ones from your home."
-price = 30
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_talk"]
-radius = 26.0
-
-[node name="Gnome" type="Area2D"]
+[node name="Gnome" type="Area2D" unique_id=316417742]
 texture_filter = 1
 script = ExtResource("1_npc")
+items = Array[ExtResource("4_item")]([SubResource("ShopItem_ghost_food"), SubResource("ShopItem_silver_bullets"), SubResource("Resource_50pl2")])
 speaker = "Gnome"
 lines = Array[String](["Hello traveler. Do you want to see my wares?"])
-items = Array[ExtResource("4_item")]([SubResource("ShopItem_ghost_food"), SubResource("ShopItem_silver_bullets")])
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=507705759]
 texture_filter = 1
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_gnome")
 offset = Vector2(0, -5)
 
-[node name="TalkRange" type="CollisionShape2D" parent="."]
+[node name="TalkRange" type="CollisionShape2D" parent="." unique_id=885221133]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_talk")
 
-[node name="Bubble" type="AnimatedSprite2D" parent="."]
+[node name="Bubble" type="AnimatedSprite2D" parent="." unique_id=1518463509]
 texture_filter = 1
 position = Vector2(4, -23)
 sprite_frames = SubResource("SpriteFrames_bubble")
