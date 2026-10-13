@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://b70f8brawfitd" path="res://Scripts/room_new.gd" id="1_room"]
 [ext_resource type="Texture2D" uid="uid://b03ojmpn2745v" path="res://Resources/Custom Assets/New Tileset.png" id="2_newts"]
 [ext_resource type="TileSet" uid="uid://dryk2kwaslu3x" path="res://Resources/new_trees_tiletes.tres" id="3_wyf3k"]
+[ext_resource type="PackedScene" uid="uid://esuv0yme7gbv" path="res://Scenes/thorn_trigger.tscn" id="20_trigger"]
+[ext_resource type="PackedScene" uid="uid://dwmkwdf5obo0v" path="res://Scenes/thorn_door.tscn" id="21_door"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ground"]
 texture = ExtResource("2_newts")
@@ -174,8 +176,9 @@ sources/2 = SubResource("TileSetAtlasSource_pine2")
 sources/3 = SubResource("TileSetAtlasSource_rocks")
 sources/4 = SubResource("TileSetAtlasSource_stump")
 
-[node name="BossRoom" type="Node2D" unique_id=1822210101]
+[node name="BossRoom" type="Node2D" unique_id=1822210101 node_paths=PackedStringArray("trap_doors")]
 script = ExtResource("1_room")
+trap_doors = [NodePath("ThornTriggerNorthA/ThornDoor"), NodePath("ThornTriggerNorthB/ThornDoor")]
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=232648462]
 texture_filter = 1
@@ -244,3 +247,21 @@ tile_map_data = PackedByteArray("AADu////AgAAAAAAAgDu/wAAAgAAAAAAAwDu/wEAAAAAAAA
 enabled = false
 tile_set = SubResource("TileSet_forest")
 physics_quadrant_size = 1
+
+[node name="ThornTriggerNorthA" parent="." instance=ExtResource("20_trigger")]
+position = Vector2(-4, -108)
+rotation = 1.5707964
+collision_mask = 2
+
+[node name="ThornDoor" parent="ThornTriggerNorthA" instance=ExtResource("21_door")]
+position = Vector2(-40, 0)
+collision_mask = 6
+
+[node name="ThornTriggerNorthB" parent="." instance=ExtResource("20_trigger")]
+position = Vector2(18, -108)
+rotation = 1.5707964
+collision_mask = 2
+
+[node name="ThornDoor" parent="ThornTriggerNorthB" instance=ExtResource("21_door")]
+position = Vector2(-40, 0)
+collision_mask = 6

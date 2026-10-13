@@ -1,6 +1,7 @@
 extends EnemyBase
 
 @export var rock_scene: PackedScene = preload("res://Scenes/rock_bullet_new.tscn")
+@export var first_throw_delay: float = 1.0
 @export var throw_interval: float = 6.0
 @export var throw_pose_time: float = 0.3
 
@@ -32,10 +33,22 @@ func _ready() -> void:
 
 	target = get_tree().get_first_node_in_group("player")
 	room = _find_room()
-	throw_timer.wait_time = throw_interval
-	throw_timer.timeout.connect(throw_rock)
-	# Stagger the first throw so trolls in the same room don't throw in sync
-	throw_timer.start(randf_range(1.0, min(throw_interval, 4.0)))
+	throw_timer.one_shot = true
+	throw_timer.timeout.connect(_on_throw_timer_timeout)
+	throw_timer.start(first_throw_delay)
+
+func set_active(active: bool) -> void:
+	super.set_active(active)
+	if not is_node_ready():
+		return
+	if active:
+		throw_timer.start(first_throw_delay)
+	else:
+		throw_timer.stop()
+
+func _on_throw_timer_timeout() -> void:
+	throw_rock()
+	throw_timer.start(throw_interval)
 
 func _exit_tree() -> void:
 	# Only clean up when the room despawns us (player left). If we died, rocks and pebbles

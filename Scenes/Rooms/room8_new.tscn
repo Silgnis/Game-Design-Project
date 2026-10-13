@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bf8hkj8p6pfa6" path="res://Scenes/enemy_melee.tscn" id="6_wolf"]
 [ext_resource type="PackedScene" uid="uid://i3mjmjt0y0la" path="res://Scenes/goblin.tscn" id="7_goblin"]
 [ext_resource type="PackedScene" uid="uid://bg1iw0c6a26qw" path="res://Scenes/Boss/boss_gate.tscn" id="4_iem3n"]
+[ext_resource type="PackedScene" uid="uid://esuv0yme7gbv" path="res://Scenes/thorn_trigger.tscn" id="20_trigger"]
+[ext_resource type="PackedScene" uid="uid://dwmkwdf5obo0v" path="res://Scenes/thorn_door.tscn" id="21_door"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ground"]
 texture = ExtResource("2_newts")
@@ -179,8 +181,9 @@ sources/2 = SubResource("TileSetAtlasSource_pine2")
 sources/3 = SubResource("TileSetAtlasSource_rocks")
 sources/4 = SubResource("TileSetAtlasSource_stump")
 
-[node name="Room8" type="Node2D" unique_id=2038173119]
+[node name="Room8" type="Node2D" unique_id=2038173119 node_paths=PackedStringArray("trap_doors")]
 script = ExtResource("1_room")
+trap_doors = [NodePath("ThornTriggerNorthA/ThornDoor"), NodePath("ThornTriggerNorthB/ThornDoor"), NodePath("ThornTriggerSouthA/ThornDoor"), NodePath("ThornTriggerSouthB/ThornDoor")]
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=717893872]
 texture_filter = 1
@@ -292,3 +295,39 @@ enemy_id = "goblin8_4"
 [node name="BossGate" parent="." unique_id=1595886427 instance=ExtResource("4_iem3n")]
 position = Vector2(0, -6.9999995)
 scale = Vector2(0.11448688, 0.11448688)
+
+[node name="ThornTriggerNorthA" parent="." instance=ExtResource("20_trigger")]
+position = Vector2(-4, -108)
+rotation = 1.5707964
+collision_mask = 2
+
+[node name="ThornDoor" parent="ThornTriggerNorthA" instance=ExtResource("21_door")]
+position = Vector2(-40, 0)
+collision_mask = 6
+
+[node name="ThornTriggerNorthB" parent="." instance=ExtResource("20_trigger")]
+position = Vector2(18, -108)
+rotation = 1.5707964
+collision_mask = 2
+
+[node name="ThornDoor" parent="ThornTriggerNorthB" instance=ExtResource("21_door")]
+position = Vector2(-40, 0)
+collision_mask = 6
+
+[node name="ThornTriggerSouthA" parent="." instance=ExtResource("20_trigger")]
+position = Vector2(-18, 108)
+rotation = -1.5707964
+collision_mask = 2
+
+[node name="ThornDoor" parent="ThornTriggerSouthA" instance=ExtResource("21_door")]
+position = Vector2(-40, 0)
+collision_mask = 6
+
+[node name="ThornTriggerSouthB" parent="." instance=ExtResource("20_trigger")]
+position = Vector2(4, 108)
+rotation = -1.5707964
+collision_mask = 2
+
+[node name="ThornDoor" parent="ThornTriggerSouthB" instance=ExtResource("21_door")]
+position = Vector2(-40, 0)
+collision_mask = 6
